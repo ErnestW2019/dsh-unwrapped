@@ -26,7 +26,7 @@ const DEFAULT_DSH_HOME = process.env.DSH_HOME || join(homedir(), '.dsh');
 
 const HELP = `dsh-unwrapped — install the conversation report into a DSH profile
 
-Usage: dsh-wrapped <command> [options]
+Usage: dsh-unwrapped <command> [options]
 
 Commands:
   install      copy the plugin into the profile and add its patch row

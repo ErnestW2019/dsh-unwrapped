@@ -14,101 +14,101 @@
   },
   "hasData": true,
   "totals": {
-    "messages": 170,
-    "humanMessages": 85,
-    "aiMessages": 85,
-    "aiSteps": 85,
-    "humanChars": 842,
-    "aiChars": 2250,
-    "reasoningChars": 0,
-    "turns": 85,
-    "steps": 85,
-    "toolCalls": 151,
-    "sessionsTouched": 23,
-    "sessionsCreated": 23,
-    "messagesPerSession": 7.4,
-    "avgMessagesPerSession": 7.4,
-    "activeDays": 20,
-    "maxStreak": 1,
-    "humanAvgChars": 10,
-    "aiAvgChars": 26,
-    "longestSpanMs": 1966000,
-    "longestRunMs": 1979000,
-    "interrupted": 0,
-    "failures": 0,
-    "injectedMessages": 0,
-    "delegatedSessions": 0,
+    "messages": 1148,
+    "humanMessages": 256,
+    "aiMessages": 892,
+    "aiSteps": 892,
+    "humanChars": 4731,
+    "aiChars": 33093,
+    "reasoningChars": 1275,
+    "turns": 256,
+    "steps": 256,
+    "toolCalls": 769,
+    "sessionsTouched": 92,
+    "sessionsCreated": 92,
+    "messagesPerSession": 12.5,
+    "avgMessagesPerSession": 12.5,
+    "activeDays": 68,
+    "maxStreak": 12,
+    "humanAvgChars": 18,
+    "aiAvgChars": 37,
+    "longestSpanMs": 13642000,
+    "longestRunMs": 13644000,
+    "interrupted": 19,
+    "failures": 19,
+    "injectedMessages": 14,
+    "delegatedSessions": 7,
     "busiestDay": {
-      "day": "2026-09-20",
-      "messages": 20
+      "day": "2026-07-16",
+      "messages": 36
     },
-    "peakHour": 14
+    "peakHour": 12
   },
   "ratio": {
-    "humanShare": 0.5,
-    "aiShare": 0.5,
-    "humanToAi": 1
+    "humanShare": 0.223,
+    "aiShare": 0.777,
+    "humanToAi": 0.29
   },
   "series": [
     {
       "key": "2026-01",
-      "human": 15,
-      "ai": 15,
-      "total": 30
+      "human": 12,
+      "ai": 42,
+      "total": 54
     },
     {
       "key": "2026-02",
-      "human": 9,
-      "ai": 9,
-      "total": 18
+      "human": 31,
+      "ai": 115,
+      "total": 146
     },
     {
       "key": "2026-03",
-      "human": 16,
-      "ai": 16,
-      "total": 32
+      "human": 17,
+      "ai": 60,
+      "total": 77
     },
     {
       "key": "2026-04",
-      "human": 2,
-      "ai": 2,
-      "total": 4
+      "human": 18,
+      "ai": 61,
+      "total": 79
     },
     {
       "key": "2026-05",
-      "human": 7,
-      "ai": 7,
-      "total": 14
+      "human": 60,
+      "ai": 217,
+      "total": 277
     },
     {
       "key": "2026-06",
-      "human": 11,
-      "ai": 11,
-      "total": 22
+      "human": 15,
+      "ai": 51,
+      "total": 66
     },
     {
       "key": "2026-07",
-      "human": 4,
-      "ai": 4,
-      "total": 8
+      "human": 28,
+      "ai": 87,
+      "total": 115
     },
     {
       "key": "2026-08",
-      "human": 9,
-      "ai": 9,
-      "total": 18
+      "human": 20,
+      "ai": 76,
+      "total": 96
     },
     {
       "key": "2026-09",
-      "human": 10,
-      "ai": 10,
-      "total": 20
+      "human": 35,
+      "ai": 117,
+      "total": 152
     },
     {
       "key": "2026-10",
-      "human": 2,
-      "ai": 2,
-      "total": 4
+      "human": 20,
+      "ai": 66,
+      "total": 86
     },
     {
       "key": "2026-11",
@@ -124,6 +124,8 @@
     }
   ],
   "hours": [
+    19,
+    17,
     0,
     0,
     0,
@@ -131,371 +133,394 @@
     0,
     0,
     0,
-    0,
-    0,
-    12,
-    3,
-    11,
-    8,
-    20,
-    28,
-    16,
-    2,
-    11,
-    9,
-    10,
-    0,
-    18,
-    14,
-    8
+    38,
+    106,
+    91,
+    158,
+    111,
+    101,
+    40,
+    107,
+    84,
+    47,
+    68,
+    53,
+    40,
+    52,
+    16
   ],
   "weekday": [
-    32,
-    32,
-    26,
-    32,
-    18,
-    24,
-    6
+    44,
+    248,
+    253,
+    218,
+    187,
+    121,
+    77
   ],
   "tokens": {
-    "input": 1232081,
-    "output": 8494,
-    "total": 1240575,
-    "cacheRead": 334084,
+    "input": 36073012,
+    "output": 67426,
+    "total": 36140438,
+    "cacheRead": 16989299,
     "cacheWrite": 0,
-    "requests": 85
+    "requests": 892
   },
   "topModels": [
     {
       "model": "code-fast",
-      "count": 42
+      "count": 473
     },
     {
       "model": "deepseek-chat",
-      "count": 22
+      "count": 225
     },
     {
       "model": "deepseek-reasoner",
-      "count": 21
+      "count": 194
     }
   ],
   "topProviders": [
     {
-      "provider": "deepseek",
-      "count": 43
+      "provider": "internal",
+      "count": 473
     },
     {
-      "provider": "internal",
-      "count": 42
+      "provider": "deepseek",
+      "count": 419
     }
   ],
   "topWorkspaces": [
     {
-      "workspace": "/home/dev/code/tiny-db",
-      "count": 94
+      "workspace": "/home/dev/work/notes",
+      "count": 291
     },
     {
-      "workspace": "/home/dev/work/notes",
-      "count": 34
+      "workspace": "/home/dev/code/ledger-core",
+      "count": 262
+    },
+    {
+      "workspace": "/home/dev/code/signal-hub",
+      "count": 223
+    },
+    {
+      "workspace": "/home/dev/code/tiny-db",
+      "count": 206
     },
     {
       "workspace": "/home/dev/code/aurora-ui",
-      "count": 28
-    },
-    {
-      "workspace": "/home/dev/code/pipeline",
-      "count": 14
+      "count": 166
     }
   ],
   "topPresets": [
     {
       "preset": "standard",
-      "count": 16
+      "count": 63
     },
     {
       "preset": "reviewer",
-      "count": 7
+      "count": 29
     }
   ],
   "tools": [
     {
       "name": "edit",
-      "count": 25
-    },
-    {
-      "name": "glob",
-      "count": 25
-    },
-    {
-      "name": "web_fetch",
-      "count": 23
+      "count": 235
     },
     {
       "name": "read",
-      "count": 20
-    },
-    {
-      "name": "grep",
-      "count": 15
+      "count": 232
     },
     {
       "name": "pwsh",
-      "count": 15
+      "count": 155
+    },
+    {
+      "name": "write",
+      "count": 84
+    },
+    {
+      "name": "grep",
+      "count": 58
+    },
+    {
+      "name": "web_search",
+      "count": 5
     }
   ],
   "topSessions": [
     {
-      "id": "demo-066",
-      "title": "把配置从 JSON 换成 YAML",
-      "cwd": "/home/dev/code/tiny-db",
+      "id": "demo-232",
+      "title": "从零做一个插件，最后发布出去",
+      "cwd": "/home/dev/code/ledger-core",
       "agentPreset": "standard",
       "delegated": false,
-      "human": 6,
-      "ai": 6,
-      "steps": 6,
-      "messages": 12,
-      "chars": 218,
-      "tokens": 114618,
-      "tools": 14,
-      "spanMs": 1966000,
-      "startTs": 1781789730000,
-      "endTs": 1781791696000,
+      "human": 11,
+      "ai": 32,
+      "steps": 32,
+      "messages": 43,
+      "chars": 1253,
+      "tokens": 1308243,
+      "tools": 21,
+      "spanMs": 13642000,
+      "startTs": 1784120755000,
+      "endTs": 1784134397000,
       "previews": [
-        "帮我看看这个类型为什么不匹配",
-        "换个思路试试",
-        "谢谢，跑通了"
+        "我想开发一个插件，把本地的对话日志变成一份能分享的年度报告",
+        "为什么不能直接把整个日志丢给模型让它总结",
+        "报告里最打动人的地方应该是什么"
       ]
     },
     {
-      "id": "demo-057",
-      "title": "给上传接口加并发限制",
-      "cwd": "/home/dev/code/tiny-db",
+      "id": "demo-218",
+      "title": "调研向量检索方案",
+      "cwd": "/home/dev/code/ledger-core",
       "agentPreset": "standard",
       "delegated": false,
-      "human": 6,
-      "ai": 6,
-      "steps": 6,
-      "messages": 12,
-      "chars": 226,
-      "tokens": 89664,
-      "tools": 11,
-      "spanMs": 1673000,
-      "startTs": 1773205130000,
-      "endTs": 1773206803000,
+      "human": 3,
+      "ai": 14,
+      "steps": 14,
+      "messages": 17,
+      "chars": 508,
+      "tokens": 637021,
+      "tools": 12,
+      "spanMs": 920000,
+      "startTs": 1779082552000,
+      "endTs": 1779083472000,
       "previews": [
-        "再试一次，还是不行",
-        "换个思路试试",
-        "能不能只改这一处，别动别的"
+        "这几个方案和上次那个有什么区别，我想先搞清楚再动手",
+        "那评测怎么做，总不能拍脑袋说变好了",
+        "先写测试再改，别动现有索引"
       ]
     },
     {
-      "id": "demo-055",
-      "title": "优化首屏加载",
-      "cwd": "/home/dev/work/notes",
+      "id": "demo-185",
+      "title": "CI 上偶发失败的测试",
+      "cwd": "/home/dev/code/ledger-core",
       "agentPreset": "reviewer",
       "delegated": false,
-      "human": 6,
-      "ai": 6,
-      "steps": 6,
-      "messages": 12,
-      "chars": 239,
-      "tokens": 88834,
-      "tools": 10,
-      "spanMs": 1270000,
-      "startTs": 1770699327000,
-      "endTs": 1770700597000,
+      "human": 3,
+      "ai": 14,
+      "steps": 14,
+      "messages": 17,
+      "chars": 570,
+      "tokens": 566016,
+      "tools": 16,
+      "spanMs": 1070000,
+      "startTs": 1771047899000,
+      "endTs": 1771048969000,
       "previews": [
-        "帮我看看这个类型为什么不匹配",
-        "这个颜色太亮了，换暗一点",
-        "先写测试再改"
-      ]
-    },
-    {
-      "id": "demo-053",
-      "title": "把报告页改成可分享的图片",
-      "cwd": "/home/dev/code/tiny-db",
-      "agentPreset": "standard",
-      "delegated": false,
-      "human": 6,
-      "ai": 6,
-      "steps": 6,
-      "messages": 12,
-      "chars": 200,
-      "tokens": 85791,
-      "tools": 11,
-      "spanMs": 1539000,
-      "startTs": 1768200547000,
-      "endTs": 1768202086000,
-      "previews": [
-        "能不能只改这一处，别动别的",
-        "把这段抽成插件",
+        "这个测试本地过，CI 上大概五次挂一次，看不出原因",
+        "为什么本地一直没暴露",
         "再试一次，还是不行"
       ]
     },
     {
-      "id": "demo-056",
-      "title": "梳理一下这个模块的依赖",
-      "cwd": "/home/dev/work/notes",
-      "agentPreset": "reviewer",
+      "id": "demo-248",
+      "title": "梳理这个模块的依赖方向",
+      "cwd": "/home/dev/code/tiny-db",
+      "agentPreset": "standard",
       "delegated": false,
-      "human": 6,
-      "ai": 6,
-      "steps": 6,
-      "messages": 12,
-      "chars": 220,
-      "tokens": 78634,
-      "tools": 6,
-      "spanMs": 1399000,
-      "startTs": 1773710011000,
-      "endTs": 1773711410000,
+      "human": 3,
+      "ai": 14,
+      "steps": 14,
+      "messages": 17,
+      "chars": 500,
+      "tokens": 524965,
+      "tools": 11,
+      "spanMs": 1087000,
+      "startTs": 1788368427000,
+      "endTs": 1788369514000,
       "previews": [
-        "谢谢，跑通了",
-        "我刚才那个改动是不是把缓存弄坏了",
-        "再试一次，还是不行"
+        "梳理一下这个模块的依赖，我怀疑有循环",
+        "换个思路试试，能不能不改结构只加约束",
+        "算了，先回滚这一版，明天再说"
       ]
     },
     {
-      "id": "demo-052",
-      "title": "把报告页改成可分享的图片",
-      "cwd": "/home/dev/code/tiny-db",
-      "agentPreset": "reviewer",
+      "id": "demo-192",
+      "title": "一个只在长会话里出现的内存泄漏",
+      "cwd": "/home/dev/code/ledger-core",
+      "agentPreset": "standard",
       "delegated": false,
-      "human": 5,
-      "ai": 5,
-      "steps": 5,
-      "messages": 10,
-      "chars": 162,
-      "tokens": 80684,
-      "tools": 11,
-      "spanMs": 1564000,
-      "startTs": 1768979910000,
-      "endTs": 1768981474000,
+      "human": 3,
+      "ai": 13,
+      "steps": 13,
+      "messages": 16,
+      "chars": 480,
+      "tokens": 601441,
+      "tools": 12,
+      "spanMs": 993000,
+      "startTs": 1773131030000,
+      "endTs": 1773132023000,
       "previews": [
-        "先写测试再改",
-        "算了，先回滚这一版",
-        "确认一下，这样可以吗"
+        "我这边看不到日志，但跑两个小时之后 RSS 一直在涨",
+        "这里为什么会重复请求",
+        "线上现在能用吗"
+      ]
+    },
+    {
+      "id": "demo-256",
+      "title": "SSR 首屏 hydration 不一致",
+      "cwd": "/home/dev/work/notes",
+      "agentPreset": "standard",
+      "delegated": false,
+      "human": 3,
+      "ai": 13,
+      "steps": 13,
+      "messages": 16,
+      "chars": 487,
+      "tokens": 581549,
+      "tools": 12,
+      "spanMs": 1004000,
+      "startTs": 1790755378000,
+      "endTs": 1790756382000,
+      "previews": [
+        "首屏一直闪一下，控制台说 hydration mismatch，帮我看看",
+        "优化首屏加载，现在白屏大概 1.4 秒",
+        "有没有更简单的写法"
       ]
     }
   ],
   "failures": {
-    "count": 0,
-    "samples": []
+    "count": 19,
+    "samples": [
+      {
+        "t": 1773809102000,
+        "message": "context window exceeded (131072 tokens)"
+      },
+      {
+        "t": 1790174409000,
+        "message": "context window exceeded (131072 tokens)"
+      },
+      {
+        "t": 1788916770000,
+        "message": "tool timeout: pwsh exited 124 after 120s"
+      },
+      {
+        "t": 1770101671000,
+        "message": "model stream aborted: upstream reset by peer"
+      }
+    ]
   },
   "moments": {
     "first": {
-      "t": 1767610083000,
-      "text": "这个接口的返回结构不太对",
-      "title": "给 CLI 加一个 --dry-run",
-      "id": "demo-051"
+      "t": 1767322031000,
+      "text": "把这段抽成插件，别塞在页面里",
+      "title": "把报告页导出成可分享的图片",
+      "id": "demo-174"
     },
     "last": {
-      "t": 1792293890000,
-      "text": "等等，这个文件是谁改的",
-      "title": "给搜索加上拼音匹配",
-      "id": "demo-073"
+      "t": 1793270842000,
+      "text": "文档里这段是什么意思，我没看懂 migration 那行",
+      "title": "发布前检查清单",
+      "id": "demo-265"
     },
     "latestNight": {
-      "t": 1773415122000,
-      "text": "能不能只改这一处，别动别的",
-      "title": "把报告页改成可分享的图片",
-      "id": "demo-058",
-      "hour": 23,
-      "minute": 18
+      "t": 1788369342000,
+      "text": "算了，先回滚这一版，明天再说",
+      "title": "梳理这个模块的依赖方向",
+      "id": "demo-248",
+      "hour": 1,
+      "minute": 15
     },
     "latestClock": {
-      "t": 1773415122000,
-      "text": "能不能只改这一处，别动别的",
-      "title": "把报告页改成可分享的图片",
-      "id": "demo-058",
+      "t": 1784130276000,
+      "text": "再试一次，还是不行，离线切周期没反应",
+      "title": "从零做一个插件，最后发布出去",
+      "id": "demo-232",
       "hour": 23,
-      "minute": 18
+      "minute": 44
     },
     "longest": {
-      "id": "demo-066",
-      "title": "把配置从 JSON 换成 YAML",
-      "runMs": 1979000,
-      "startTs": 1781789730000
+      "id": "demo-232",
+      "title": "从零做一个插件，最后发布出去",
+      "runMs": 13644000,
+      "startTs": 1784120755000
     },
     "timeline": [
       {
         "key": "2026-01",
-        "t": 1767610083000,
-        "text": "这个接口的返回结构不太对"
+        "t": 1767322031000,
+        "text": "把这段抽成插件，别塞在页面里"
       },
       {
         "key": "2026-03",
-        "t": 1773205130000,
-        "text": "再试一次，还是不行"
+        "t": 1772514889000,
+        "text": "把配置从 JSON 换成 YAML，但现有的读取逻辑先别动"
       },
       {
         "key": "2026-05",
-        "t": 1779418738000,
-        "text": "再加个测试吧"
+        "t": 1777628801000,
+        "text": "这个颜色太亮了，换暗一点，但别动别的样式"
       },
       {
         "key": "2026-07",
-        "t": 1783663367000,
-        "text": "能不能只改这一处，别动别的"
+        "t": 1783041606000,
+        "text": "帮我写一份发布检查清单，别再漏掉回滚步骤"
       },
       {
         "key": "2026-09",
-        "t": 1789897289000,
-        "text": "线上现在能用吗"
+        "t": 1788245522000,
+        "text": "这个接口的返回结构不太对，有的地方是 code 有的是 error_code"
       }
     ],
-    "questions": 0,
-    "thanks": 3,
-    "samples": 85
+    "questions": 5,
+    "thanks": 16,
+    "samples": 256
   },
   "phrases": [
     {
-      "word": "为什么",
-      "count": 10
-    },
-    {
       "word": "能不能",
-      "count": 8
+      "count": 26
     },
     {
       "word": "确认",
-      "count": 8
+      "count": 23
+    },
+    {
+      "word": "为什么",
+      "count": 22
     }
   ],
   "comparison": {
     "prevKey": "2025",
-    "human": 86,
-    "ai": 86,
-    "sessions": 24,
-    "tokens": 1178746,
+    "human": 261,
+    "ai": 892,
+    "sessions": 94,
+    "tokens": 36718730,
     "deltas": {
-      "messagesPct": -1.2,
-      "sessionsPct": -4.2,
-      "tokensPct": 5.2
+      "messagesPct": -0.4,
+      "sessionsPct": -2.1,
+      "tokensPct": -1.6
     }
   },
   "badges": [
     {
+      "key": "streak_keeper",
+      "metric": 12
+    },
+    {
+      "key": "marathon",
+      "metric": 227
+    },
+    {
+      "key": "delegation_chief",
+      "metric": 7
+    },
+    {
       "key": "tool_master",
       "metric": 6
-    },
-    {
-      "key": "model_polyglot",
-      "metric": 3
-    },
-    {
-      "key": "terse",
-      "metric": 10
     }
   ],
   "headline": {
-    "key": "tool_master",
-    "metric": 6
+    "key": "streak_keeper",
+    "metric": 12
   },
-  "generatedAt": 1793353042846,
+  "generatedAt": 1793355001160,
   "corpus": {
-    "sessions": 74,
-    "firstAt": 1705131600000,
-    "lastAt": 1792293958000
+    "sessions": 266,
+    "firstAt": 1704970260000,
+    "lastAt": 1793270880000
   }
 }

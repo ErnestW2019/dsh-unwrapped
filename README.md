@@ -14,9 +14,13 @@ npx dsh-unwrapped install
 > 这个插件只读不写：把日志变成一份可分享的报告，不改会话、不碰工作区文件。
 
 预览（**全部是合成演示数据**，3 年 / 260 多场虚构会话 —— 真实日志里的任何一句话都不会进仓库，
-`node scripts/make-demo.mjs` 可复现）：
+`node scripts/make-demo.mjs` 可逐字节复现）：
 
 ![年度回顾](docs/preview-year.png)
+
+演示语料不是占位符拼出来的：它有跨三年的真实工作节奏、一次近 4 小时的深夜马拉松、
+一段 12 天连击、几百次多步工具调用、若干子代理会话，也有失败和中断——
+所以称号、高光对话、句子层里每张卡都有东西可指，而不是「示例文本」。
 
 自包含 HTML，**双击就能用**（图表生长、数字滚动、主题切换、分享卡片、周期切换都可用，
 最近 13 期已烘焙进文件，不需要 harness；超出这个窗口的周期会提示用 CLI 重跑）：
@@ -36,6 +40,7 @@ npx dsh-unwrapped install
 
 1. **Hero**：巨大的年份幽灵字（`2026`）压在消息占比条后面，紧跟一句反差：
    **「你说 4,731 字，它说了 3.3 万字」** + 「你说 22%」胶囊标签 —— 这一幕就是给别人截图看的。
+   （这些数字来自演示语料，你的报告里会是你自己的。）
 2. **KPI**：消息总数、对话轮次、AI 步数、会话数、活跃天数、最长连击、Token。
 3. **你说 vs AI 说**：条数、字数、平均每条字数、思考字数、工具调用数。
 4. **对话节奏**：按天（月）/ 7 天（季）/ 月（年）堆叠柱状图，人类与 AI 分色。
@@ -231,13 +236,13 @@ node bin/plugin.js status
   覆盖周期边界/时区、多帧 zstd 归档、事件抽取、聚合规则、句子层（首尾句/最晚时刻/口头禅/
   时间线/提问计数）、HTML 转义、路由与首页注入、片段渲染、内嵌周期模板、patch 文件增删。
 - **真实浏览器交互**（`node scripts/browser-check.mjs`，headless Edge + DevTools 协议）：
-  - 直连 harness（带 session cookie）：16 项断言全过，含「点下一期 → 正文原地替换」
+  - 直连 harness（带 session cookie）：全部断言通过，含「点下一期 → 正文原地替换」
     （`2026 年度 → 2026 年 10 月`，URL 变 `/unwrapped?period=month&tz=480`，页面未重载）；
-  - 直接打开 `docs/preview-year.html`（`file://`，无服务器）：14 项全过，含
+  - 直接打开 `docs/preview-year.html`（`file://`，无服务器）：17 项全过，含
     「2026 年度 → 2025 年度，hash `#2025`」，证明离线文件内嵌周期切换可用。
 - **真机端到端（真实 harness，非 mock）**：另起一份 `dsh --profile web --no-open --port 8101`
-  验证：`GET /unwrapped?period=year` → `200`（有真实数据时数字与日志一致，
-  无 `NaN` / `undefined`）；`?partial=1` → `200` 只返回 `.wrap` 片段；
+  验证：`GET /unwrapped?period=year` → `200`（有真实数据时数字与日志一致，无 `NaN` / `undefined`）；
+  `?partial=1` → `200` 只返回 `.wrap` 片段；
   `GET /api/unwrapped?period=year` → `200`；`GET /` → 已注入 `dsh-unwrapped-launcher`（`href="/unwrapped"`）。
 - **旧进程诊断**：用 cookie 直连用户正在跑的 8080，`/rewind` 返回 25,073 字节、无 `<script>`、
   无 `data-count` —— 即进程里还是启动时加载的 v0.1 代码（ESM 模块缓存），重启才会换新；
@@ -302,7 +307,7 @@ DSH 里一次人类提问往往会产生多条 assistant 消息：先说话、�
 
 ## 离线 CLI
 
-不需要运行 harness，直接对着日志目录出报告（也是本仓库单测的真实数据来源）：
+不需要运行 harness，直接对着日志目录出报告（`docs/` 下的预览就是走这条路径生成的）：
 
 ```powershell
 node bin/unwrapped.js --archive "$env:USERPROFILE\.dsh\sessions" `
@@ -310,6 +315,8 @@ node bin/unwrapped.js --archive "$env:USERPROFILE\.dsh\sessions" `
 
 node bin/unwrapped.js --period month --key 2026-10 --stdout | Out-File report.html
 ```
+
+`--archive` 默认就是 `$DSH_HOME/sessions`（或 `~/.dsh/sessions`），一般不用显式传。
 
 `--period`、`--key`、`--tz`、`--lang`、`--max-sessions`、`--out`、`--json`、`--stdout`、
 `--embed <n>`、`--no-write`；`--help` 看完整说明。退出码：`0` 成功，`1` 归档缺失/不可读，`2` 参数错误。
@@ -321,13 +328,13 @@ node bin/unwrapped.js --period month --key 2026-10 --stdout | Out-File report.ht
 node bin/unwrapped.js --period year --embed 13 --out unwrapped.html
 ```
 
-体积参考：13 期全量内嵌约 71 KB（CSS/JS 只写一份）。
+体积参考：13 期全量内嵌约 145 KB（CSS/JS 只写一份）。
 
 ## 开发与测试
 
 ```bash
 node --test --test-isolation=none "test/*.test.js"        # 105 个用例，零依赖
-node scripts/browser-check.mjs --file docs/preview-year.html   # 真浏览器交互 14 项
+node scripts/browser-check.mjs --file docs/preview-year.html   # 真浏览器交互 17 项
 node scripts/market-check.mjs                                  # 查包名是否被占 + 同类插件
 ```
 

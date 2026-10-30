@@ -5,7 +5,7 @@ node_modules/
 *.tgz
 report.html
 report.json
-wrapped.html
+unwrapped.html
 
 # generated demo archive + scratch files
 .demo/

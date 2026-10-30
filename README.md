@@ -1,8 +1,14 @@
-# dsh-plugin-wrapped · 对话 Wrapped
+# dsh-unwrapped · 你和 AI 的年度报告
 
 一个 DeepSeek Harness 插件，把本机**所有**历史会话自动汇成一份网易云年度报告风格的
 「对话回顾」：月度 / 季度 / 年度，人类与 AI 各说了多少、什么时候说的、用了什么模型和
 工具、哪几场对话最高光、你当时到底说了什么。
+
+装一句，打开一个页面，你的这一年就在那儿了：
+
+```bash
+npx dsh-unwrapped install
+```
 
 > **不是回滚工具**。DSH 生态里 `rewind` / `recall` 那一类插件做的是「把对话和文件退回上一步」，
 > 这个插件只读不写：把日志变成一份可分享的报告，不改会话、不碰工作区文件。
@@ -26,7 +32,7 @@
 
 ## 它长什么样
 
-打开 `http://127.0.0.1:8080/wrapped`（或点击 GUI 右下角的「年度回顾」悬浮按钮）：
+打开 `http://127.0.0.1:8080/unwrapped`（或点击 GUI 右下角的「年度回顾」悬浮按钮）：
 
 1. **Hero**：巨大的年份幽灵字（`2026`）压在消息占比条后面，紧跟一句反差：
    **「你说 4,731 字，它说了 3.3 万字」** + 「你说 22%」胶囊标签 —— 这一幕就是给别人截图看的。
@@ -101,8 +107,9 @@ JS 只是把它们升级成无刷新体验（页面在 `<html>` 上自己加 `.j
 也不是回滚工具。
 
 顺带记一笔命名的坑：`rewind` 这个词在 DSH 生态里已被回滚类插件占满 —— `dsh-plugin-rewind`
-（v0.0.0，占名）和 `dsh-rewind`（v0.11.12，git 还原）都不可用，`dsh-wrapped` 也被占了，
-所以包名是 **`dsh-plugin-wrapped`**，路由是 `/wrapped`。
+（v0.0.0，占名）和 `dsh-rewind`（v0.11.12，git 还原）都不可用；`wrapped` 方向也满了 ——
+`dsh-wrapped`、`dsh-recap`、`dsh-retro`、`dsh-plugin-recap` 全被占（好几个描述直接写着
+"name reserved"）。最后落在 **`dsh-unwrapped`**（这个才是空的），路由是 `/unwrapped`。
 
 ## 为什么是「插件」，而不是一个新的统计服务
 
@@ -117,7 +124,7 @@ JS 只是把它们升级成无刷新体验（页面在 `<html>` 上自己加 `.j
 1. `ctx.sessionQuery.listSessions()` / `readSession(id)` —— 自动收集全部会话（含存档、
    含子代理会话），无需用户导入；
 2. 纯函数聚合（`lib/aggregate.js`）—— 可单测、与 I/O 解耦；
-3. `ctx.webServer.register({ kind: 'exact', path })` —— 把 `/wrapped` 和 `/api/wrapped`
+3. `ctx.webServer.register({ kind: 'exact', path })` —— 把 `/unwrapped` 和 `/api/unwrapped`
    挂在**已有**的 8080 端口上，并用 `webServer.tapIndex()` 往 GUI 首页注入一行悬浮链接。
 
 ## 别人怎么用
@@ -127,28 +134,28 @@ JS 只是把它们升级成无刷新体验（页面在 `<html>` 上自己加 `.j
 ### 方式 A：一行命令（推荐）
 
 ```bash
-npx dsh-plugin-wrapped install                 # 装进 $DSH_HOME/profiles/web
-npx dsh-plugin-wrapped install --profile tui   # 换 profile
-npx dsh-plugin-wrapped install --language en --label "Wrapped"
-npx dsh-plugin-wrapped status                  # 装没装、patch 有没有、热加载开着没
-npx dsh-plugin-wrapped uninstall               # 摘掉 patch 行 + 删掉插件目录
-npx dsh-wrapped-report --period year --embed 13 --out wrapped.html   # 不开 harness 也出报告
+npx dsh-unwrapped install                 # 装进 $DSH_HOME/profiles/web
+npx dsh-unwrapped install --profile tui   # 换 profile
+npx dsh-unwrapped install --language en --label "Wrapped"
+npx dsh-unwrapped status                  # 装没装、patch 有没有、热加载开着没
+npx dsh-unwrapped uninstall               # 摘掉 patch 行 + 删掉插件目录
+npx dsh-unwrapped-report --period year --embed 13 --out unwrapped.html   # 不开 harness 也出报告
 ```
 
-也可以全局装：`npm i -g dsh-plugin-wrapped && dsh-wrapped install`。
-三个 bin：`dsh-plugin-wrapped`（npx 认包名）、`dsh-wrapped`（安装器）、
-`dsh-wrapped-report`（离线生成 HTML）。
+也可以全局装：`npm i -g dsh-unwrapped && dsh-unwrapped install`。
+三个 bin：`dsh-unwrapped`（npx 认包名）、`dsh-unwrapped`（安装器）、
+`dsh-unwrapped-report`（离线生成 HTML）。
 
 > 还没发布到 npm 时：`git clone` 本目录后 `node bin/plugin.js install`；或 `npm pack` 出
-> tarball 再 `npm i -g ./dsh-plugin-wrapped-0.2.0.tgz`。发布步骤见
+> tarball 再 `npm i -g ./dsh-unwrapped-0.2.0.tgz`。发布步骤见
 > [`docs/PUBLISH.md`](docs/PUBLISH.md)。
 
 它做的事就两件：
 
 1. 把 `index.js` / `lib` / `bin` / `package.json` / `README.md` 复制到
-   `$DSH_HOME/profiles/<profile>/plugins/dsh-plugin-wrapped`；
+   `$DSH_HOME/profiles/<profile>/plugins/dsh-unwrapped`；
 2. 在 `$DSH_HOME/profiles/<profile>/cordis.patch.yml` 里维护**唯一一行** `insert`
-   （`id: rewind`，`name: ./plugins/dsh-plugin-wrapped/index.js`）。
+   （`id: rewind`，`name: ./plugins/dsh-unwrapped/index.js`）。
 
 重跑是幂等的：已有行原地替换，顺手删掉残留的空 `[]` 文档标记（空数组后面跟块级条目
 不是合法 YAML），别人的 patch 行一个字节都不动。`--dry-run` 只打印不落盘，
@@ -160,7 +167,7 @@ npx dsh-wrapped-report --period year --embed 13 --out wrapped.html   # 不开 ha
 ### 方式 B：`dsh plugin add`（需要 pnpm 在 PATH）
 
 ```bash
-dsh plugin --profile web add dsh-plugin-wrapped
+dsh plugin --profile web add dsh-unwrapped
 ```
 
 然后把这段追加到 `$DSH_HOME/profiles/web/cordis.patch.yml`：
@@ -168,40 +175,40 @@ dsh plugin --profile web add dsh-plugin-wrapped
 ```yaml
 - insert:
     - id: rewind
-      name: dsh-plugin-wrapped
+      name: dsh-unwrapped
       config:
         language: zh
         launcherLabel: 年度回顾
 ```
 
 （`name` 用包名，走 profile 的 `node_modules`；方式 A 用相对路径，不依赖包管理器。
-方式 B 不会给你 `dsh-wrapped` 这个全局命令，升级/状态查询用 `npx dsh-plugin-wrapped status`
+方式 B 不会给你 `dsh-unwrapped` 这个全局命令，升级/状态查询用 `npx dsh-unwrapped status`
 或全局装一次。）
 
 ### 方式 C：手工
 
-1. 把整个 `dsh-wrapped/` 目录拷到 `$DSH_HOME/profiles/web/plugins/dsh-plugin-wrapped`；
+1. 把整个 `dsh-unwrapped/` 目录拷到 `$DSH_HOME/profiles/web/plugins/dsh-unwrapped`；
 2. 在 `cordis.patch.yml` 里加：
 
 ```yaml
 - insert:
     - id: rewind
-      name: ./plugins/dsh-plugin-wrapped/index.js
+      name: ./plugins/dsh-unwrapped/index.js
       config:
         language: zh
 ```
 
-3. 刷新 GUI，右下角出现「年度回顾」；或直接访问 `/wrapped`。
+3. 刷新 GUI，右下角出现「年度回顾」；或直接访问 `/unwrapped`。
 
 Web profile 默认 `patchReload: live`：改 `config`（`language` / `launcherLabel` / 路由 …）
 会立即生效，**但改了插件代码（`index.js`、`lib/`）必须重启一次 `dsh web`** ——
 Node 的 ESM 模块缓存按 URL 命中，patch 重新应用只是重新挂载配置，不会重新读取文件。
 这就是「装完看不到新界面」最常见的原因：进程里跑的还是它启动时加载的那份代码。
 
-> **本机已安装**：`$DSH_HOME/profiles/web/plugins/dsh-plugin-wrapped`，patch 行 id 为
+> **本机已安装**：`$DSH_HOME/profiles/web/plugins/dsh-unwrapped`，patch 行 id 为
 > `rewind`，已用 `dsh-rewind status` 验证。
 > **注意**：当前 8080 端口那个 `dsh web` 进程启动于 v0.1，仍在提供旧版静态报告
-> （旧版 `/wrapped` 约 25 KB、无 `<script>`）。重启一次 `dsh web` 才会换成交互版。
+> （旧版 `/unwrapped` 约 25 KB、无 `<script>`）。重启一次 `dsh web` 才会换成交互版。
 
 验证安装：
 
@@ -209,13 +216,13 @@ Node 的 ESM 模块缓存按 URL 命中，patch 重新应用只是重新挂载�
 node bin/plugin.js status
 ```
 
-> **鉴权实况**（实测）：`/wrapped`、`/api/wrapped` 是由插件直接注册在本地 web server 上的
+> **鉴权实况**（实测）：`/unwrapped`、`/api/unwrapped` 是由插件直接注册在本地 web server 上的
 > `exact` 路由，**不走** GUI 那层浏览器 cookie 校验 —— 不带 cookie 也返回 200；
 > `/` 这类 shell 路由仍然需要 cookie（首次 `/?token=…` 换到）。
 > 换句话说，报告的可访问性只取决于端口可达性（默认只监听回环）。
 > 想更保守：把 `path` / `apiPath` 改成不公开的路径，或关掉 `launcher`、只用离线 CLI 出文件。
 
-如果只想看报告、连 harness 都不想开：`node bin/wrapped.js --out wrapped.html`（见下文）。
+如果只想看报告、连 harness 都不想开：`node bin/unwrapped.js --out unwrapped.html`（见下文）。
 
 
 ## 已验证
@@ -225,22 +232,22 @@ node bin/plugin.js status
   时间线/提问计数）、HTML 转义、路由与首页注入、片段渲染、内嵌周期模板、patch 文件增删。
 - **真实浏览器交互**（`node scripts/browser-check.mjs`，headless Edge + DevTools 协议）：
   - 直连 harness（带 session cookie）：16 项断言全过，含「点下一期 → 正文原地替换」
-    （`2026 年度 → 2026 年 10 月`，URL 变 `/wrapped?period=month&tz=480`，页面未重载）；
+    （`2026 年度 → 2026 年 10 月`，URL 变 `/unwrapped?period=month&tz=480`，页面未重载）；
   - 直接打开 `docs/preview-year.html`（`file://`，无服务器）：14 项全过，含
     「2026 年度 → 2025 年度，hash `#2025`」，证明离线文件内嵌周期切换可用。
 - **真机端到端（真实 harness，非 mock）**：另起一份 `dsh --profile web --no-open --port 8101`
-  验证：`GET /wrapped?period=year` → `200`（有真实数据时数字与日志一致，
+  验证：`GET /unwrapped?period=year` → `200`（有真实数据时数字与日志一致，
   无 `NaN` / `undefined`）；`?partial=1` → `200` 只返回 `.wrap` 片段；
-  `GET /api/wrapped?period=year` → `200`；`GET /` → 已注入 `dsh-wrapped-launcher`（`href="/wrapped"`）。
+  `GET /api/unwrapped?period=year` → `200`；`GET /` → 已注入 `dsh-unwrapped-launcher`（`href="/unwrapped"`）。
 - **旧进程诊断**：用 cookie 直连用户正在跑的 8080，`/rewind` 返回 25,073 字节、无 `<script>`、
   无 `data-count` —— 即进程里还是启动时加载的 v0.1 代码（ESM 模块缓存），重启才会换新；
-  同名路由也因此从 `/rewind` 改成 `/wrapped`（`dsh-rewind` 那个回滚插件同样要占 `/rewind`）。
+  同名路由也因此从 `/rewind` 改成 `/unwrapped`（`dsh-rewind` 那个回滚插件同样要占 `/rewind`）。
   这条经验已写进上面的「更新插件」说明。
 - **安装链路（含 npm 产物）**：`node bin/plugin.js install` 把插件拷进 profile 并维护 patch 行；
   改写后的 `cordis.patch.yml` 用 loader 同款 `yaml.JSON_SCHEMA` 解析通过，中文 `launcherLabel` 正常。
-  另外把 `npm pack` 出的 tarball 装进临时 prefix、用它自带的 `dsh-plugin-wrapped` 命令
+  另外把 `npm pack` 出的 tarball 装进临时 prefix、用它自带的 `dsh-unwrapped` 命令
   往一个**全新 `$DSH_HOME`**（只有空 profile）安装，再用该 home 真实启动 harness：
-  `/wrapped` → `200` 且是交互版，`/` 仍是 `401`（未带 cookie），空数据时显示「本期还没有数据」
+  `/unwrapped` → `200` 且是交互版，`/` 仍是 `401`（未带 cookie），空数据时显示「本期还没有数据」
   —— 即「发布后别人照命令装」这条路已跑通，只差 npm 上有没有这个包。
 
 ## 配置
@@ -249,8 +256,8 @@ node bin/plugin.js status
 
 | key | 默认 | 说明 |
 | --- | --- | --- |
-| `path` | `/wrapped` | 报告页路由（精确匹配） |
-| `apiPath` | `/api/wrapped` | JSON API 路由 |
+| `path` | `/unwrapped` | 报告页路由（精确匹配） |
+| `apiPath` | `/api/unwrapped` | JSON API 路由 |
 | `language` | `zh` | `zh` / `en` 文案包 |
 | `launcher` | `true` | 是否往 GUI 首页注入悬浮链接 |
 | `launcherLabel` | `年度回顾` | 悬浮链接文案 |
@@ -262,14 +269,14 @@ node bin/plugin.js status
 ## HTTP API
 
 ```
-GET /wrapped?period=month|quarter|year&key=2026-06|2026-Q2|2026&tz=480
+GET /unwrapped?period=month|quarter|year&key=2026-06|2026-Q2|2026&tz=480
 ```
 
 - `key` 省略 = 当前周期；非法 `key` 自动回退到当前周期。
 - `tz` 是**东为正**的分钟偏移（`480` = UTC+8），缺省取宿主本地时区。周期边界按本地
   零点切分，所以同一天不会跨期。
-- `/api/wrapped` 返回 `{ period, generatedAt, report }`，字段见 `lib/aggregate.js`。
-- `/wrapped?partial=1`（或请求头 `x-rewind-partial: 1`）只返回报告正文（`.wrap` 片段，
+- `/api/unwrapped` 返回 `{ period, generatedAt, report }`，字段见 `lib/aggregate.js`。
+- `/unwrapped?partial=1`（或请求头 `x-rewind-partial: 1`）只返回报告正文（`.wrap` 片段，
   无 `<html>`），供页面内切换周期时原地替换；不带该参数时永远返回完整可打印页面。
 
 页面切换周期在浏览器里走 `partial` 片段 + `history.pushState`；JS 没跑起来、被打印、
@@ -298,10 +305,10 @@ DSH 里一次人类提问往往会产生多条 assistant 消息：先说话、�
 不需要运行 harness，直接对着日志目录出报告（也是本仓库单测的真实数据来源）：
 
 ```powershell
-node bin/wrapped.js --archive "$env:USERPROFILE\.dsh\sessions" `
-  --period year --lang zh --out wrapped.html --json report.json
+node bin/unwrapped.js --archive "$env:USERPROFILE\.dsh\sessions" `
+  --period year --lang zh --out unwrapped.html --json report.json
 
-node bin/wrapped.js --period month --key 2026-10 --stdout | Out-File report.html
+node bin/unwrapped.js --period month --key 2026-10 --stdout | Out-File report.html
 ```
 
 `--period`、`--key`、`--tz`、`--lang`、`--max-sessions`、`--out`、`--json`、`--stdout`、
@@ -311,7 +318,7 @@ node bin/wrapped.js --period month --key 2026-10 --stdout | Out-File report.html
 双击打开也能切周期、能前进后退，完全不需要 harness：
 
 ```bash
-node bin/wrapped.js --period year --embed 13 --out wrapped.html
+node bin/unwrapped.js --period year --embed 13 --out unwrapped.html
 ```
 
 体积参考：13 期全量内嵌约 71 KB（CSS/JS 只写一份）。
@@ -340,7 +347,7 @@ node scripts/market-check.mjs                                  # 查包名是否
 | `lib/report.js` | 自包含 HTML（inline CSS + SVG 图表 + 交互脚本） |
 | `lib/http.js` | 路由注册、首页注入、`partial` 片段 |
 | `lib/profilePatch.js` | `cordis.patch.yml` 增删（纯函数，零 YAML 依赖） |
-| `bin/wrapped.js` | 离线 CLI |
+| `bin/unwrapped.js` | 离线 CLI |
 | `bin/plugin.js` | 跨平台安装器（`install` / `uninstall` / `status` / `patch`） |
 | `scripts/browser-check.mjs` | headless 浏览器交互冒烟测试（开发用） |
 | `scripts/shot.mjs` | 真·整页截图：滚动触发渐入后 `captureBeyondViewport`（开发用） |

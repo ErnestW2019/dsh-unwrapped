@@ -59,7 +59,7 @@ describe('profilePatch: upsert', () => {
     - id: other
       name: some-plugin
     - id: rewind
-      name: ./plugins/dsh-plugin-wrapped/index.js
+      name: ./plugins/dsh-unwrapped/index.js
 `;
     const next = upsertRow(shared, { language: 'zh' });
     assert.equal(next.includes('some-plugin'), true);

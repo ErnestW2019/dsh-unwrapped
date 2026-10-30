@@ -1,6 +1,6 @@
 /**
  * Mint a valid browser-session cookie for a running harness instance, so a
- * headless check can read an auth-gated route (the plugin's /rewind) without the
+ * headless check can read an auth-gated route (the plugin's /unwrapped) without the
  * user's token. Dev tool only.
  *
  *   node scripts/mint-cookie.mjs --authority 127.0.0.1:8080

@@ -13,7 +13,7 @@ const T0 = Date.UTC(2026, 5, 10, 22, 0, 0);
 
 /** Build a two-session archive shaped like the real on-disk store. */
 function makeArchive() {
-  const root = mkdtempSync(join(tmpdir(), 'dsh-wrapped-it-'));
+  const root = mkdtempSync(join(tmpdir(), 'dsh-unwrapped-it-'));
   const dir = join(root, '--work-demo--', 'session-it-1');
   mkdirSync(dir, { recursive: true });
   const rows = [
@@ -88,13 +88,13 @@ describe('integration: plugin mounted over an archive-backed session query', { s
       const ctx = { webServer, sessionQuery, logger: () => {} };
       const dispose = apply(ctx, { language: 'zh' });
 
-      const page = webServer.routes.find((route) => route.path === '/wrapped');
-      const api = webServer.routes.find((route) => route.path === '/api/wrapped');
+      const page = webServer.routes.find((route) => route.path === '/unwrapped');
+      const api = webServer.routes.find((route) => route.path === '/api/unwrapped');
       assert.ok(page && api);
       assert.equal(webServer.taps.length, 1);
 
       const html = fakeRes();
-      await page.handler({ url: '/wrapped?period=month&key=2026-06&tz=0' }, html);
+      await page.handler({ url: '/unwrapped?period=month&key=2026-06&tz=0' }, html);
       assert.equal(html.statusCode, 200);
       assert.match(html.body, /Integration session/);
       assert.match(html.body, /2026 年 6 月/);
@@ -102,7 +102,7 @@ describe('integration: plugin mounted over an archive-backed session query', { s
       assert.equal(html.body.includes('undefined'), false);
 
       const json = fakeRes();
-      await api.handler({ url: '/api/wrapped?period=month&key=2026-06&tz=0' }, json);
+      await api.handler({ url: '/api/unwrapped?period=month&key=2026-06&tz=0' }, json);
       const body = JSON.parse(json.body);
       assert.equal(body.report.totals.humanMessages, 1);
       assert.equal(body.report.totals.aiMessages, 1);
@@ -112,7 +112,7 @@ describe('integration: plugin mounted over an archive-backed session query', { s
 
       // The launcher tap reaches the GUI shell.
       const shell = webServer.taps[0]('<html><body><div id="app"></div></body></html>');
-      assert.match(shell, /dsh-wrapped-launcher/);
+      assert.match(shell, /dsh-unwrapped-launcher/);
 
       dispose();
       assert.equal(webServer.routes.length, 0);
@@ -139,9 +139,9 @@ describe('integration: plugin mounted over an archive-backed session query', { s
       const webServer = fakeWebServer();
       const errors = [];
       const dispose = apply({ webServer, sessionQuery, logger: () => {} }, {});
-      const api = webServer.routes.find((route) => route.path === '/api/wrapped');
+      const api = webServer.routes.find((route) => route.path === '/api/unwrapped');
       const res = fakeRes();
-      await api.handler({ url: '/api/wrapped?period=month&key=2026-06&tz=0' }, res);
+      await api.handler({ url: '/api/unwrapped?period=month&key=2026-06&tz=0' }, res);
       assert.equal(res.statusCode, 200);
       assert.equal(JSON.parse(res.body).report.totals.sessionsTouched, 1);
       dispose();

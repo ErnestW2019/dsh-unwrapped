@@ -2,12 +2,12 @@
 /**
  * Cross-platform profile installer — the "how do others use it" entry point.
  *
- *   npx dsh-plugin-wrapped install            # into $DSH_HOME/profiles/web
- *   npx dsh-plugin-wrapped install --profile tui --language en
- *   npx dsh-plugin-wrapped uninstall
- *   npx dsh-plugin-wrapped status
+ *   npx dsh-unwrapped install            # into $DSH_HOME/profiles/web
+ *   npx dsh-unwrapped install --profile tui --language en
+ *   npx dsh-unwrapped uninstall
+ *   npx dsh-unwrapped status
  *
- * It copies the plugin into `<profile>/plugins/dsh-plugin-wrapped` and keeps one
+ * It copies the plugin into `<profile>/plugins/dsh-unwrapped` and keeps one
  * `rewind` insert row in `<profile>/cordis.patch.yml`, so a package manager is
  * never required. Running it from a checkout, a tarball, or an npm install all
  * behave the same, because it copies from its own package root.
@@ -24,7 +24,7 @@ const PACKAGE_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const COPY_ENTRIES = ['index.js', 'package.json', 'README.md', 'lib', 'bin'];
 const DEFAULT_DSH_HOME = process.env.DSH_HOME || join(homedir(), '.dsh');
 
-const HELP = `dsh-plugin-wrapped — install the conversation rewind into a DSH profile
+const HELP = `dsh-unwrapped — install the conversation report into a DSH profile
 
 Usage: dsh-wrapped <command> [options]
 
@@ -94,7 +94,7 @@ function pathsFor(options) {
   const profileDir = join(options.home, 'profiles', options.profile);
   return {
     profileDir,
-    pluginDir: join(profileDir, 'plugins', 'dsh-plugin-wrapped'),
+    pluginDir: join(profileDir, 'plugins', 'dsh-unwrapped'),
     patchFile: join(profileDir, 'cordis.patch.yml'),
   };
 }
@@ -156,7 +156,7 @@ function install(options) {
   console.log(`${options.dryRun ? 'would install' : 'installed'} ${copied.join(', ')}`);
   console.log(`  plugin -> ${pluginDir}`);
   console.log(`  patch  -> ${patchFile}${changed ? '' : ' (already up to date)'}`);
-  if (live) console.log('  reload -> patchReload is live, refresh the GUI or open /rewind');
+  if (live) console.log('  reload -> patchReload is live, refresh the GUI or open /unwrapped');
   else console.log(`  reload -> restart the harness (dsh --profile ${options.profile}) to pick it up`);
   return 0;
 }

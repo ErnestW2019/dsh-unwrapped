@@ -3,8 +3,8 @@
  * Offline CLI: turn a durable session archive into a rewind report without a
  * running harness.
  *
- *   node bin/wrapped.js --period month --key 2026-06 --out rewind.html
- *   node bin/wrapped.js --period year --lang en --json report.json --stdout
+ *   node bin/unwrapped.js --period month --key 2026-06 --out rewind.html
+ *   node bin/unwrapped.js --period year --lang en --json report.json --stdout
  *
  * Defaults to `$DSH_HOME/sessions` (or `~/.dsh/sessions`), which is exactly the
  * archive the plugin itself reads through `ctx.sessionQuery`.
@@ -21,9 +21,9 @@ import { resolvePeriod, recentKeys } from '../lib/periods.js';
 import { formatCompact, formatDate, formatInt } from '../lib/report.js';
 import { packFor } from '../lib/labels.js';
 
-const HELP = `dsh-plugin-wrapped — build a conversation rewind report offline
+const HELP = `dsh-unwrapped — build a conversation rewind report offline
 
-Usage: node bin/wrapped.js [options]
+Usage: node bin/unwrapped.js [options]
 
 Options:
   --archive <dir>     session archive root (default: $DSH_HOME/sessions)

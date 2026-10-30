@@ -1,8 +1,8 @@
 {
-  "name": "dsh-plugin-wrapped",
+  "name": "dsh-unwrapped",
   "version": "0.2.0",
   "type": "module",
-  "description": "NetEase-style Wrapped for DeepSeek Harness: an interactive monthly / quarterly / yearly rewind of human-vs-AI conversations — auto-collected from every local session log, with the sentences you actually said. · 像网易云年度报告那样回顾你和 AI 的对话。",
+  "description": "Unwrapped for DeepSeek Harness: an interactive monthly / quarterly / yearly report of human-vs-AI conversations — auto-collected from every local session log, with the sentences you actually said. · 给你和 AI 的对话一份网易云年度报告。",
   "keywords": [
     "dsh",
     "dsh-plugin",
@@ -19,11 +19,11 @@
   "author": "ErnestW2019",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ErnestW2019/dsh-plugin-wrapped.git"
+    "url": "git+https://github.com/ErnestW2019/dsh-unwrapped.git"
   },
-  "homepage": "https://github.com/ErnestW2019/dsh-plugin-wrapped#readme",
+  "homepage": "https://github.com/ErnestW2019/dsh-unwrapped#readme",
   "bugs": {
-    "url": "https://github.com/ErnestW2019/dsh-plugin-wrapped/issues"
+    "url": "https://github.com/ErnestW2019/dsh-unwrapped/issues"
   },
   "main": "index.js",
   "exports": {
@@ -31,9 +31,8 @@
     "./lib/*": "./lib/*"
   },
   "bin": {
-    "dsh-wrapped": "./bin/plugin.js",
-    "dsh-plugin-wrapped": "./bin/plugin.js",
-    "dsh-wrapped-report": "./bin/wrapped.js"
+    "dsh-unwrapped": "./bin/plugin.js",
+    "dsh-unwrapped-report": "./bin/unwrapped.js"
   },
   "files": [
     "index.js",
@@ -47,8 +46,8 @@
   },
   "scripts": {
     "test": "node --test --test-isolation=none \"test/*.test.js\"",
-    "preview": "node bin/wrapped.js",
-    "report": "node bin/wrapped.js --period year --out report.html --json report.json",
+    "preview": "node bin/unwrapped.js",
+    "report": "node bin/unwrapped.js --period year --out report.html --json report.json",
     "install:profile": "node bin/plugin.js install",
     "uninstall:profile": "node bin/plugin.js uninstall",
     "prepublishOnly": "node --test --test-isolation=none \"test/*.test.js\""

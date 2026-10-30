@@ -7,7 +7,7 @@
  * builds, and (against a live harness) a period link swaps the body without a
  * full page load.
  *
- *   node scripts/browser-check.mjs --url http://127.0.0.1:8099/wrapped?token=…
+ *   node scripts/browser-check.mjs --url http://127.0.0.1:8099/unwrapped?token=…
  *   node scripts/browser-check.mjs --file docs/preview-year.html
  */
 
@@ -154,7 +154,7 @@ try {
   }
   await page.send('Page.navigate', { url: target });
   await sleep(1600);
-  const launcherOnShell = await page.evaluate("(function(){var el=document.getElementById('dsh-wrapped-launcher');return el?el.getAttribute('href'):null})()");
+  const launcherOnShell = await page.evaluate("(function(){var el=document.getElementById('dsh-unwrapped-launcher');return el?el.getAttribute('href'):null})()");
   if (then) {
     // The harness hands out its auth cookie on a tokenized first visit, so a
     // report URL only works after that redirect has happened.
@@ -248,7 +248,7 @@ try {
     const patched = await page.evaluate("document.querySelector('a[data-nav]').getAttribute('href')");
     check('period switch swaps content in place', before !== after && reloads === 1, `${before} -> ${after}`);
     check('period switch updates the URL', patched && patched.includes('period='), String(patched));
-    const json = await page.evaluate(`fetch(location.pathname + '?period=year&partial=1', {headers:{'x-wrapped-partial':'1'}}).then(function(r){return r.status + ':' + (r.ok?'ok':'bad')})`);
+    const json = await page.evaluate(`fetch(location.pathname + '?period=year&partial=1', {headers:{'x-unwrapped-partial':'1'}}).then(function(r){return r.status + ':' + (r.ok?'ok':'bad')})`);
     check('partial endpoint answers', json.endsWith(':ok'), json);
   } else {
     check('static file keeps links as plain navigation', true, 'offline mode');

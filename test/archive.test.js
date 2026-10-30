@@ -22,7 +22,7 @@ function zstdFrame(text) {
 }
 
 function makeArchive() {
-  const root = mkdtempSync(join(tmpdir(), 'dsh-wrapped-'));
+  const root = mkdtempSync(join(tmpdir(), 'dsh-unwrapped-'));
   const workspace = join(root, '--work-demo--');
   const sessionA = join(workspace, 'session-a');
   const sessionB = join(workspace, 'session-b');

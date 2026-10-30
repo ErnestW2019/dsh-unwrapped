@@ -77,7 +77,7 @@ function setup(config = {}) {
 describe('http: route registration', () => {
   it('registers the page and the JSON API on exact paths', () => {
     const { webServer } = setup();
-    assert.deepEqual(webServer.routes.map((route) => route.path).sort(), ['/api/wrapped', '/wrapped']);
+    assert.deepEqual(webServer.routes.map((route) => route.path).sort(), ['/api/unwrapped', '/unwrapped']);
     assert.equal(webServer.routes.every((route) => route.kind === 'exact'), true);
   });
 
@@ -107,20 +107,20 @@ describe('http: route registration', () => {
 describe('http: handlers', () => {
   it('serves the HTML report with navigable period links', async () => {
     const { webServer } = setup();
-    const route = webServer.routes.find((item) => item.path === '/wrapped');
+    const route = webServer.routes.find((item) => item.path === '/unwrapped');
     const res = fakeRes();
-    await route.handler({ url: '/wrapped?period=month&key=2026-06&tz=0' }, res);
+    await route.handler({ url: '/unwrapped?period=month&key=2026-06&tz=0' }, res);
     assert.equal(res.statusCode, 200);
     assert.match(res.headers['content-type'], /text\/html/);
     assert.match(res.body, /2026 年 6 月/);
-    assert.match(res.body, /href="\/wrapped\?period=month&amp;tz=0&amp;key=2026-05"/);
+    assert.match(res.body, /href="\/unwrapped\?period=month&amp;tz=0&amp;key=2026-05"/);
   });
 
   it('serves the JSON API', async () => {
     const { webServer } = setup();
-    const route = webServer.routes.find((item) => item.path === '/api/wrapped');
+    const route = webServer.routes.find((item) => item.path === '/api/unwrapped');
     const res = fakeRes();
-    await route.handler({ url: '/api/wrapped?period=quarter&key=2026-Q2&tz=480' }, res);
+    await route.handler({ url: '/api/unwrapped?period=quarter&key=2026-Q2&tz=480' }, res);
     assert.equal(res.statusCode, 200);
     assert.match(res.headers['content-type'], /application\/json/);
     const body = JSON.parse(res.body);
@@ -133,30 +133,30 @@ describe('http: handlers', () => {
     const webServer = fakeWebServer();
     const ctx = { webServer, logger: () => {} };
     registerRewindRoutes(ctx, { getReport: async () => { throw new Error('boom'); } }, normalizeOptions({}));
-    const route = webServer.routes.find((item) => item.path === '/api/wrapped');
+    const route = webServer.routes.find((item) => item.path === '/api/unwrapped');
     const res = fakeRes();
-    await route.handler({ url: '/api/wrapped' }, res);
+    await route.handler({ url: '/api/unwrapped' }, res);
     assert.equal(res.statusCode, 500);
     assert.equal(JSON.parse(res.body).error, 'rewind_failed');
   });
 
   it('parses period, key, and offset with a fallback', () => {
-    const parsed = parseQuery('/wrapped?period=year&key=2026&tz=-300', 480);
+    const parsed = parseQuery('/unwrapped?period=year&key=2026&tz=-300', 480);
     assert.equal(parsed.period, 'year');
     assert.equal(parsed.key, '2026');
     assert.equal(parsed.offsetMinutes, -300);
     assert.equal(parsed.partial, false);
-    assert.equal(parseQuery('/wrapped?partial=1', 480).partial, true);
-    assert.equal(parseQuery('/wrapped', 480, { 'x-wrapped-partial': '1' }).partial, true);
-    assert.equal(parseQuery('/wrapped', 480).offsetMinutes, 480);
-    assert.equal(parseQuery('/wrapped?tz=99999', 480).offsetMinutes, 480);
+    assert.equal(parseQuery('/unwrapped?partial=1', 480).partial, true);
+    assert.equal(parseQuery('/unwrapped', 480, { 'x-unwrapped-partial': '1' }).partial, true);
+    assert.equal(parseQuery('/unwrapped', 480).offsetMinutes, 480);
+    assert.equal(parseQuery('/unwrapped?tz=99999', 480).offsetMinutes, 480);
   });
 
   it('serves a fragment for partial requests', async () => {
     const { webServer } = setup();
-    const route = webServer.routes.find((item) => item.path === '/wrapped');
+    const route = webServer.routes.find((item) => item.path === '/unwrapped');
     const res = fakeRes();
-    await route.handler({ url: '/wrapped?period=month&key=2026-06&tz=0&partial=1', headers: {} }, res);
+    await route.handler({ url: '/unwrapped?period=month&key=2026-06&tz=0&partial=1', headers: {} }, res);
     assert.equal(res.statusCode, 200);
     assert.equal(res.body.includes('<!doctype html>'), false);
     assert.match(res.body, /data-rewind-root/);
@@ -166,18 +166,18 @@ describe('http: handlers', () => {
 
 describe('http: launcher injection', () => {
   it('adds one launcher link before </body>', () => {
-    const html = injectLauncher('<html><body><div id="app"></div></body></html>', '/wrapped', '年度回顾');
-    assert.match(html, /dsh-wrapped-launcher/);
-    assert.match(html, /href="\/wrapped"/);
+    const html = injectLauncher('<html><body><div id="app"></div></body></html>', '/unwrapped', '年度回顾');
+    assert.match(html, /dsh-unwrapped-launcher/);
+    assert.match(html, /href="\/unwrapped"/);
     assert.match(html, /年度回顾/);
-    assert.equal(html.indexOf('dsh-wrapped-launcher') < html.indexOf('</body>'), true);
+    assert.equal(html.indexOf('dsh-unwrapped-launcher') < html.indexOf('</body>'), true);
   });
 
   it('is idempotent and safe on markup without a body', () => {
-    const once = injectLauncher('<body></body>', '/wrapped', '年度回顾');
-    assert.equal(injectLauncher(once, '/wrapped', '年度回顾'), once);
-    assert.equal(injectLauncher('<div></div>', '/wrapped', 'X'), '<div></div>');
-    assert.equal(injectLauncher(null, '/wrapped', 'X'), null);
+    const once = injectLauncher('<body></body>', '/unwrapped', '年度回顾');
+    assert.equal(injectLauncher(once, '/unwrapped', '年度回顾'), once);
+    assert.equal(injectLauncher('<div></div>', '/unwrapped', 'X'), '<div></div>');
+    assert.equal(injectLauncher(null, '/unwrapped', 'X'), null);
   });
 
   it('wires the tap to the configured path and label', () => {
@@ -191,8 +191,8 @@ describe('http: launcher injection', () => {
 describe('config: normalizeOptions', () => {
   it('applies defaults', () => {
     const options = normalizeOptions();
-    assert.equal(options.path, '/wrapped');
-    assert.equal(options.apiPath, '/api/wrapped');
+    assert.equal(options.path, '/unwrapped');
+    assert.equal(options.apiPath, '/api/unwrapped');
     assert.equal(options.language, 'zh');
     assert.equal(options.launcher, true);
     assert.equal(options.cacheTtlMs, 60_000);
@@ -217,7 +217,7 @@ describe('config: normalizeOptions', () => {
 
   it('rejects bad paths and collisions', () => {
     assert.throws(() => normalizeOptions({ path: 'rewind' }), /must start with/);
-    assert.throws(() => normalizeOptions({ apiPath: '/wrapped', path: '/wrapped' }), /must differ/);
+    assert.throws(() => normalizeOptions({ apiPath: '/unwrapped', path: '/unwrapped' }), /must differ/);
   });
 
   it('clamps numeric knobs instead of trusting them', () => {

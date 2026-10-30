@@ -13,14 +13,14 @@
  */
 
 const CANDIDATES = [
-  'dsh-plugin-wrapped',
-  'dsh-wrapped',
-  'dsh-plugin-wrapped',
+  'dsh-unwrapped',
+  'dsh-unwrapped',
+  'dsh-unwrapped',
   'dsh-plugin-conversation-rewind',
   'dsh-conversation-rewind',
   'dsh-plugin-year-in-review',
-  'dsh-plugin-wrapped-report',
-  'dsh-wrapped',
+  'dsh-unwrapped-report',
+  'dsh-unwrapped',
 ];
 
 const SIMILAR = ['rewind', 'wrapped', 'year in review', '年度报告', '回顾', 'usage stats', 'session stats'];

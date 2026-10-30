@@ -243,9 +243,9 @@ const sessions = buildArchive(outRoot);
 console.log(`wrote ${sessions} synthetic sessions to ${outRoot} (timezone +08:00)`);
 
 const common = ['--archive', outRoot, '--tz', String(TZ)];
-run(['bin/wrapped.js', ...common, '--period', 'year', '--key', '2026', '--embed', '13', '--out', 'docs/preview-year.html', '--json', 'docs/preview-year.json']);
-run(['bin/wrapped.js', ...common, '--period', 'quarter', '--key', '2026-Q3', '--embed', '8', '--out', 'docs/preview-quarter.html']);
-run(['bin/wrapped.js', ...common, '--period', 'month', '--key', '2020-01', '--embed', '12', '--out', 'docs/preview-empty.html']);
+run(['bin/unwrapped.js', ...common, '--period', 'year', '--key', '2026', '--embed', '13', '--out', 'docs/preview-year.html', '--json', 'docs/preview-year.json']);
+run(['bin/unwrapped.js', ...common, '--period', 'quarter', '--key', '2026-Q3', '--embed', '8', '--out', 'docs/preview-quarter.html']);
+run(['bin/unwrapped.js', ...common, '--period', 'month', '--key', '2020-01', '--embed', '12', '--out', 'docs/preview-empty.html']);
 
 if (!keepArchive) rmSync(outRoot, { recursive: true, force: true });
 console.log('\npreviews rebuilt from synthetic data. next: node scripts/shot.mjs --file docs/preview-year.html --out docs/preview-year.png');

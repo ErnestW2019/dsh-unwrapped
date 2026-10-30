@@ -34,7 +34,7 @@
 
 英文版（X / HN）：
 
-> **Wrapped, but for your AI conversations.** DeepSeek Harness 插件：月度/季度/年度回顾，人类 vs AI 双视角，读本地日志，不上传、不调模型。`npx dsh-plugin-wrapped install`
+> **Wrapped, but for your AI conversations.** DeepSeek Harness 插件：月度/季度/年度回顾，人类 vs AI 双视角，读本地日志，不上传、不调模型。`npx dsh-unwrapped install`
 
 **反面教材**（不要这么写）："一个功能完整的对话统计分析插件，支持多维度聚合与可视化。" —— 没有一个字让人想点。
 
@@ -64,11 +64,11 @@ npx dsh-plugin-catalog --help 2>/dev/null || npm view dsh-plugin-catalog version
 提交时用的元信息（照抄）：
 
 ```yaml
-name: dsh-plugin-wrapped
+name: dsh-unwrapped
 one-liner: 网易云年度报告风格的 AI 对话回顾 · 人类 vs AI 双视角
 keywords: wrapped, year-in-review, conversation-analytics, report
 category: insights / stats
-install: npx dsh-plugin-wrapped install
+install: npx dsh-unwrapped install
 ```
 
 ---
@@ -90,7 +90,7 @@ install: npx dsh-plugin-wrapped install
 >
 > 报告最后一句是它写给自己的：**「它不会记得这些。日志会。」**
 >
-> 数据全在本地，不上传、不联网，装一个就能看自己的：`npx dsh-plugin-wrapped install`
+> 数据全在本地，不上传、不联网，装一个就能看自己的：`npx dsh-unwrapped install`
 
 ### 3.2 X / Twitter thread（英文）
 
@@ -106,16 +106,16 @@ install: npx dsh-plugin-wrapped install
 > the phrase you kept repeating.
 >
 > 4/ No upload, no database, no model calls. It's a host plugin on the
-> harness's own web server: `npx dsh-plugin-wrapped install`
+> harness's own web server: `npx dsh-unwrapped install`
 >
-> 5/ Repo: github.com/ErnestW2019/dsh-plugin-wrapped
+> 5/ Repo: github.com/ErnestW2019/dsh-unwrapped
 > MIT. Zero deps. 105 tests. PRs welcome.
 > Here's my card ⬇️
 
 ### 3.3 即刻 / 朋友圈（一行 + 图）
 
 > 给自己的 AI 对话做了一份年度报告，最后一句话是「它不会记得这些。日志会。」
-> 数据全本地，装一个能看自己的：`npx dsh-plugin-wrapped install`
+> 数据全本地，装一个能看自己的：`npx dsh-unwrapped install`
 
 ### 3.4 V2EX / 知乎（技术向，别标题党）
 
@@ -151,7 +151,7 @@ install: npx dsh-plugin-wrapped install
 **15 秒 GIF 脚本**（一镜到底，别剪辑炫技）：
 
 ```
-0-2s   终端：npx dsh-plugin-wrapped install && 看到 "patch -> ... (live)"
+0-2s   终端：npx dsh-unwrapped install && 看到 "patch -> ... (live)"
 2-5s   浏览器刷新，右下角出现悬浮按钮，点进去
 5-8s   首屏：巨大的 2026 + "你说 4,731 字，它说了 3.3 万字" + 占比条生长
 8-11s  滚动：图表长出来 → 「最晚的一次 01:15」→ 引号里的原话

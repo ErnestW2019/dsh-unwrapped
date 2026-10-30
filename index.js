@@ -1,5 +1,5 @@
 /**
- * dsh-plugin-wrapped — a DeepSeek Harness plugin that produces a NetEase-style
+ * dsh-unwrapped — a DeepSeek Harness plugin that produces a NetEase-style
  * monthly / quarterly / yearly rewind of human-vs-AI conversations.
  *
  * Form: a host-side Cordis plugin (no client bundle, no build step) that
@@ -7,8 +7,8 @@
  *      durable session log already on this machine, live or persisted;
  *   2. derives the report in-process with a TTL cache (no database, no new
  *      storage, no import step);
- *   3. publishes it on the GUI's own web server: `/wrapped` renders the report
- *      and `/api/wrapped` serves the same numbers as JSON. A floating launcher
+ *   3. publishes it on the GUI's own web server: `/unwrapped` renders the report
+ *      and `/api/unwrapped` serves the same numbers as JSON. A floating launcher
  *      link is added to the GUI shell via `webServer.tapIndex`.
  *
  * The model never sees any of this: no tools, no prompt, no KV-cache effect.
@@ -28,8 +28,8 @@ export const name = 'rewind';
 export const inject = ['sessionQuery', 'webServer'];
 
 const DEFAULT_OPTIONS = Object.freeze({
-  path: '/wrapped',
-  apiPath: '/api/wrapped',
+  path: '/unwrapped',
+  apiPath: '/api/unwrapped',
   language: 'zh',
   launcher: true,
   launcherLabel: '年度回顾',

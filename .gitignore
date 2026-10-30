@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# build/publish artifacts
+*.tgz
+report.html
+report.json
+wrapped.html
+
+# generated demo archive + scratch files
+.demo/
+.tmp-*
+raw.png
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,501 @@
+{
+  "range": {
+    "kind": "year",
+    "key": "2026",
+    "year": 2026,
+    "month": null,
+    "quarter": null,
+    "startMs": 1767196800000,
+    "endMs": 1798732800000,
+    "prevKey": "2025",
+    "nextKey": "2027",
+    "isCurrent": true,
+    "offsetMinutes": 480
+  },
+  "hasData": true,
+  "totals": {
+    "messages": 170,
+    "humanMessages": 85,
+    "aiMessages": 85,
+    "aiSteps": 85,
+    "humanChars": 842,
+    "aiChars": 2250,
+    "reasoningChars": 0,
+    "turns": 85,
+    "steps": 85,
+    "toolCalls": 151,
+    "sessionsTouched": 23,
+    "sessionsCreated": 23,
+    "messagesPerSession": 7.4,
+    "avgMessagesPerSession": 7.4,
+    "activeDays": 20,
+    "maxStreak": 1,
+    "humanAvgChars": 10,
+    "aiAvgChars": 26,
+    "longestSpanMs": 1966000,
+    "longestRunMs": 1979000,
+    "interrupted": 0,
+    "failures": 0,
+    "injectedMessages": 0,
+    "delegatedSessions": 0,
+    "busiestDay": {
+      "day": "2026-09-20",
+      "messages": 20
+    },
+    "peakHour": 14
+  },
+  "ratio": {
+    "humanShare": 0.5,
+    "aiShare": 0.5,
+    "humanToAi": 1
+  },
+  "series": [
+    {
+      "key": "2026-01",
+      "human": 15,
+      "ai": 15,
+      "total": 30
+    },
+    {
+      "key": "2026-02",
+      "human": 9,
+      "ai": 9,
+      "total": 18
+    },
+    {
+      "key": "2026-03",
+      "human": 16,
+      "ai": 16,
+      "total": 32
+    },
+    {
+      "key": "2026-04",
+      "human": 2,
+      "ai": 2,
+      "total": 4
+    },
+    {
+      "key": "2026-05",
+      "human": 7,
+      "ai": 7,
+      "total": 14
+    },
+    {
+      "key": "2026-06",
+      "human": 11,
+      "ai": 11,
+      "total": 22
+    },
+    {
+      "key": "2026-07",
+      "human": 4,
+      "ai": 4,
+      "total": 8
+    },
+    {
+      "key": "2026-08",
+      "human": 9,
+      "ai": 9,
+      "total": 18
+    },
+    {
+      "key": "2026-09",
+      "human": 10,
+      "ai": 10,
+      "total": 20
+    },
+    {
+      "key": "2026-10",
+      "human": 2,
+      "ai": 2,
+      "total": 4
+    },
+    {
+      "key": "2026-11",
+      "human": 0,
+      "ai": 0,
+      "total": 0
+    },
+    {
+      "key": "2026-12",
+      "human": 0,
+      "ai": 0,
+      "total": 0
+    }
+  ],
+  "hours": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    12,
+    3,
+    11,
+    8,
+    20,
+    28,
+    16,
+    2,
+    11,
+    9,
+    10,
+    0,
+    18,
+    14,
+    8
+  ],
+  "weekday": [
+    32,
+    32,
+    26,
+    32,
+    18,
+    24,
+    6
+  ],
+  "tokens": {
+    "input": 1232081,
+    "output": 8494,
+    "total": 1240575,
+    "cacheRead": 334084,
+    "cacheWrite": 0,
+    "requests": 85
+  },
+  "topModels": [
+    {
+      "model": "code-fast",
+      "count": 42
+    },
+    {
+      "model": "deepseek-chat",
+      "count": 22
+    },
+    {
+      "model": "deepseek-reasoner",
+      "count": 21
+    }
+  ],
+  "topProviders": [
+    {
+      "provider": "deepseek",
+      "count": 43
+    },
+    {
+      "provider": "internal",
+      "count": 42
+    }
+  ],
+  "topWorkspaces": [
+    {
+      "workspace": "/home/dev/code/tiny-db",
+      "count": 94
+    },
+    {
+      "workspace": "/home/dev/work/notes",
+      "count": 34
+    },
+    {
+      "workspace": "/home/dev/code/aurora-ui",
+      "count": 28
+    },
+    {
+      "workspace": "/home/dev/code/pipeline",
+      "count": 14
+    }
+  ],
+  "topPresets": [
+    {
+      "preset": "standard",
+      "count": 16
+    },
+    {
+      "preset": "reviewer",
+      "count": 7
+    }
+  ],
+  "tools": [
+    {
+      "name": "edit",
+      "count": 25
+    },
+    {
+      "name": "glob",
+      "count": 25
+    },
+    {
+      "name": "web_fetch",
+      "count": 23
+    },
+    {
+      "name": "read",
+      "count": 20
+    },
+    {
+      "name": "grep",
+      "count": 15
+    },
+    {
+      "name": "pwsh",
+      "count": 15
+    }
+  ],
+  "topSessions": [
+    {
+      "id": "demo-066",
+      "title": "把配置从 JSON 换成 YAML",
+      "cwd": "/home/dev/code/tiny-db",
+      "agentPreset": "standard",
+      "delegated": false,
+      "human": 6,
+      "ai": 6,
+      "steps": 6,
+      "messages": 12,
+      "chars": 218,
+      "tokens": 114618,
+      "tools": 14,
+      "spanMs": 1966000,
+      "startTs": 1781789730000,
+      "endTs": 1781791696000,
+      "previews": [
+        "帮我看看这个类型为什么不匹配",
+        "换个思路试试",
+        "谢谢，跑通了"
+      ]
+    },
+    {
+      "id": "demo-057",
+      "title": "给上传接口加并发限制",
+      "cwd": "/home/dev/code/tiny-db",
+      "agentPreset": "standard",
+      "delegated": false,
+      "human": 6,
+      "ai": 6,
+      "steps": 6,
+      "messages": 12,
+      "chars": 226,
+      "tokens": 89664,
+      "tools": 11,
+      "spanMs": 1673000,
+      "startTs": 1773205130000,
+      "endTs": 1773206803000,
+      "previews": [
+        "再试一次，还是不行",
+        "换个思路试试",
+        "能不能只改这一处，别动别的"
+      ]
+    },
+    {
+      "id": "demo-055",
+      "title": "优化首屏加载",
+      "cwd": "/home/dev/work/notes",
+      "agentPreset": "reviewer",
+      "delegated": false,
+      "human": 6,
+      "ai": 6,
+      "steps": 6,
+      "messages": 12,
+      "chars": 239,
+      "tokens": 88834,
+      "tools": 10,
+      "spanMs": 1270000,
+      "startTs": 1770699327000,
+      "endTs": 1770700597000,
+      "previews": [
+        "帮我看看这个类型为什么不匹配",
+        "这个颜色太亮了，换暗一点",
+        "先写测试再改"
+      ]
+    },
+    {
+      "id": "demo-053",
+      "title": "把报告页改成可分享的图片",
+      "cwd": "/home/dev/code/tiny-db",
+      "agentPreset": "standard",
+      "delegated": false,
+      "human": 6,
+      "ai": 6,
+      "steps": 6,
+      "messages": 12,
+      "chars": 200,
+      "tokens": 85791,
+      "tools": 11,
+      "spanMs": 1539000,
+      "startTs": 1768200547000,
+      "endTs": 1768202086000,
+      "previews": [
+        "能不能只改这一处，别动别的",
+        "把这段抽成插件",
+        "再试一次，还是不行"
+      ]
+    },
+    {
+      "id": "demo-056",
+      "title": "梳理一下这个模块的依赖",
+      "cwd": "/home/dev/work/notes",
+      "agentPreset": "reviewer",
+      "delegated": false,
+      "human": 6,
+      "ai": 6,
+      "steps": 6,
+      "messages": 12,
+      "chars": 220,
+      "tokens": 78634,
+      "tools": 6,
+      "spanMs": 1399000,
+      "startTs": 1773710011000,
+      "endTs": 1773711410000,
+      "previews": [
+        "谢谢，跑通了",
+        "我刚才那个改动是不是把缓存弄坏了",
+        "再试一次，还是不行"
+      ]
+    },
+    {
+      "id": "demo-052",
+      "title": "把报告页改成可分享的图片",
+      "cwd": "/home/dev/code/tiny-db",
+      "agentPreset": "reviewer",
+      "delegated": false,
+      "human": 5,
+      "ai": 5,
+      "steps": 5,
+      "messages": 10,
+      "chars": 162,
+      "tokens": 80684,
+      "tools": 11,
+      "spanMs": 1564000,
+      "startTs": 1768979910000,
+      "endTs": 1768981474000,
+      "previews": [
+        "先写测试再改",
+        "算了，先回滚这一版",
+        "确认一下，这样可以吗"
+      ]
+    }
+  ],
+  "failures": {
+    "count": 0,
+    "samples": []
+  },
+  "moments": {
+    "first": {
+      "t": 1767610083000,
+      "text": "这个接口的返回结构不太对",
+      "title": "给 CLI 加一个 --dry-run",
+      "id": "demo-051"
+    },
+    "last": {
+      "t": 1792293890000,
+      "text": "等等，这个文件是谁改的",
+      "title": "给搜索加上拼音匹配",
+      "id": "demo-073"
+    },
+    "latestNight": {
+      "t": 1773415122000,
+      "text": "能不能只改这一处，别动别的",
+      "title": "把报告页改成可分享的图片",
+      "id": "demo-058",
+      "hour": 23,
+      "minute": 18
+    },
+    "latestClock": {
+      "t": 1773415122000,
+      "text": "能不能只改这一处，别动别的",
+      "title": "把报告页改成可分享的图片",
+      "id": "demo-058",
+      "hour": 23,
+      "minute": 18
+    },
+    "longest": {
+      "id": "demo-066",
+      "title": "把配置从 JSON 换成 YAML",
+      "runMs": 1979000,
+      "startTs": 1781789730000
+    },
+    "timeline": [
+      {
+        "key": "2026-01",
+        "t": 1767610083000,
+        "text": "这个接口的返回结构不太对"
+      },
+      {
+        "key": "2026-03",
+        "t": 1773205130000,
+        "text": "再试一次，还是不行"
+      },
+      {
+        "key": "2026-05",
+        "t": 1779418738000,
+        "text": "再加个测试吧"
+      },
+      {
+        "key": "2026-07",
+        "t": 1783663367000,
+        "text": "能不能只改这一处，别动别的"
+      },
+      {
+        "key": "2026-09",
+        "t": 1789897289000,
+        "text": "线上现在能用吗"
+      }
+    ],
+    "questions": 0,
+    "thanks": 3,
+    "samples": 85
+  },
+  "phrases": [
+    {
+      "word": "为什么",
+      "count": 10
+    },
+    {
+      "word": "能不能",
+      "count": 8
+    },
+    {
+      "word": "确认",
+      "count": 8
+    }
+  ],
+  "comparison": {
+    "prevKey": "2025",
+    "human": 86,
+    "ai": 86,
+    "sessions": 24,
+    "tokens": 1178746,
+    "deltas": {
+      "messagesPct": -1.2,
+      "sessionsPct": -4.2,
+      "tokensPct": 5.2
+    }
+  },
+  "badges": [
+    {
+      "key": "tool_master",
+      "metric": 6
+    },
+    {
+      "key": "model_polyglot",
+      "metric": 3
+    },
+    {
+      "key": "terse",
+      "metric": 10
+    }
+  ],
+  "headline": {
+    "key": "tool_master",
+    "metric": 6
+  },
+  "generatedAt": 1793351926137,
+  "corpus": {
+    "sessions": 74,
+    "firstAt": 1705131600000,
+    "lastAt": 1792293958000
+  }
+}

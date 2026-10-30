@@ -1,0 +1,1927 @@
+<!doctype html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="color-scheme" content="dark light"/>
+<title>对话回顾 · 2026 年 第 3 季度</title>
+<style>
+
+:root, :root[data-theme="dark"]{
+  --bg:#050509; --bg-2:#0b0b12; --ink:#f6f6f8; --muted:#9a9aa8; --dim:#666672;
+  --panel:rgba(255,255,255,.045); --panel-2:rgba(255,255,255,.028);
+  --line:rgba(255,255,255,.1); --line-2:rgba(255,255,255,.2);
+  --human:#f6c88a; --human-2:#e0a35c; --ai:#5b8cff; --ai-2:#3f6fe0;
+  --accent:#ff2d55; --accent-2:#ff6b8b; --ok:#43d19e;
+  --shadow:0 24px 60px rgba(0,0,0,.45); --radius:22px;
+  --glow-1:rgba(255,45,85,.22); --glow-2:rgba(91,140,255,.22);
+}
+:root[data-theme="light"]{
+  --bg:#f7f6f3; --bg-2:#ffffff; --ink:#141418; --muted:#5d5d68; --dim:#8a8a95;
+  --panel:#ffffff; --panel-2:#fbfbfd;
+  --line:rgba(20,20,24,.1); --line-2:rgba(20,20,24,.2);
+  --human:#c9852f; --human-2:#a96a1c; --ai:#2f5fd0; --ai-2:#1f47a8;
+  --accent:#e01142; --accent-2:#c00d38; --ok:#14915f;
+  --shadow:0 18px 40px rgba(20,20,24,.09); --radius:22px;
+  --glow-1:rgba(255,45,85,.1); --glow-2:rgba(91,140,255,.12);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--ink); background:var(--bg);
+  font-family:"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body::before{
+  content:""; position:fixed; inset:-20% -10% auto -10%; height:120vh; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(48% 40% at 12% 2%, var(--glow-1), transparent 62%),
+    radial-gradient(46% 38% at 88% 6%, var(--glow-2), transparent 60%),
+    radial-gradient(50% 40% at 50% 0%, rgba(255,255,255,.05), transparent 70%);
+  filter:blur(6px);
+  animation:drift 26s ease-in-out infinite alternate;
+}
+@keyframes drift{ from{transform:translate3d(-1.5%,-1%,0) scale(1)} to{transform:translate3d(1.5%,1.5%,0) scale(1.06)} }
+@media (prefers-reduced-motion: reduce){ body::before{animation:none} html{scroll-behavior:auto} *{transition-duration:.01ms !important;animation-duration:.01ms !important} }
+a{color:inherit;text-decoration:none}
+.progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--accent),var(--ai));z-index:60;transition:width .1s linear}
+.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 22px 72px}
+.wrap.is-loading{opacity:.45;transition:opacity .15s ease}
+.bar{
+  position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:14px 0;margin-bottom:8px;
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:blur(16px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.kicker{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);flex:1;min-width:150px;font-weight:600}
+.tabs{display:inline-flex;padding:3px;border-radius:999px;border:1px solid var(--line);background:var(--panel-2)}
+.tab{padding:6px 14px;border-radius:999px;font-size:12.5px;color:var(--muted);font-weight:600;transition:color .15s,background .15s}
+.tab:hover{color:var(--ink)}
+.tab.on{background:var(--ink);color:var(--bg)}
+.actions{display:flex;gap:8px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  font-size:12.5px;font-weight:600;font-family:inherit;cursor:pointer;
+  transition:transform .15s ease,border-color .15s ease,background .15s ease;
+}
+.btn:hover{transform:translateY(-1px);border-color:var(--line-2)}
+.btn:active{transform:translateY(0)}
+.btn.icon{padding:7px 10px}
+.btn[aria-disabled="true"]{opacity:.3;pointer-events:none}
+.nav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0 14px}
+.period-pill{
+  display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border-radius:999px;
+  border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),transparent);
+}
+.period-pill .kind{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:700}
+.period-pill strong{font-size:15px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.keys{font-size:11.5px;color:var(--dim);margin-left:auto}
+.scrub{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
+.scrub::-webkit-scrollbar{display:none}
+.scrub a{
+  flex:0 0 auto;padding:5px 11px;border-radius:999px;border:1px solid transparent;
+  font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;transition:all .15s ease;
+}
+.scrub a:hover{border-color:var(--line);color:var(--ink)}
+.scrub a.on{background:var(--panel);border-color:var(--line-2);color:var(--ink);font-weight:600}
+.scrub-label{flex:0 0 auto;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);align-self:center;margin-right:6px;font-weight:700}
+.hero{padding:46px 0 40px;position:relative}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:16px}
+h1{
+  font-size:clamp(34px,6vw,66px);line-height:1.03;margin:0 0 20px;letter-spacing:-.035em;font-weight:800;
+  background:linear-gradient(120deg,var(--ink) 30%,var(--muted) 75%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+h1 em{font-style:normal;background:linear-gradient(100deg,var(--accent),var(--accent-2) 45%,var(--ai));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin:0;max-width:720px;font-size:16px;line-height:1.75;color:var(--muted)}
+.split{display:flex;height:14px;border-radius:999px;overflow:hidden;margin:30px 0 14px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line)}
+.split .h{background:linear-gradient(90deg,var(--human-2),var(--human))}
+.split .a{background:linear-gradient(90deg,var(--ai-2),var(--ai))}
+.js .split .h,.js .split .a{transform-origin:left;animation:splitIn .9s cubic-bezier(.2,.8,.2,1) both}
+.js .split .a{animation-delay:.12s}
+@keyframes splitIn{from{transform:scaleX(.02);opacity:.4}to{transform:scaleX(1);opacity:1}}
+.legend{display:flex;gap:26px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.legend b{color:var(--ink);font-size:17px;margin:0 4px 0 9px;font-variant-numeric:tabular-nums}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%}
+.dot.h{background:var(--human);box-shadow:0 0 12px var(--human)}
+.dot.a{background:var(--ai);box-shadow:0 0 12px var(--ai)}
+section{margin-top:52px}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 16px;display:flex;align-items:center;gap:10px}
+h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+[data-reveal]{transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0ms)}
+.js [data-reveal]{opacity:0;transform:translateY(16px)}
+.js [data-reveal].in{opacity:1;transform:none}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin-top:38px}
+.card{
+  background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--line);
+  border-radius:var(--radius);padding:18px;position:relative;overflow:hidden;
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.card::after{content:"";position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,var(--line-2),transparent)}
+.card:hover{transform:translateY(-2px);border-color:var(--line-2);box-shadow:var(--shadow)}
+.kpi .label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;font-weight:700}
+.kpi .value{font-size:clamp(26px,3.2vw,34px);font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1}
+.kpi .value small{font-size:13px;font-weight:700;color:var(--muted);margin-left:3px;letter-spacing:0}
+.kpi .hint{font-size:11.5px;color:var(--dim);margin-top:10px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vol{display:flex;align-items:baseline;gap:10px;font-variant-numeric:tabular-nums}
+.vol .n{font-size:clamp(34px,4.6vw,50px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.vol .u{font-size:13px;color:var(--muted);font-weight:600}
+.vol.h .n{color:var(--human)}.vol.a .n{color:var(--ai)}
+.sub{font-size:12.5px;color:var(--muted);line-height:2;margin-top:10px}
+.sub b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.chart{margin-top:4px;overflow:hidden}
+.chart svg{display:block;overflow:visible}
+.chart rect.bar{transform-box:fill-box;transform-origin:bottom}
+.js .chart rect.bar{transform:scaleY(0);transition:transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0) * 26ms)}
+.js .chart.in rect.bar{transform:scaleY(1)}
+.chart rect.hit{fill:transparent}
+.grid2{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}
+.rows{display:flex;flex-direction:column;gap:11px;margin-top:2px}
+.row{display:grid;grid-template-columns:minmax(64px,124px) 1fr auto;gap:10px;align-items:center;font-size:12.5px}
+.row .name{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .track{height:8px;border-radius:999px;background:var(--panel);overflow:hidden;position:relative}
+.row .fill{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ai-2),var(--ai));transform-origin:left}
+.js .row .fill{animation:growX .8s cubic-bezier(.2,.8,.2,1) both}
+.row .fill.warm{background:linear-gradient(90deg,var(--human-2),var(--human))}
+@keyframes growX{from{transform:scaleX(.02)}to{transform:scaleX(1)}}
+.row .n{font-variant-numeric:tabular-nums;color:var(--ink);min-width:46px;text-align:right;font-weight:600}
+.row .n i{color:var(--dim);font-style:normal;font-weight:500}
+.sessions{display:flex;flex-direction:column;gap:10px}
+.session .top{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.session .title{font-size:15.5px;font-weight:700;flex:1;min-width:200px;line-height:1.4}
+.session .id{font-size:11px;color:var(--dim);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.session .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:10px;font-variant-numeric:tabular-nums}
+.session .quote{margin-top:12px;padding-left:12px;border-left:2px solid var(--line-2);font-size:12.5px;color:var(--muted);line-height:1.7}
+.session .quote+.quote{margin-top:8px}
+.session .more{border:0;background:none;color:var(--muted);font-size:11.5px;font-family:inherit;cursor:pointer;padding:6px 0 0;text-decoration:underline;text-underline-offset:3px}
+.session[data-open="1"] .more{color:var(--ink)}
+.tag{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);font-size:11px;color:var(--muted)}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{
+  display:inline-flex;align-items:center;gap:9px;padding:11px 16px;border-radius:999px;
+  border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),transparent);
+  font-size:13px;font-weight:600;transition:transform .2s ease,border-color .2s ease;
+}
+.chip:hover{transform:translateY(-2px);border-color:var(--line-2)}
+.chip .bullet{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.note{font-size:12.5px;color:var(--muted);line-height:1.95}
+.note b{color:var(--ink);font-variant-numeric:tabular-nums}
+.fail{color:var(--accent-2)}
+
+/* ── the emotional layer ─────────────────────────────────────────────── */
+.moments-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:12px;align-items:start}
+.stack{display:flex;flex-direction:column;gap:12px}
+.card.quiet{background:linear-gradient(180deg,var(--panel-2),transparent);border-color:var(--line)}
+.card .label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:700}
+.tl-card{padding:20px 20px 8px}
+.tl{position:relative;margin-top:14px;padding-left:18px}
+.tl::before{content:"";position:absolute;left:3px;top:6px;bottom:16px;width:1px;background:linear-gradient(180deg,var(--line-2),transparent)}
+.tl-item{position:relative;padding:0 0 18px}
+.tl-dot{position:absolute;left:-18px;top:5px;width:7px;height:7px;border-radius:50%;background:var(--human);box-shadow:0 0 10px var(--human)}
+.tl-when{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:700;font-variant-numeric:tabular-nums}
+.tl-text{margin:4px 0 0;font-size:13.5px;line-height:1.7;color:var(--ink)}
+.clock{font-size:44px;font-weight:800;letter-spacing:-.04em;line-height:1.05;margin:8px 0 6px;font-variant-numeric:tabular-nums;
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.clock.small{font-size:32px;background:linear-gradient(120deg,var(--ai),var(--human));-webkit-background-clip:text;background-clip:text;color:transparent}
+.said{margin:0;font-size:14px;line-height:1.75;color:var(--ink)}
+.whisper{margin:8px 0 0;font-size:11.5px;color:var(--dim)}
+.phrase-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.phrase{display:inline-flex;align-items:baseline;gap:6px;padding:7px 13px;border-radius:999px;border:1px solid var(--line-2);
+  font-size:13.5px;font-weight:600;background:linear-gradient(180deg,var(--panel),transparent)}
+.phrase i{font-style:normal;font-size:11.5px;color:var(--accent);font-weight:700}
+.bookends{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bookend .when{font-size:11.5px;color:var(--dim);margin-left:8px;font-variant-numeric:tabular-nums}
+.bookend .said{margin-top:8px;font-size:13px}
+.closing{margin-top:64px;padding:52px 0 8px;border-top:1px solid var(--line);text-align:center}
+.closing-line{max-width:760px;margin:0 auto;font-size:clamp(19px,2.5vw,25px);line-height:1.85;letter-spacing:-.01em;color:var(--ink)}
+.closing-sign{margin:22px 0 0;font-size:13.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.closing-actions{display:flex;gap:10px;justify-content:center;margin-top:26px}
+@media (max-width:820px){.moments-grid{grid-template-columns:1fr}.bookends{grid-template-columns:1fr}}
+.empty{padding:80px 0;text-align:center}
+.empty h3{font-size:26px;margin:0 0 10px;letter-spacing:-.02em}
+.empty p{color:var(--muted);margin:0}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--dim);line-height:1.9}
+footer .grow{flex:1;min-width:260px}
+.tip{
+  position:fixed;z-index:70;pointer-events:none;opacity:0;transform:translate(-50%,-120%);
+  padding:7px 11px;border-radius:10px;border:1px solid var(--line-2);
+  background:color-mix(in srgb, var(--bg-2) 92%, transparent);backdrop-filter:blur(10px);
+  color:var(--ink);font-size:11.5px;font-weight:600;white-space:nowrap;transition:opacity .12s ease;
+  box-shadow:var(--shadow);
+}
+.tip.on{opacity:1}
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);z-index:80;
+  padding:11px 18px;border-radius:999px;border:1px solid var(--line-2);
+  background:color-mix(in srgb, var(--bg-2) 94%, transparent);backdrop-filter:blur(12px);
+  font-size:12.5px;font-weight:600;opacity:0;pointer-events:none;transition:all .25s ease;box-shadow:var(--shadow);
+}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (max-width:820px){
+  .two,.grid2{grid-template-columns:1fr}
+  .keys{display:none}
+  .wrap{padding:0 16px 56px}
+  .hero{padding:30px 0 26px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  body::before,.bar,.actions,.nav,.scrub,.progress,.toast,.keys{display:none !important}
+  .card{border-color:#e2e2e2;background:#fff;box-shadow:none;break-inside:avoid}
+  h2,.kicker,.sub,.row .name,.session .meta,.note{color:#444}
+  .kpi .value,.vol .n{color:#111}
+  [data-reveal]{opacity:1 !important;transform:none !important}
+}
+</style>
+</head>
+<body>
+<div class="progress"></div>
+<div class="wrap" data-rewind-root data-period-key="2026-Q3"><header class="bar">
+    <span class="kicker">DeepSeek Harness · 对话回顾</span>
+    <div class="tabs"><span class="tab">月度</span><span class="tab on">季度</span><span class="tab">年度</span></div>
+    <div class="actions">
+      <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
+    </div>
+  </header>
+  <nav class="nav">
+    <span class="btn nav-arrow" aria-disabled="false">‹ 上一期</span>
+    <span class="period-pill"><span class="kind">季度</span><strong>2026 年 第 3 季度</strong></span>
+    <span class="btn nav-arrow" aria-disabled="false">下一期 ›</span>
+    <span class="btn ghost" aria-disabled="false">回到本期</span>
+    <span class="keys">← → 切换周期</span>
+  </nav>
+  <div class="scrub" data-scrub><span class="scrub-label">最近</span><a data-nav href="#2022-Q4">Q4</a><a data-nav href="#2023-Q1">Q1</a><a data-nav href="#2023-Q4">Q4</a><a data-nav href="#2024-Q1">Q1</a><a data-nav href="#2024-Q4">Q4</a><a data-nav href="#2025-Q1">Q1</a><a data-nav href="#2025-Q4">Q4</a><a data-nav href="#2026-Q3" class="on" aria-current="page">Q3</a></div>
+  <section class="hero">
+    <div class="eyebrow">季度</div>
+    <h1>你和 AI 的 <em>2026 年 第 3 季度</em></h1>
+    <p>在 5 个活跃日、6 场会话里，你发了 23 条消息，AI 回了 23 条，一共 23 轮对话。</p>
+    <div class="split" data-split>
+      <span class="h" style="width:50.00%"></span>
+      <span class="a" style="width:50.00%"></span>
+    </div>
+    <div class="legend">
+      <span><span class="dot h"></span>你说<b><span class="num" data-count="23">23</span></b>条 · 50%</span>
+      <span><span class="dot a"></span>AI 说<b><span class="num" data-count="23">23</span></b>条 · 50%</span>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="card kpi" data-reveal style="--d:0ms">
+      <div class="label">消息总数</div>
+      <div class="value"><span class="num" data-count="46">46</span></div>
+      <div class="hint">人类 + AI 消息条数</div>
+    </div><div class="card kpi" data-reveal style="--d:45ms">
+      <div class="label">对话轮次</div>
+      <div class="value"><span class="num" data-count="23">23</span></div>
+      <div class="hint">由 AI 结束的一轮问答计一轮</div>
+    </div><div class="card kpi" data-reveal style="--d:90ms">
+      <div class="label">AI 步数</div>
+      <div class="value"><span class="num" data-count="23">23</span></div>
+      <div class="hint">含工具调用的模型步数</div>
+    </div><div class="card kpi" data-reveal style="--d:135ms">
+      <div class="label">会话数</div>
+      <div class="value"><span class="num" data-count="6">6</span></div>
+      <div class="hint">本期有对话的会话</div>
+    </div><div class="card kpi" data-reveal style="--d:180ms">
+      <div class="label">活跃天数</div>
+      <div class="value"><span class="num" data-count="5">5</span></div>
+      <div class="hint">有任意对话的日历日</div>
+    </div><div class="card kpi" data-reveal style="--d:225ms">
+      <div class="label">最长连击</div>
+      <div class="value"><span class="num" data-count="1">1</span><small>d</small></div>
+      <div class="hint">连续有对话的最长天数</div>
+    </div><div class="card kpi" data-reveal style="--d:270ms">
+      <div class="label">Token 用量</div>
+      <div class="value">28万</div>
+      <div class="hint">AI 侧真实上报的 Token</div>
+    </div>
+  </div>
+
+  <section data-reveal>
+    <h2>你说了多少，AI 回了多少</h2>
+    <div class="two">
+      <div class="card">
+        <div class="vol h"><span class="n"><span class="num" data-count="23">23</span></span><span class="u">你发出的消息</span></div>
+        <div class="sub"><b>227</b> 字 · 平均每条 <b>10</b></div>
+      </div>
+      <div class="card">
+        <div class="vol a"><span class="n"><span class="num" data-count="23">23</span></span><span class="u">AI 回复的消息</span></div>
+        <div class="sub"><b>583</b> 字 · 平均每条 <b>25</b></div>
+        <div class="sub">模型步数 <b>23</b> · 工具调用 <b>40</b> · AI 思考字数 <b>0</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>对话节奏</h2>
+    <div class="card chart"><svg viewBox="0 0 1000 230" width="100%" height="230" role="img" aria-label="对话节奏"><line x1="46" y1="156.5" x2="992" y2="156.5" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="160.5" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">5</text><line x1="46" y1="109.0" x2="992" y2="109.0" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="113.0" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">10</text><line x1="46" y1="61.5" x2="992" y2="61.5" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="65.5" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">15</text><line x1="46" y1="14.0" x2="992" y2="14.0" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="18.0" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">20</text><text x="79.8" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">07-01</text><rect class="bar" style="--i:1;fill:var(--human)" x="131.4" y="166.0" width="32.0" height="38.0" rx="3" opacity=".95" data-tip="2026-07-08 · 你 4 · AI 4"/><rect class="bar" style="--i:1;fill:var(--ai)" x="131.4" y="128.0" width="32.0" height="38.0" rx="3" opacity=".95" data-tip="2026-07-08 · 你 4 · AI 4"/><text x="214.9" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">07-15</text><rect class="bar" style="--i:4;fill:var(--human)" x="334.1" y="166.0" width="32.0" height="38.0" rx="3" opacity=".95" data-tip="2026-07-29 · 你 4 · AI 4"/><rect class="bar" style="--i:4;fill:var(--ai)" x="334.1" y="128.0" width="32.0" height="38.0" rx="3" opacity=".95" data-tip="2026-07-29 · 你 4 · AI 4"/><text x="350.1" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">07-29</text><text x="485.2" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">08-12</text><rect class="bar" style="--i:7;fill:var(--human)" x="536.8" y="156.5" width="32.0" height="47.5" rx="3" opacity=".95" data-tip="2026-08-19 · 你 5 · AI 5"/><rect class="bar" style="--i:7;fill:var(--ai)" x="536.8" y="109.0" width="32.0" height="47.5" rx="3" opacity=".95" data-tip="2026-08-19 · 你 5 · AI 5"/><text x="620.4" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">08-26</text><text x="755.5" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">09-09</text><rect class="bar" style="--i:11;fill:var(--human)" x="807.1" y="109.0" width="32.0" height="95.0" rx="3" opacity=".95" data-tip="2026-09-16 · 你 10 · AI 10"/><rect class="bar" style="--i:11;fill:var(--ai)" x="807.1" y="14.0" width="32.0" height="95.0" rx="3" opacity=".95" data-tip="2026-09-16 · 你 10 · AI 10"/><text x="890.6" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">09-23</text></svg></div>
+  </section>
+
+  <section data-reveal>
+    <h2>你最常在什么时候出现</h2>
+    <div class="grid2">
+      <div class="card chart hour">
+        <div class="note">你的高峰时段是 14:00 · 最忙的一天是 2026-09-20，共 20 条消息</div>
+        <svg viewBox="0 0 1000 156" width="100%" height="156" role="img" aria-label="你最常在什么时候出现"><rect class="bar" style="--i:0;fill:var(--accent)" x="13.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="00:00 · 0"/><text x="26.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">0</text><rect class="bar" style="--i:1;fill:var(--accent)" x="54.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="01:00 · 0"/><rect class="bar" style="--i:2;fill:var(--accent)" x="95.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="02:00 · 0"/><rect class="bar" style="--i:3;fill:var(--accent)" x="136.5" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="03:00 · 0"/><rect class="bar" style="--i:4;fill:var(--accent)" x="177.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="04:00 · 0"/><rect class="bar" style="--i:5;fill:var(--accent)" x="218.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="05:00 · 0"/><rect class="bar" style="--i:6;fill:var(--accent)" x="260.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="06:00 · 0"/><text x="273.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">6</text><rect class="bar" style="--i:7;fill:var(--accent)" x="301.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="07:00 · 0"/><rect class="bar" style="--i:8;fill:var(--accent)" x="342.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="08:00 · 0"/><rect class="bar" style="--i:9;fill:var(--accent)" x="383.5" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="09:00 · 0"/><rect class="bar" style="--i:10;fill:var(--accent)" x="424.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="10:00 · 0"/><rect class="bar" style="--i:11;fill:var(--accent)" x="465.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="11:00 · 0"/><rect class="bar" style="--i:12;fill:var(--accent)" x="507.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="12:00 · 0"/><text x="520.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">12</text><rect class="bar" style="--i:13;fill:var(--accent)" x="548.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="13:00 · 0"/><rect class="bar" style="--i:14;fill:var(--accent)" x="589.3" y="12.0" width="27.2" height="122.0" rx="2" opacity="1.00" data-tip="14:00 · 16"/><rect class="bar" style="--i:15;fill:var(--accent)" x="630.5" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="15:00 · 0"/><rect class="bar" style="--i:16;fill:var(--accent)" x="671.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="16:00 · 0"/><rect class="bar" style="--i:17;fill:var(--accent)" x="712.8" y="57.8" width="27.2" height="76.3" rx="2" opacity="0.74" data-tip="17:00 · 10"/><rect class="bar" style="--i:18;fill:var(--accent)" x="754.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="18:00 · 0"/><text x="767.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">18</text><rect class="bar" style="--i:19;fill:var(--accent)" x="795.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="19:00 · 0"/><rect class="bar" style="--i:20;fill:var(--accent)" x="836.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="20:00 · 0"/><rect class="bar" style="--i:21;fill:var(--accent)" x="877.5" y="57.8" width="27.2" height="76.3" rx="2" opacity="0.74" data-tip="21:00 · 10"/><rect class="bar" style="--i:22;fill:var(--accent)" x="918.7" y="57.8" width="27.2" height="76.3" rx="2" opacity="0.74" data-tip="22:00 · 10"/><rect class="bar" style="--i:23;fill:var(--accent)" x="959.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="23:00 · 0"/><text x="973.4" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">23</text></svg>
+      </div>
+      <div class="card chart">
+        <svg viewBox="0 0 1000 156" width="100%" height="156" role="img" aria-label="weekday"><rect class="bar" style="--i:0;fill:var(--ai)" x="43.6" y="12.0" width="66.0" height="122.0" rx="4" opacity="0.9" data-tip="周日 · 20"/><text x="76.6" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周日</text><rect class="bar" style="--i:1;fill:var(--ai)" x="184.7" y="60.8" width="66.0" height="73.2" rx="4" opacity="0.9" data-tip="周一 · 12"/><text x="217.7" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周一</text><rect class="bar" style="--i:2;fill:var(--ai)" x="325.9" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周二 · 0"/><text x="358.9" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周二</text><rect class="bar" style="--i:3;fill:var(--ai)" x="467.0" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周三 · 0"/><text x="500.0" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周三</text><rect class="bar" style="--i:4;fill:var(--ai)" x="608.1" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周四 · 0"/><text x="641.1" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周四</text><rect class="bar" style="--i:5;fill:var(--ai)" x="749.3" y="85.2" width="66.0" height="48.8" rx="4" opacity="0.9" data-tip="周五 · 8"/><text x="782.3" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周五</text><rect class="bar" style="--i:6;fill:var(--ai)" x="890.4" y="97.4" width="66.0" height="36.6" rx="4" opacity="0.9" data-tip="周六 · 6"/><text x="923.4" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周六</text></svg>
+        <div class="note">周日</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>你最常一起工作的是</h2>
+    <div class="two">
+      <div class="card">
+        <div class="sub" style="margin:0 0 10px"><b>模型</b></div>
+        <div class="rows"><div class="row"><span class="name" title="code-fast">code-fast</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">13<i> · 57%</i></span></div><div class="row"><span class="name" title="deepseek-reasoner">deepseek-reasoner</span><span class="track"><span class="fill" style="width:62%"></span></span><span class="n">8<i> · 35%</i></span></div><div class="row"><span class="name" title="deepseek-chat">deepseek-chat</span><span class="track"><span class="fill" style="width:15%"></span></span><span class="n">2<i> · 9%</i></span></div></div>
+        <div class="sub" style="margin:16px 0 10px"><b>Provider</b></div>
+        <div class="rows"><div class="row"><span class="name" title="internal">internal</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">13<i> · 57%</i></span></div><div class="row"><span class="name" title="deepseek">deepseek</span><span class="track"><span class="fill" style="width:77%"></span></span><span class="n">10<i> · 43%</i></span></div></div>
+      </div>
+      <div class="card">
+        <div class="sub" style="margin:0 0 10px"><b>工具</b></div>
+        <div class="rows"><div class="row"><span class="name" title="glob">glob</span><span class="track"><span class="fill warm" style="width:100%"></span></span><span class="n">9</span></div><div class="row"><span class="name" title="read">read</span><span class="track"><span class="fill warm" style="width:67%"></span></span><span class="n">6</span></div><div class="row"><span class="name" title="edit">edit</span><span class="track"><span class="fill warm" style="width:56%"></span></span><span class="n">5</span></div><div class="row"><span class="name" title="grep">grep</span><span class="track"><span class="fill warm" style="width:56%"></span></span><span class="n">5</span></div><div class="row"><span class="name" title="pwsh">pwsh</span><span class="track"><span class="fill warm" style="width:56%"></span></span><span class="n">5</span></div><div class="row"><span class="name" title="web_fetch">web_fetch</span><span class="track"><span class="fill warm" style="width:56%"></span></span><span class="n">5</span></div></div>
+        <div class="sub" style="margin:16px 0 10px"><b>工作区</b></div>
+        <div class="rows"><div class="row"><span class="name" title="/home/dev/code/tiny-db">/home/dev/code/tiny-db</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">34</span></div><div class="row"><span class="name" title="/home/dev/work/notes">/home/dev/work/notes</span><span class="track"><span class="fill" style="width:24%"></span></span><span class="n">8</span></div><div class="row"><span class="name" title="/home/dev/code/pipeline">/home/dev/code/pipeline</span><span class="track"><span class="fill" style="width:12%"></span></span><span class="n">4</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>本期高光对话</h2>
+    <div class="sessions"><article class="card session" data-reveal style="--d:0ms">
+        <div class="top"><span class="title">调研向量检索方案</span>
+        
+        <span class="id">demo-072</span></div>
+        <div class="meta">
+          <span>你说 5 · AI 说 5</span>
+          <span>7.0万 Token</span>
+          <span>持续 16m</span>
+          <span>2026-09-20 17:41</span>
+        </div>
+        线上现在能用吗,谢谢，跑通了,换个思路试试<div class="quote extra" hidden>谢谢，跑通了</div><div class="quote extra" hidden>换个思路试试</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:50ms">
+        <div class="top"><span class="title">给搜索加上拼音匹配</span>
+        
+        <span class="id">demo-071</span></div>
+        <div class="meta">
+          <span>你说 5 · AI 说 5</span>
+          <span>7.0万 Token</span>
+          <span>持续 18m</span>
+          <span>2026-09-20 22:36</span>
+        </div>
+        算了，先回滚这一版,帮我看看这个类型为什么不匹配,线上现在能用吗<div class="quote extra" hidden>帮我看看这个类型为什么不匹配</div><div class="quote extra" hidden>线上现在能用吗</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:100ms">
+        <div class="top"><span class="title">给设置页加暗色主题</span>
+        
+        <span class="id">demo-069</span></div>
+        <div class="meta">
+          <span>你说 4 · AI 说 4</span>
+          <span>5.6万 Token</span>
+          <span>持续 15m</span>
+          <span>2026-08-03 14:23</span>
+        </div>
+        等等，这个文件是谁改的,确认一下，这样可以吗,先别改，我确认一下需求<div class="quote extra" hidden>确认一下，这样可以吗</div><div class="quote extra" hidden>先别改，我确认一下需求</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:150ms">
+        <div class="top"><span class="title">把日志里的时间戳统一成 UTC</span>
+        
+        <span class="id">demo-067</span></div>
+        <div class="meta">
+          <span>你说 4 · AI 说 4</span>
+          <span>5.3万 Token</span>
+          <span>持续 22m</span>
+          <span>2026-07-10 14:02</span>
+        </div>
+        能不能只改这一处，别动别的,再试一次，还是不行,再加个测试吧<div class="quote extra" hidden>再试一次，还是不行</div><div class="quote extra" hidden>再加个测试吧</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:200ms">
+        <div class="top"><span class="title">梳理一下这个模块的依赖</span>
+        
+        <span class="id">demo-070</span></div>
+        <div class="meta">
+          <span>你说 3 · AI 说 3</span>
+          <span>1.9万 Token</span>
+          <span>持续 8m</span>
+          <span>2026-08-22 21:34</span>
+        </div>
+        文档里这段是什么意思,算了，先回滚这一版,这里为什么会重复请求<div class="quote extra" hidden>算了，先回滚这一版</div><div class="quote extra" hidden>这里为什么会重复请求</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:250ms">
+        <div class="top"><span class="title">把日志里的时间戳统一成 UTC</span>
+        
+        <span class="id">demo-068</span></div>
+        <div class="meta">
+          <span>你说 2 · AI 说 2</span>
+          <span>8,313 Token</span>
+          <span>持续 2m</span>
+          <span>2026-08-24 21:23</span>
+        </div>
+        这个接口的返回结构不太对,把这段抽成插件<div class="quote extra" hidden>把这段抽成插件</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article></div>
+  </section>
+
+  <section data-reveal>
+    <h2>你留下的句子</h2>
+    <div class="moments-grid">
+      <div class="card tl-card">
+        <div class="label">每一段的第一句</div>
+        <div class="tl"><div class="tl-item" data-reveal style="--d:0ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">07-08</span>
+      <p class="tl-text">能不能只改这一处，别动别的</p>
+    </div><div class="tl-item" data-reveal style="--d:40ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">07-29</span>
+      <p class="tl-text">等等，这个文件是谁改的</p>
+    </div><div class="tl-item" data-reveal style="--d:80ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">08-19</span>
+      <p class="tl-text">文档里这段是什么意思</p>
+    </div><div class="tl-item" data-reveal style="--d:120ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">09-16</span>
+      <p class="tl-text">线上现在能用吗</p>
+    </div></div>
+      </div>
+      <div class="stack">
+        <div class="card quiet">
+        <div class="label">最晚的一次</div>
+        <div class="clock">22:53</div>
+        <p class="said">「算了，先回滚这一版」</p>
+        <p class="whisper">（这一条，你自己大概也忘了）</p>
+      </div><div class="card quiet">
+        <div class="label">最长的一次</div>
+        <div class="clock small">22m</div>
+        <p class="said">「把日志里的时间戳统一成 UTC」</p>
+        <p class="whisper">连续聊了 22m</p>
+      </div><div class="card quiet">
+        <div class="label">你说得最多的</div>
+        <div class="phrase-row"><span class="phrase">「算了」<i>×4</i></span><span class="phrase">「确认」<i>×3</i></span><span class="phrase">「为什么」<i>×2</i></span></div>
+      </div><div class="card quiet bookends">
+        <div class="bookend"><span class="label">第一次</span><span class="when">2026-07-10 14:02</span><p class="said">「能不能只改这一处，别动别的」</p></div>
+        <div class="bookend"><span class="label">最近一次</span><span class="when">2026-09-20 22:53</span><p class="said">「算了，先回滚这一版」</p></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>本期称号</h2>
+    <div class="card"><div class="chips"><span class="chip" data-reveal style="--d:0ms"><span class="bullet"></span>工具大师 · 6 种工具</span><span class="chip" data-reveal style="--d:60ms"><span class="bullet"></span>模型杂食 · 3 个模型</span></div></div>
+  </section>
+
+  <section data-reveal>
+    <h2>和上一期相比</h2>
+    <div class="card">
+      <div class="sub" style="margin:0 0 6px">上一期 · 2026-Q2</div>
+      <div class="note">消息：46（环比 +15%）<span style="color:var(--ok)"> ▲</span></div><div class="note">会话：6（环比 -25%）<span style="color:var(--accent-2)"> ▼</span></div><div class="note">Token：28万（环比 -17.7%）<span style="color:var(--accent-2)"> ▼</span></div>
+    </div>
+  </section>
+
+  
+
+  <section data-reveal class="closing">
+    <p class="closing-line">这一段，你在这里写下 227字，它回了你 583字。说了 1 次谢谢。</p>
+    <p class="closing-sign">它不会记得这些。日志会。</p>
+    <div class="closing-actions">
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-print>打印 / PDF</button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
+    <span>生成于 2026-10-30 17:18</span>
+  </footer>
+  <script type="application/json" id="rw-meta">{"lang":"zh","period":"2026 年 第 3 季度","human":23,"ai":23,"turns":23,"tokens":276225,"days":5,"badge":"工具大师 · 6 种工具","phrase":{"word":"算了","count":4},"closing":"这一段，你在这里写下 227字，它回了你 583字。说了 1 次谢谢。","labels":{"title":"对话回顾","footer":"DeepSeek Harness · dsh-plugin-wrapped","human":"你说了","ai":"AI 回了","rounds":"轮对话","tokens":"Token","days":"活跃天"},"ui":{"saved":"分享卡片已保存到下载目录","failed":"分享卡片生成失败","offline":"离线预览：切换周期请重新运行 CLI","navFailed":"切换周期失败"}}</script>
+</div>
+<template id="rw-body-2022-Q1" data-period-key="2022-Q1"><div class="wrap" data-rewind-root data-period-key="2022-Q1"><header class="bar">
+    <span class="kicker">DeepSeek Harness · 对话回顾</span>
+    <div class="tabs"><span class="tab">月度</span><span class="tab on">季度</span><span class="tab">年度</span></div>
+    <div class="actions">
+      <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
+    </div>
+  </header>
+  <nav class="nav">
+    <span class="btn nav-arrow" aria-disabled="false">‹ 上一期</span>
+    <span class="period-pill"><span class="kind">季度</span><strong>2022 年 第 1 季度</strong></span>
+    <span class="btn nav-arrow" aria-disabled="false">下一期 ›</span>
+    <span class="btn ghost" aria-disabled="false">回到本期</span>
+    <span class="keys">← → 切换周期</span>
+  </nav>
+  <div class="scrub" data-scrub><span class="scrub-label">最近</span><a data-nav href="">Q4</a><a data-nav href="">Q1</a><a data-nav href="">Q4</a><a data-nav href="">Q1</a><a data-nav href="">Q4</a><a data-nav href="">Q1</a><a data-nav href="">Q4</a><a data-nav href="#2022-Q1" class="on" aria-current="page">Q1</a></div>
+      <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
+      <footer>
+    <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
+    <span>生成于 2026-10-30 17:18</span>
+  </footer></div></template>
+<template id="rw-body-2022-Q4" data-period-key="2022-Q4"><div class="wrap" data-rewind-root data-period-key="2022-Q4"><header class="bar">
+    <span class="kicker">DeepSeek Harness · 对话回顾</span>
+    <div class="tabs"><span class="tab">月度</span><span class="tab on">季度</span><span class="tab">年度</span></div>
+    <div class="actions">
+      <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
+    </div>
+  </header>
+  <nav class="nav">
+    <span class="btn nav-arrow" aria-disabled="false">‹ 上一期</span>
+    <span class="period-pill"><span class="kind">季度</span><strong>2022 年 第 4 季度</strong></span>
+    <a class="btn nav-arrow" data-nav href="#2023-Q1">下一期 ›</a>
+    <span class="btn ghost" aria-disabled="false">回到本期</span>
+    <span class="keys">← → 切换周期</span>
+  </nav>
+  <div class="scrub" data-scrub><span class="scrub-label">最近</span><a data-nav href="">Q1</a><a data-nav href="">Q4</a><a data-nav href="">Q1</a><a data-nav href="">Q4</a><a data-nav href="">Q1</a><a data-nav href="">Q4</a><a data-nav href="#2022-Q1">Q1</a><a data-nav href="#2022-Q4" class="on" aria-current="page">Q4</a></div>
+      <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
+      <footer>
+    <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
+    <span>生成于 2026-10-30 17:18</span>
+  </footer></div></template>
+<template id="rw-body-2023-Q1" data-period-key="2023-Q1"><div class="wrap" data-rewind-root data-period-key="2023-Q1"><header class="bar">
+    <span class="kicker">DeepSeek Harness · 对话回顾</span>
+    <div class="tabs"><span class="tab">月度</span><span class="tab on">季度</span><span class="tab">年度</span></div>
+    <div class="actions">
+      <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
+    </div>
+  </header>
+  <nav class="nav">
+    <a class="btn nav-arrow" data-nav href="#2022-Q4">‹ 上一期</a>
+    <span class="period-pill"><span class="kind">季度</span><strong>2023 年 第 1 季度</strong></span>
+    <span class="btn nav-arrow" aria-disabled="false">下一期 ›</span>
+    <span class="btn ghost" aria-disabled="false">回到本期</span>
+    <span class="keys">← → 切换周期</span>
+  </nav>
+  <div class="scrub" data-scrub><span class="scrub-label">最近</span><a data-nav href="">Q4</a><a data-nav href="">Q1</a><a data-nav href="">Q4</a><a data-nav href="">Q1</a><a data-nav href="">Q4</a><a data-nav href="#2022-Q1">Q1</a><a data-nav href="#2022-Q4">Q4</a><a data-nav href="#2023-Q1" class="on" aria-current="page">Q1</a></div>
+      <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
+      <footer>
+    <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
+    <span>生成于 2026-10-30 17:18</span>
+  </footer></div></template>
+<template id="rw-body-2023-Q4" data-period-key="2023-Q4"><div class="wrap" data-rewind-root data-period-key="2023-Q4"><header class="bar">
+    <span class="kicker">DeepSeek Harness · 对话回顾</span>
+    <div class="tabs"><span class="tab">月度</span><span class="tab on">季度</span><span class="tab">年度</span></div>
+    <div class="actions">
+      <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
+    </div>
+  </header>
+  <nav class="nav">
+    <span class="btn nav-arrow" aria-disabled="false">‹ 上一期</span>
+    <span class="period-pill"><span class="kind">季度</span><strong>2023 年 第 4 季度</strong></span>
+    <a class="btn nav-arrow" data-nav href="#2024-Q1">下一期 ›</a>
+    <span class="btn ghost" aria-disabled="false">回到本期</span>
+    <span class="keys">← → 切换周期</span>
+  </nav>
+  <div class="scrub" data-scrub><span class="scrub-label">最近</span><a data-nav href="">Q1</a><a data-nav href="">Q4</a><a data-nav href="">Q1</a><a data-nav href="">Q4</a><a data-nav href="#2022-Q1">Q1</a><a data-nav href="#2022-Q4">Q4</a><a data-nav href="#2023-Q1">Q1</a><a data-nav href="#2023-Q4" class="on" aria-current="page">Q4</a></div>
+      <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
+      <footer>
+    <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
+    <span>生成于 2026-10-30 17:18</span>
+  </footer></div></template>
+<template id="rw-body-2024-Q1" data-period-key="2024-Q1"><div class="wrap" data-rewind-root data-period-key="2024-Q1"><header class="bar">
+    <span class="kicker">DeepSeek Harness · 对话回顾</span>
+    <div class="tabs"><span class="tab">月度</span><span class="tab on">季度</span><span class="tab">年度</span></div>
+    <div class="actions">
+      <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
+    </div>
+  </header>
+  <nav class="nav">
+    <a class="btn nav-arrow" data-nav href="#2023-Q4">‹ 上一期</a>
+    <span class="period-pill"><span class="kind">季度</span><strong>2024 年 第 1 季度</strong></span>
+    <span class="btn nav-arrow" aria-disabled="false">下一期 ›</span>
+    <span class="btn ghost" aria-disabled="false">回到本期</span>
+    <span class="keys">← → 切换周期</span>
+  </nav>
+  <div class="scrub" data-scrub><span class="scrub-label">最近</span><a data-nav href="">Q4</a><a data-nav href="">Q1</a><a data-nav href="">Q4</a><a data-nav href="#2022-Q1">Q1</a><a data-nav href="#2022-Q4">Q4</a><a data-nav href="#2023-Q1">Q1</a><a data-nav href="#2023-Q4">Q4</a><a data-nav href="#2024-Q1" class="on" aria-current="page">Q1</a></div>
+  <section class="hero">
+    <div class="eyebrow">季度</div>
+    <h1>你和 AI 的 <em>2024 年 第 1 季度</em></h1>
+    <p>在 9 个活跃日、9 场会话里，你发了 40 条消息，AI 回了 40 条，一共 40 轮对话。</p>
+    <div class="split" data-split>
+      <span class="h" style="width:50.00%"></span>
+      <span class="a" style="width:50.00%"></span>
+    </div>
+    <div class="legend">
+      <span><span class="dot h"></span>你说<b><span class="num" data-count="40">40</span></b>条 · 50%</span>
+      <span><span class="dot a"></span>AI 说<b><span class="num" data-count="40">40</span></b>条 · 50%</span>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="card kpi" data-reveal style="--d:0ms">
+      <div class="label">消息总数</div>
+      <div class="value"><span class="num" data-count="80">80</span></div>
+      <div class="hint">人类 + AI 消息条数</div>
+    </div><div class="card kpi" data-reveal style="--d:45ms">
+      <div class="label">对话轮次</div>
+      <div class="value"><span class="num" data-count="40">40</span></div>
+      <div class="hint">由 AI 结束的一轮问答计一轮</div>
+    </div><div class="card kpi" data-reveal style="--d:90ms">
+      <div class="label">AI 步数</div>
+      <div class="value"><span class="num" data-count="40">40</span></div>
+      <div class="hint">含工具调用的模型步数</div>
+    </div><div class="card kpi" data-reveal style="--d:135ms">
+      <div class="label">会话数</div>
+      <div class="value"><span class="num" data-count="9">9</span></div>
+      <div class="hint">本期有对话的会话</div>
+    </div><div class="card kpi" data-reveal style="--d:180ms">
+      <div class="label">活跃天数</div>
+      <div class="value"><span class="num" data-count="9">9</span></div>
+      <div class="hint">有任意对话的日历日</div>
+    </div><div class="card kpi" data-reveal style="--d:225ms">
+      <div class="label">最长连击</div>
+      <div class="value"><span class="num" data-count="1">1</span><small>d</small></div>
+      <div class="hint">连续有对话的最长天数</div>
+    </div><div class="card kpi" data-reveal style="--d:270ms">
+      <div class="label">Token 用量</div>
+      <div class="value">58万</div>
+      <div class="hint">AI 侧真实上报的 Token</div>
+    </div>
+  </div>
+
+  <section data-reveal>
+    <h2>你说了多少，AI 回了多少</h2>
+    <div class="two">
+      <div class="card">
+        <div class="vol h"><span class="n"><span class="num" data-count="40">40</span></span><span class="u">你发出的消息</span></div>
+        <div class="sub"><b>397</b> 字 · 平均每条 <b>10</b></div>
+      </div>
+      <div class="card">
+        <div class="vol a"><span class="n"><span class="num" data-count="40">40</span></span><span class="u">AI 回复的消息</span></div>
+        <div class="sub"><b>1,161</b> 字 · 平均每条 <b>29</b></div>
+        <div class="sub">模型步数 <b>40</b> · 工具调用 <b>60</b> · AI 思考字数 <b>0</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>对话节奏</h2>
+    <div class="card chart"><svg viewBox="0 0 1000 230" width="100%" height="230" role="img" aria-label="对话节奏"><line x1="46" y1="156.5" x2="992" y2="156.5" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="160.5" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">3</text><line x1="46" y1="109.0" x2="992" y2="109.0" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="113.0" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">6</text><line x1="46" y1="61.5" x2="992" y2="61.5" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="65.5" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">9</text><line x1="46" y1="14.0" x2="992" y2="14.0" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="18.0" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">12</text><text x="82.4" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">01-01</text><rect class="bar" style="--i:1;fill:var(--human)" x="139.2" y="109.0" width="32.0" height="95.0" rx="3" opacity=".95" data-tip="2024-01-08 · 你 6 · AI 6"/><rect class="bar" style="--i:1;fill:var(--ai)" x="139.2" y="14.0" width="32.0" height="95.0" rx="3" opacity=".95" data-tip="2024-01-08 · 你 6 · AI 6"/><text x="155.2" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">01-08</text><rect class="bar" style="--i:2;fill:var(--human)" x="211.9" y="172.3" width="32.0" height="31.7" rx="3" opacity=".95" data-tip="2024-01-15 · 你 2 · AI 2"/><rect class="bar" style="--i:2;fill:var(--ai)" x="211.9" y="140.7" width="32.0" height="31.7" rx="3" opacity=".95" data-tip="2024-01-15 · 你 2 · AI 2"/><text x="227.9" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">01-15</text><rect class="bar" style="--i:3;fill:var(--human)" x="284.7" y="109.0" width="32.0" height="95.0" rx="3" opacity=".95" data-tip="2024-01-22 · 你 6 · AI 6"/><rect class="bar" style="--i:3;fill:var(--ai)" x="284.7" y="14.0" width="32.0" height="95.0" rx="3" opacity=".95" data-tip="2024-01-22 · 你 6 · AI 6"/><text x="300.7" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">01-22</text><rect class="bar" style="--i:4;fill:var(--human)" x="357.5" y="124.8" width="32.0" height="79.2" rx="3" opacity=".95" data-tip="2024-01-29 · 你 5 · AI 5"/><rect class="bar" style="--i:4;fill:var(--ai)" x="357.5" y="45.7" width="32.0" height="79.2" rx="3" opacity=".95" data-tip="2024-01-29 · 你 5 · AI 5"/><text x="373.5" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">01-29</text><text x="446.2" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">02-05</text><rect class="bar" style="--i:6;fill:var(--human)" x="503.0" y="124.8" width="32.0" height="79.2" rx="3" opacity=".95" data-tip="2024-02-12 · 你 5 · AI 5"/><rect class="bar" style="--i:6;fill:var(--ai)" x="503.0" y="45.7" width="32.0" height="79.2" rx="3" opacity=".95" data-tip="2024-02-12 · 你 5 · AI 5"/><text x="519.0" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">02-12</text><rect class="bar" style="--i:7;fill:var(--human)" x="575.8" y="172.3" width="32.0" height="31.7" rx="3" opacity=".95" data-tip="2024-02-19 · 你 2 · AI 2"/><rect class="bar" style="--i:7;fill:var(--ai)" x="575.8" y="140.7" width="32.0" height="31.7" rx="3" opacity=".95" data-tip="2024-02-19 · 你 2 · AI 2"/><text x="591.8" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">02-19</text><text x="664.5" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">02-26</text><rect class="bar" style="--i:9;fill:var(--human)" x="721.3" y="124.8" width="32.0" height="79.2" rx="3" opacity=".95" data-tip="2024-03-04 · 你 5 · AI 5"/><rect class="bar" style="--i:9;fill:var(--ai)" x="721.3" y="45.7" width="32.0" height="79.2" rx="3" opacity=".95" data-tip="2024-03-04 · 你 5 · AI 5"/><text x="737.3" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">03-04</text><rect class="bar" style="--i:10;fill:var(--human)" x="794.1" y="140.7" width="32.0" height="63.3" rx="3" opacity=".95" data-tip="2024-03-11 · 你 4 · AI 4"/><rect class="bar" style="--i:10;fill:var(--ai)" x="794.1" y="77.3" width="32.0" height="63.3" rx="3" opacity=".95" data-tip="2024-03-11 · 你 4 · AI 4"/><text x="810.1" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">03-11</text><text x="882.8" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">03-18</text><rect class="bar" style="--i:12;fill:var(--human)" x="939.6" y="124.8" width="32.0" height="79.2" rx="3" opacity=".95" data-tip="2024-03-25 · 你 5 · AI 5"/><rect class="bar" style="--i:12;fill:var(--ai)" x="939.6" y="45.7" width="32.0" height="79.2" rx="3" opacity=".95" data-tip="2024-03-25 · 你 5 · AI 5"/><text x="955.6" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">03-25</text></svg></div>
+  </section>
+
+  <section data-reveal>
+    <h2>你最常在什么时候出现</h2>
+    <div class="grid2">
+      <div class="card chart hour">
+        <div class="note">你的高峰时段是 19:00 · 最忙的一天是 2024-01-13，共 12 条消息</div>
+        <svg viewBox="0 0 1000 156" width="100%" height="156" role="img" aria-label="你最常在什么时候出现"><rect class="bar" style="--i:0;fill:var(--accent)" x="13.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="00:00 · 0"/><text x="26.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">0</text><rect class="bar" style="--i:1;fill:var(--accent)" x="54.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="01:00 · 0"/><rect class="bar" style="--i:2;fill:var(--accent)" x="95.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="02:00 · 0"/><rect class="bar" style="--i:3;fill:var(--accent)" x="136.5" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="03:00 · 0"/><rect class="bar" style="--i:4;fill:var(--accent)" x="177.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="04:00 · 0"/><rect class="bar" style="--i:5;fill:var(--accent)" x="218.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="05:00 · 0"/><rect class="bar" style="--i:6;fill:var(--accent)" x="260.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="06:00 · 0"/><text x="273.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">6</text><rect class="bar" style="--i:7;fill:var(--accent)" x="301.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="07:00 · 0"/><rect class="bar" style="--i:8;fill:var(--accent)" x="342.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="08:00 · 0"/><rect class="bar" style="--i:9;fill:var(--accent)" x="383.5" y="103.5" width="27.2" height="30.5" rx="2" opacity="0.47" data-tip="09:00 · 4"/><rect class="bar" style="--i:10;fill:var(--accent)" x="424.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="10:00 · 0"/><rect class="bar" style="--i:11;fill:var(--accent)" x="465.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="11:00 · 0"/><rect class="bar" style="--i:12;fill:var(--accent)" x="507.0" y="42.5" width="27.2" height="91.5" rx="2" opacity="0.82" data-tip="12:00 · 12"/><text x="520.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">12</text><rect class="bar" style="--i:13;fill:var(--accent)" x="548.2" y="57.8" width="27.2" height="76.3" rx="2" opacity="0.74" data-tip="13:00 · 10"/><rect class="bar" style="--i:14;fill:var(--accent)" x="589.3" y="27.3" width="27.2" height="106.8" rx="2" opacity="0.91" data-tip="14:00 · 14"/><rect class="bar" style="--i:15;fill:var(--accent)" x="630.5" y="80.6" width="27.2" height="53.4" rx="2" opacity="0.61" data-tip="15:00 · 7"/><rect class="bar" style="--i:16;fill:var(--accent)" x="671.7" y="50.1" width="27.2" height="83.9" rx="2" opacity="0.78" data-tip="16:00 · 11"/><rect class="bar" style="--i:17;fill:var(--accent)" x="712.8" y="103.5" width="27.2" height="30.5" rx="2" opacity="0.47" data-tip="17:00 · 4"/><rect class="bar" style="--i:18;fill:var(--accent)" x="754.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="18:00 · 0"/><text x="767.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">18</text><rect class="bar" style="--i:19;fill:var(--accent)" x="795.2" y="12.0" width="27.2" height="122.0" rx="2" opacity="1.00" data-tip="19:00 · 16"/><rect class="bar" style="--i:20;fill:var(--accent)" x="836.3" y="118.8" width="27.2" height="15.3" rx="2" opacity="0.39" data-tip="20:00 · 2"/><rect class="bar" style="--i:21;fill:var(--accent)" x="877.5" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="21:00 · 0"/><rect class="bar" style="--i:22;fill:var(--accent)" x="918.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="22:00 · 0"/><rect class="bar" style="--i:23;fill:var(--accent)" x="959.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="23:00 · 0"/><text x="973.4" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">23</text></svg>
+      </div>
+      <div class="card chart">
+        <svg viewBox="0 0 1000 156" width="100%" height="156" role="img" aria-label="weekday"><rect class="bar" style="--i:0;fill:var(--ai)" x="43.6" y="62.8" width="66.0" height="71.2" rx="4" opacity="0.9" data-tip="周日 · 14"/><text x="76.6" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周日</text><rect class="bar" style="--i:1;fill:var(--ai)" x="184.7" y="22.2" width="66.0" height="111.8" rx="4" opacity="0.9" data-tip="周一 · 22"/><text x="217.7" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周一</text><rect class="bar" style="--i:2;fill:var(--ai)" x="325.9" y="83.2" width="66.0" height="50.8" rx="4" opacity="0.9" data-tip="周二 · 10"/><text x="358.9" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周二</text><rect class="bar" style="--i:3;fill:var(--ai)" x="467.0" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周三 · 0"/><text x="500.0" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周三</text><rect class="bar" style="--i:4;fill:var(--ai)" x="608.1" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周四 · 0"/><text x="641.1" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周四</text><rect class="bar" style="--i:5;fill:var(--ai)" x="749.3" y="83.2" width="66.0" height="50.8" rx="4" opacity="0.9" data-tip="周五 · 10"/><text x="782.3" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周五</text><rect class="bar" style="--i:6;fill:var(--ai)" x="890.4" y="12.0" width="66.0" height="122.0" rx="4" opacity="0.9" data-tip="周六 · 24"/><text x="923.4" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周六</text></svg>
+        <div class="note">周六</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>你最常一起工作的是</h2>
+    <div class="two">
+      <div class="card">
+        <div class="sub" style="margin:0 0 10px"><b>模型</b></div>
+        <div class="rows"><div class="row"><span class="name" title="code-fast">code-fast</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">15<i> · 38%</i></span></div><div class="row"><span class="name" title="deepseek-chat">deepseek-chat</span><span class="track"><span class="fill" style="width:87%"></span></span><span class="n">13<i> · 33%</i></span></div><div class="row"><span class="name" title="deepseek-reasoner">deepseek-reasoner</span><span class="track"><span class="fill" style="width:80%"></span></span><span class="n">12<i> · 30%</i></span></div></div>
+        <div class="sub" style="margin:16px 0 10px"><b>Provider</b></div>
+        <div class="rows"><div class="row"><span class="name" title="deepseek">deepseek</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">25<i> · 63%</i></span></div><div class="row"><span class="name" title="internal">internal</span><span class="track"><span class="fill" style="width:60%"></span></span><span class="n">15<i> · 38%</i></span></div></div>
+      </div>
+      <div class="card">
+        <div class="sub" style="margin:0 0 10px"><b>工具</b></div>
+        <div class="rows"><div class="row"><span class="name" title="glob">glob</span><span class="track"><span class="fill warm" style="width:100%"></span></span><span class="n">12</span></div><div class="row"><span class="name" title="subagent">subagent</span><span class="track"><span class="fill warm" style="width:75%"></span></span><span class="n">9</span></div><div class="row"><span class="name" title="edit">edit</span><span class="track"><span class="fill warm" style="width:67%"></span></span><span class="n">8</span></div><div class="row"><span class="name" title="pwsh">pwsh</span><span class="track"><span class="fill warm" style="width:58%"></span></span><span class="n">7</span></div><div class="row"><span class="name" title="write">write</span><span class="track"><span class="fill warm" style="width:58%"></span></span><span class="n">7</span></div><div class="row"><span class="name" title="grep">grep</span><span class="track"><span class="fill warm" style="width:50%"></span></span><span class="n">6</span></div></div>
+        <div class="sub" style="margin:16px 0 10px"><b>工作区</b></div>
+        <div class="rows"><div class="row"><span class="name" title="/home/dev/code/tiny-db">/home/dev/code/tiny-db</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">34</span></div><div class="row"><span class="name" title="/home/dev/code/aurora-ui">/home/dev/code/aurora-ui</span><span class="track"><span class="fill" style="width:65%"></span></span><span class="n">22</span></div><div class="row"><span class="name" title="/home/dev/work/notes">/home/dev/work/notes</span><span class="track"><span class="fill" style="width:47%"></span></span><span class="n">16</span></div><div class="row"><span class="name" title="/home/dev/code/pipeline">/home/dev/code/pipeline</span><span class="track"><span class="fill" style="width:24%"></span></span><span class="n">8</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>本期高光对话</h2>
+    <div class="sessions"><article class="card session" data-reveal style="--d:0ms">
+        <div class="top"><span class="title">把构建时间从 90s 压到 20s</span>
+        
+        <span class="id">demo-001</span></div>
+        <div class="meta">
+          <span>你说 6 · AI 说 6</span>
+          <span>11万 Token</span>
+          <span>持续 21m</span>
+          <span>2024-01-22 12:22</span>
+        </div>
+        把这段抽成插件,这个方案和上次那个有什么区别,换个思路试试<div class="quote extra" hidden>这个方案和上次那个有什么区别</div><div class="quote extra" hidden>换个思路试试</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:50ms">
+        <div class="top"><span class="title">给上传接口加并发限制</span>
+        
+        <span class="id">demo-002</span></div>
+        <div class="meta">
+          <span>你说 6 · AI 说 6</span>
+          <span>9.1万 Token</span>
+          <span>持续 27m</span>
+          <span>2024-01-13 15:42</span>
+        </div>
+        先写测试再改,先别改，我确认一下需求,能不能只改这一处，别动别的<div class="quote extra" hidden>先别改，我确认一下需求</div><div class="quote extra" hidden>能不能只改这一处，别动别的</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:100ms">
+        <div class="top"><span class="title">统一各处的错误码</span>
+        
+        <span class="id">demo-004</span></div>
+        <div class="meta">
+          <span>你说 5 · AI 说 5</span>
+          <span>7.8万 Token</span>
+          <span>持续 18m</span>
+          <span>2024-02-18 16:48</span>
+        </div>
+        先写测试再改,有没有更简单的写法,有没有更简单的写法<div class="quote extra" hidden>有没有更简单的写法</div><div class="quote extra" hidden>有没有更简单的写法</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:150ms">
+        <div class="top"><span class="title">优化首屏加载</span>
+        
+        <span class="id">demo-007</span></div>
+        <div class="meta">
+          <span>你说 5 · AI 说 5</span>
+          <span>7.1万 Token</span>
+          <span>持续 21m</span>
+          <span>2024-03-05 13:30</span>
+        </div>
+        我刚才那个改动是不是把缓存弄坏了,这个报错你能看出是哪一步吗,算了，先回滚这一版<div class="quote extra" hidden>这个报错你能看出是哪一步吗</div><div class="quote extra" hidden>算了，先回滚这一版</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:200ms">
+        <div class="top"><span class="title">给搜索加上拼音匹配</span>
+        
+        <span class="id">demo-008</span></div>
+        <div class="meta">
+          <span>你说 5 · AI 说 5</span>
+          <span>6.0万 Token</span>
+          <span>持续 14m</span>
+          <span>2024-03-25 14:06</span>
+        </div>
+        这个颜色太亮了，换暗一点,谢谢，跑通了,再加个测试吧<div class="quote extra" hidden>谢谢，跑通了</div><div class="quote extra" hidden>再加个测试吧</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:250ms">
+        <div class="top"><span class="title">把构建时间从 90s 压到 20s</span>
+        
+        <span class="id">demo-005</span></div>
+        <div class="meta">
+          <span>你说 5 · AI 说 5</span>
+          <span>5.7万 Token</span>
+          <span>持续 21m</span>
+          <span>2024-02-02 19:40</span>
+        </div>
+        线上现在能用吗,算了，先回滚这一版,能不能拆成两个函数<div class="quote extra" hidden>算了，先回滚这一版</div><div class="quote extra" hidden>能不能拆成两个函数</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article></div>
+  </section>
+
+  <section data-reveal>
+    <h2>你留下的句子</h2>
+    <div class="moments-grid">
+      <div class="card tl-card">
+        <div class="label">每一段的第一句</div>
+        <div class="tl"><div class="tl-item" data-reveal style="--d:0ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">01-08</span>
+      <p class="tl-text">先写测试再改</p>
+    </div><div class="tl-item" data-reveal style="--d:40ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">01-22</span>
+      <p class="tl-text">把这段抽成插件</p>
+    </div><div class="tl-item" data-reveal style="--d:80ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">02-12</span>
+      <p class="tl-text">先写测试再改</p>
+    </div><div class="tl-item" data-reveal style="--d:120ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">03-04</span>
+      <p class="tl-text">我刚才那个改动是不是把缓存弄坏了</p>
+    </div><div class="tl-item" data-reveal style="--d:160ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">03-25</span>
+      <p class="tl-text">这个颜色太亮了，换暗一点</p>
+    </div></div>
+      </div>
+      <div class="stack">
+        <div class="card quiet">
+        <div class="label">最晚收工</div>
+        <div class="clock">20:02</div>
+        <p class="said">「先别改，我确认一下需求」</p>
+        <p class="whisper">（这一天，你是最晚走的）</p>
+      </div><div class="card quiet">
+        <div class="label">最长的一次</div>
+        <div class="clock small">27m</div>
+        <p class="said">「给上传接口加并发限制」</p>
+        <p class="whisper">连续聊了 27m</p>
+      </div><div class="card quiet">
+        <div class="label">你说得最多的</div>
+        <div class="phrase-row"><span class="phrase">「颜色」<i>×5</i></span><span class="phrase">「能不能」<i>×4</i></span><span class="phrase">「为什么」<i>×4</i></span></div>
+      </div><div class="card quiet bookends">
+        <div class="bookend"><span class="label">第一次</span><span class="when">2024-01-13 15:42</span><p class="said">「先写测试再改」</p></div>
+        <div class="bookend"><span class="label">最近一次</span><span class="when">2024-03-25 14:19</span><p class="said">「为什么这里会慢」</p></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>本期称号</h2>
+    <div class="card"><div class="chips"><span class="chip" data-reveal style="--d:0ms"><span class="bullet"></span>工具大师 · 6 种工具</span><span class="chip" data-reveal style="--d:60ms"><span class="bullet"></span>模型杂食 · 3 个模型</span><span class="chip" data-reveal style="--d:120ms"><span class="bullet"></span>惜字如金 · 每条 10 字</span></div></div>
+  </section>
+
+  <section data-reveal>
+    <h2>和上一期相比</h2>
+    <div class="card">
+      <div class="sub" style="margin:0 0 6px">上一期 · 2023-Q4</div>
+      <div class="note">消息：80（上一期为 0）<span></span></div><div class="note">会话：9（上一期为 0）<span></span></div><div class="note">Token：58万（上一期为 0）<span></span></div>
+    </div>
+  </section>
+
+  
+
+  <section data-reveal class="closing">
+    <p class="closing-line">这一段，你在这里写下 397字，它回了你 1,161字。说了 2 次谢谢。</p>
+    <p class="closing-sign">它不会记得这些。日志会。</p>
+    <div class="closing-actions">
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-print>打印 / PDF</button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
+    <span>生成于 2026-10-30 17:18</span>
+  </footer>
+  <script type="application/json" id="rw-meta">{"lang":"zh","period":"2024 年 第 1 季度","human":40,"ai":40,"turns":40,"tokens":584659,"days":9,"badge":"工具大师 · 6 种工具","phrase":{"word":"颜色","count":5},"closing":"这一段，你在这里写下 397字，它回了你 1,161字。说了 2 次谢谢。","labels":{"title":"对话回顾","footer":"DeepSeek Harness · dsh-plugin-wrapped","human":"你说了","ai":"AI 回了","rounds":"轮对话","tokens":"Token","days":"活跃天"},"ui":{"saved":"分享卡片已保存到下载目录","failed":"分享卡片生成失败","offline":"离线预览：切换周期请重新运行 CLI","navFailed":"切换周期失败"}}</script>
+</div></template>
+<template id="rw-body-2024-Q4" data-period-key="2024-Q4"><div class="wrap" data-rewind-root data-period-key="2024-Q4"><header class="bar">
+    <span class="kicker">DeepSeek Harness · 对话回顾</span>
+    <div class="tabs"><span class="tab">月度</span><span class="tab on">季度</span><span class="tab">年度</span></div>
+    <div class="actions">
+      <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
+    </div>
+  </header>
+  <nav class="nav">
+    <span class="btn nav-arrow" aria-disabled="false">‹ 上一期</span>
+    <span class="period-pill"><span class="kind">季度</span><strong>2024 年 第 4 季度</strong></span>
+    <a class="btn nav-arrow" data-nav href="#2025-Q1">下一期 ›</a>
+    <span class="btn ghost" aria-disabled="false">回到本期</span>
+    <span class="keys">← → 切换周期</span>
+  </nav>
+  <div class="scrub" data-scrub><span class="scrub-label">最近</span><a data-nav href="">Q1</a><a data-nav href="">Q4</a><a data-nav href="#2022-Q1">Q1</a><a data-nav href="#2022-Q4">Q4</a><a data-nav href="#2023-Q1">Q1</a><a data-nav href="#2023-Q4">Q4</a><a data-nav href="#2024-Q1">Q1</a><a data-nav href="#2024-Q4" class="on" aria-current="page">Q4</a></div>
+  <section class="hero">
+    <div class="eyebrow">季度</div>
+    <h1>你和 AI 的 <em>2024 年 第 4 季度</em></h1>
+    <p>在 6 个活跃日、6 场会话里，你发了 25 条消息，AI 回了 25 条，一共 25 轮对话。</p>
+    <div class="split" data-split>
+      <span class="h" style="width:50.00%"></span>
+      <span class="a" style="width:50.00%"></span>
+    </div>
+    <div class="legend">
+      <span><span class="dot h"></span>你说<b><span class="num" data-count="25">25</span></b>条 · 50%</span>
+      <span><span class="dot a"></span>AI 说<b><span class="num" data-count="25">25</span></b>条 · 50%</span>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="card kpi" data-reveal style="--d:0ms">
+      <div class="label">消息总数</div>
+      <div class="value"><span class="num" data-count="50">50</span></div>
+      <div class="hint">人类 + AI 消息条数</div>
+    </div><div class="card kpi" data-reveal style="--d:45ms">
+      <div class="label">对话轮次</div>
+      <div class="value"><span class="num" data-count="25">25</span></div>
+      <div class="hint">由 AI 结束的一轮问答计一轮</div>
+    </div><div class="card kpi" data-reveal style="--d:90ms">
+      <div class="label">AI 步数</div>
+      <div class="value"><span class="num" data-count="25">25</span></div>
+      <div class="hint">含工具调用的模型步数</div>
+    </div><div class="card kpi" data-reveal style="--d:135ms">
+      <div class="label">会话数</div>
+      <div class="value"><span class="num" data-count="6">6</span></div>
+      <div class="hint">本期有对话的会话</div>
+    </div><div class="card kpi" data-reveal style="--d:180ms">
+      <div class="label">活跃天数</div>
+      <div class="value"><span class="num" data-count="6">6</span></div>
+      <div class="hint">有任意对话的日历日</div>
+    </div><div class="card kpi" data-reveal style="--d:225ms">
+      <div class="label">最长连击</div>
+      <div class="value"><span class="num" data-count="1">1</span><small>d</small></div>
+      <div class="hint">连续有对话的最长天数</div>
+    </div><div class="card kpi" data-reveal style="--d:270ms">
+      <div class="label">Token 用量</div>
+      <div class="value">36万</div>
+      <div class="hint">AI 侧真实上报的 Token</div>
+    </div>
+  </div>
+
+  <section data-reveal>
+    <h2>你说了多少，AI 回了多少</h2>
+    <div class="two">
+      <div class="card">
+        <div class="vol h"><span class="n"><span class="num" data-count="25">25</span></span><span class="u">你发出的消息</span></div>
+        <div class="sub"><b>241</b> 字 · 平均每条 <b>10</b></div>
+      </div>
+      <div class="card">
+        <div class="vol a"><span class="n"><span class="num" data-count="25">25</span></span><span class="u">AI 回复的消息</span></div>
+        <div class="sub"><b>588</b> 字 · 平均每条 <b>24</b></div>
+        <div class="sub">模型步数 <b>25</b> · 工具调用 <b>38</b> · AI 思考字数 <b>0</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>对话节奏</h2>
+    <div class="card chart"><svg viewBox="0 0 1000 230" width="100%" height="230" role="img" aria-label="对话节奏"><line x1="46" y1="156.5" x2="992" y2="156.5" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="160.5" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">5</text><line x1="46" y1="109.0" x2="992" y2="109.0" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="113.0" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">9</text><line x1="46" y1="61.5" x2="992" y2="61.5" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="65.5" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">14</text><line x1="46" y1="14.0" x2="992" y2="14.0" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="18.0" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">18</text><rect class="bar" style="--i:0;fill:var(--human)" x="63.8" y="109.0" width="32.0" height="95.0" rx="3" opacity=".95" data-tip="2024-10-01 · 你 9 · AI 9"/><rect class="bar" style="--i:0;fill:var(--ai)" x="63.8" y="14.0" width="32.0" height="95.0" rx="3" opacity=".95" data-tip="2024-10-01 · 你 9 · AI 9"/><text x="79.8" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">10-01</text><rect class="bar" style="--i:1;fill:var(--human)" x="131.4" y="161.8" width="32.0" height="42.2" rx="3" opacity=".95" data-tip="2024-10-08 · 你 4 · AI 4"/><rect class="bar" style="--i:1;fill:var(--ai)" x="131.4" y="119.6" width="32.0" height="42.2" rx="3" opacity=".95" data-tip="2024-10-08 · 你 4 · AI 4"/><text x="214.9" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">10-15</text><rect class="bar" style="--i:4;fill:var(--human)" x="334.1" y="161.8" width="32.0" height="42.2" rx="3" opacity=".95" data-tip="2024-10-29 · 你 4 · AI 4"/><rect class="bar" style="--i:4;fill:var(--ai)" x="334.1" y="119.6" width="32.0" height="42.2" rx="3" opacity=".95" data-tip="2024-10-29 · 你 4 · AI 4"/><text x="350.1" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">10-29</text><text x="485.2" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">11-12</text><text x="620.4" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">11-26</text><text x="755.5" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">12-10</text><rect class="bar" style="--i:11;fill:var(--human)" x="807.1" y="140.7" width="32.0" height="63.3" rx="3" opacity=".95" data-tip="2024-12-17 · 你 6 · AI 6"/><rect class="bar" style="--i:11;fill:var(--ai)" x="807.1" y="77.3" width="32.0" height="63.3" rx="3" opacity=".95" data-tip="2024-12-17 · 你 6 · AI 6"/><rect class="bar" style="--i:12;fill:var(--human)" x="874.6" y="182.9" width="32.0" height="21.1" rx="3" opacity=".95" data-tip="2024-12-24 · 你 2 · AI 2"/><rect class="bar" style="--i:12;fill:var(--ai)" x="874.6" y="161.8" width="32.0" height="21.1" rx="3" opacity=".95" data-tip="2024-12-24 · 你 2 · AI 2"/><text x="890.6" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">12-24</text></svg></div>
+  </section>
+
+  <section data-reveal>
+    <h2>你最常在什么时候出现</h2>
+    <div class="grid2">
+      <div class="card chart hour">
+        <div class="note">你的高峰时段是 13:00 · 最忙的一天是 2024-12-19，共 12 条消息</div>
+        <svg viewBox="0 0 1000 156" width="100%" height="156" role="img" aria-label="你最常在什么时候出现"><rect class="bar" style="--i:0;fill:var(--accent)" x="13.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="00:00 · 0"/><text x="26.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">0</text><rect class="bar" style="--i:1;fill:var(--accent)" x="54.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="01:00 · 0"/><rect class="bar" style="--i:2;fill:var(--accent)" x="95.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="02:00 · 0"/><rect class="bar" style="--i:3;fill:var(--accent)" x="136.5" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="03:00 · 0"/><rect class="bar" style="--i:4;fill:var(--accent)" x="177.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="04:00 · 0"/><rect class="bar" style="--i:5;fill:var(--accent)" x="218.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="05:00 · 0"/><rect class="bar" style="--i:6;fill:var(--accent)" x="260.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="06:00 · 0"/><text x="273.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">6</text><rect class="bar" style="--i:7;fill:var(--accent)" x="301.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="07:00 · 0"/><rect class="bar" style="--i:8;fill:var(--accent)" x="342.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="08:00 · 0"/><rect class="bar" style="--i:9;fill:var(--accent)" x="383.5" y="52.7" width="27.2" height="81.3" rx="2" opacity="0.77" data-tip="09:00 · 8"/><rect class="bar" style="--i:10;fill:var(--accent)" x="424.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="10:00 · 0"/><rect class="bar" style="--i:11;fill:var(--accent)" x="465.8" y="73.0" width="27.2" height="61.0" rx="2" opacity="0.65" data-tip="11:00 · 6"/><rect class="bar" style="--i:12;fill:var(--accent)" x="507.0" y="93.3" width="27.2" height="40.7" rx="2" opacity="0.53" data-tip="12:00 · 4"/><text x="520.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">12</text><rect class="bar" style="--i:13;fill:var(--accent)" x="548.2" y="12.0" width="27.2" height="122.0" rx="2" opacity="1.00" data-tip="13:00 · 12"/><rect class="bar" style="--i:14;fill:var(--accent)" x="589.3" y="52.7" width="27.2" height="81.3" rx="2" opacity="0.77" data-tip="14:00 · 8"/><rect class="bar" style="--i:15;fill:var(--accent)" x="630.5" y="52.7" width="27.2" height="81.3" rx="2" opacity="0.77" data-tip="15:00 · 8"/><rect class="bar" style="--i:16;fill:var(--accent)" x="671.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="16:00 · 0"/><rect class="bar" style="--i:17;fill:var(--accent)" x="712.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="17:00 · 0"/><rect class="bar" style="--i:18;fill:var(--accent)" x="754.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="18:00 · 0"/><text x="767.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">18</text><rect class="bar" style="--i:19;fill:var(--accent)" x="795.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="19:00 · 0"/><rect class="bar" style="--i:20;fill:var(--accent)" x="836.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="20:00 · 0"/><rect class="bar" style="--i:21;fill:var(--accent)" x="877.5" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="21:00 · 0"/><rect class="bar" style="--i:22;fill:var(--accent)" x="918.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="22:00 · 0"/><rect class="bar" style="--i:23;fill:var(--accent)" x="959.8" y="93.3" width="27.2" height="40.7" rx="2" opacity="0.53" data-tip="23:00 · 4"/><text x="973.4" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">23</text></svg>
+      </div>
+      <div class="card chart">
+        <svg viewBox="0 0 1000 156" width="100%" height="156" role="img" aria-label="weekday"><rect class="bar" style="--i:0;fill:var(--ai)" x="43.6" y="12.0" width="66.0" height="122.0" rx="4" opacity="0.9" data-tip="周日 · 18"/><text x="76.6" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周日</text><rect class="bar" style="--i:1;fill:var(--ai)" x="184.7" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周一 · 0"/><text x="217.7" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周一</text><rect class="bar" style="--i:2;fill:var(--ai)" x="325.9" y="79.8" width="66.0" height="54.2" rx="4" opacity="0.9" data-tip="周二 · 8"/><text x="358.9" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周二</text><rect class="bar" style="--i:3;fill:var(--ai)" x="467.0" y="79.8" width="66.0" height="54.2" rx="4" opacity="0.9" data-tip="周三 · 8"/><text x="500.0" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周三</text><rect class="bar" style="--i:4;fill:var(--ai)" x="608.1" y="25.6" width="66.0" height="108.4" rx="4" opacity="0.9" data-tip="周四 · 16"/><text x="641.1" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周四</text><rect class="bar" style="--i:5;fill:var(--ai)" x="749.3" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周五 · 0"/><text x="782.3" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周五</text><rect class="bar" style="--i:6;fill:var(--ai)" x="890.4" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周六 · 0"/><text x="923.4" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周六</text></svg>
+        <div class="note">周日</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>你最常一起工作的是</h2>
+    <div class="two">
+      <div class="card">
+        <div class="sub" style="margin:0 0 10px"><b>模型</b></div>
+        <div class="rows"><div class="row"><span class="name" title="deepseek-chat">deepseek-chat</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">15<i> · 60%</i></span></div><div class="row"><span class="name" title="deepseek-reasoner">deepseek-reasoner</span><span class="track"><span class="fill" style="width:67%"></span></span><span class="n">10<i> · 40%</i></span></div></div>
+        <div class="sub" style="margin:16px 0 10px"><b>Provider</b></div>
+        <div class="rows"><div class="row"><span class="name" title="deepseek">deepseek</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">25<i> · 100%</i></span></div></div>
+      </div>
+      <div class="card">
+        <div class="sub" style="margin:0 0 10px"><b>工具</b></div>
+        <div class="rows"><div class="row"><span class="name" title="edit">edit</span><span class="track"><span class="fill warm" style="width:100%"></span></span><span class="n">8</span></div><div class="row"><span class="name" title="glob">glob</span><span class="track"><span class="fill warm" style="width:100%"></span></span><span class="n">8</span></div><div class="row"><span class="name" title="pwsh">pwsh</span><span class="track"><span class="fill warm" style="width:88%"></span></span><span class="n">7</span></div><div class="row"><span class="name" title="grep">grep</span><span class="track"><span class="fill warm" style="width:75%"></span></span><span class="n">6</span></div><div class="row"><span class="name" title="subagent">subagent</span><span class="track"><span class="fill warm" style="width:50%"></span></span><span class="n">4</span></div><div class="row"><span class="name" title="web_fetch">web_fetch</span><span class="track"><span class="fill warm" style="width:25%"></span></span><span class="n">2</span></div></div>
+        <div class="sub" style="margin:16px 0 10px"><b>工作区</b></div>
+        <div class="rows"><div class="row"><span class="name" title="/home/dev/work/notes">/home/dev/work/notes</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">26</span></div><div class="row"><span class="name" title="/home/dev/code/tiny-db">/home/dev/code/tiny-db</span><span class="track"><span class="fill" style="width:46%"></span></span><span class="n">12</span></div><div class="row"><span class="name" title="/home/dev/code/pipeline">/home/dev/code/pipeline</span><span class="track"><span class="fill" style="width:31%"></span></span><span class="n">8</span></div><div class="row"><span class="name" title="/home/dev/code/aurora-ui">/home/dev/code/aurora-ui</span><span class="track"><span class="fill" style="width:15%"></span></span><span class="n">4</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>本期高光对话</h2>
+    <div class="sessions"><article class="card session" data-reveal style="--d:0ms">
+        <div class="top"><span class="title">把构建时间从 90s 压到 20s</span>
+        
+        <span class="id">demo-026</span></div>
+        <div class="meta">
+          <span>你说 6 · AI 说 6</span>
+          <span>5.6万 Token</span>
+          <span>持续 24m</span>
+          <span>2024-12-19 13:24</span>
+        </div>
+        能不能拆成两个函数,先写测试再改,能不能只改这一处，别动别的<div class="quote extra" hidden>先写测试再改</div><div class="quote extra" hidden>能不能只改这一处，别动别的</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:50ms">
+        <div class="top"><span class="title">补一组边界条件测试</span>
+        
+        <span class="id">demo-021</span></div>
+        <div class="meta">
+          <span>你说 5 · AI 说 5</span>
+          <span>6.5万 Token</span>
+          <span>持续 21m</span>
+          <span>2024-10-06 11:47</span>
+        </div>
+        再加个测试吧,这个报错你能看出是哪一步吗,能不能只改这一处，别动别的<div class="quote extra" hidden>这个报错你能看出是哪一步吗</div><div class="quote extra" hidden>能不能只改这一处，别动别的</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:100ms">
+        <div class="top"><span class="title">给上传接口加并发限制</span>
+        
+        <span class="id">demo-023</span></div>
+        <div class="meta">
+          <span>你说 4 · AI 说 4</span>
+          <span>8.2万 Token</span>
+          <span>持续 14m</span>
+          <span>2024-10-08 15:03</span>
+        </div>
+        谢谢，跑通了,这个接口的返回结构不太对,这个方案和上次那个有什么区别<div class="quote extra" hidden>这个接口的返回结构不太对</div><div class="quote extra" hidden>这个方案和上次那个有什么区别</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:150ms">
+        <div class="top"><span class="title">写一份发布检查清单</span>
+        
+        <span class="id">demo-022</span></div>
+        <div class="meta">
+          <span>你说 4 · AI 说 4</span>
+          <span>7.0万 Token</span>
+          <span>持续 15m</span>
+          <span>2024-10-02 09:21</span>
+        </div>
+        谢谢，跑通了,我刚才那个改动是不是把缓存弄坏了,为什么这里会慢<div class="quote extra" hidden>我刚才那个改动是不是把缓存弄坏了</div><div class="quote extra" hidden>为什么这里会慢</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:200ms">
+        <div class="top"><span class="title">写一份发布检查清单</span>
+        
+        <span class="id">demo-024</span></div>
+        <div class="meta">
+          <span>你说 4 · AI 说 4</span>
+          <span>6.3万 Token</span>
+          <span>持续 14m</span>
+          <span>2024-11-03 14:42</span>
+        </div>
+        先写测试再改,这个颜色太亮了，换暗一点,先别改，我确认一下需求<div class="quote extra" hidden>这个颜色太亮了，换暗一点</div><div class="quote extra" hidden>先别改，我确认一下需求</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:250ms">
+        <div class="top"><span class="title">修一个只在 CI 挂的测试</span>
+        
+        <span class="id">demo-025</span></div>
+        <div class="meta">
+          <span>你说 2 · AI 说 2</span>
+          <span>2.7万 Token</span>
+          <span>持续 7m</span>
+          <span>2024-12-26 23:09</span>
+        </div>
+        换个思路试试,先别改，我确认一下需求<div class="quote extra" hidden>先别改，我确认一下需求</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article></div>
+  </section>
+
+  <section data-reveal>
+    <h2>你留下的句子</h2>
+    <div class="moments-grid">
+      <div class="card tl-card">
+        <div class="label">每一段的第一句</div>
+        <div class="tl"><div class="tl-item" data-reveal style="--d:0ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">10-01</span>
+      <p class="tl-text">谢谢，跑通了</p>
+    </div><div class="tl-item" data-reveal style="--d:40ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">10-08</span>
+      <p class="tl-text">谢谢，跑通了</p>
+    </div><div class="tl-item" data-reveal style="--d:80ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">10-29</span>
+      <p class="tl-text">先写测试再改</p>
+    </div><div class="tl-item" data-reveal style="--d:120ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">12-17</span>
+      <p class="tl-text">能不能拆成两个函数</p>
+    </div><div class="tl-item" data-reveal style="--d:160ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">12-24</span>
+      <p class="tl-text">换个思路试试</p>
+    </div></div>
+      </div>
+      <div class="stack">
+        <div class="card quiet">
+        <div class="label">最晚的一次</div>
+        <div class="clock">23:15</div>
+        <p class="said">「先别改，我确认一下需求」</p>
+        <p class="whisper">（这一条，你自己大概也忘了）</p>
+      </div><div class="card quiet">
+        <div class="label">最长的一次</div>
+        <div class="clock small">24m</div>
+        <p class="said">「把构建时间从 90s 压到 20s」</p>
+        <p class="whisper">连续聊了 24m</p>
+      </div><div class="card quiet">
+        <div class="label">你说得最多的</div>
+        <div class="phrase-row"><span class="phrase">「试试」<i>×4</i></span><span class="phrase">「能不能」<i>×3</i></span><span class="phrase">「测试」<i>×3</i></span></div>
+      </div><div class="card quiet bookends">
+        <div class="bookend"><span class="label">第一次</span><span class="when">2024-10-02 09:21</span><p class="said">「谢谢，跑通了」</p></div>
+        <div class="bookend"><span class="label">最近一次</span><span class="when">2024-12-26 23:15</span><p class="said">「先别改，我确认一下需求」</p></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>本期称号</h2>
+    <div class="card"><div class="chips"><span class="chip" data-reveal style="--d:0ms"><span class="bullet"></span>工具大师 · 6 种工具</span></div></div>
+  </section>
+
+  <section data-reveal>
+    <h2>和上一期相比</h2>
+    <div class="card">
+      <div class="sub" style="margin:0 0 6px">上一期 · 2024-Q3</div>
+      <div class="note">消息：50（环比 +177.8%）<span style="color:var(--ok)"> ▲</span></div><div class="note">会话：6（环比 +20%）<span style="color:var(--ok)"> ▲</span></div><div class="note">Token：36万（环比 +121.1%）<span style="color:var(--ok)"> ▲</span></div>
+    </div>
+  </section>
+
+  
+
+  <section data-reveal class="closing">
+    <p class="closing-line">这一段，你在这里写下 241字，它回了你 588字。说了 2 次谢谢。</p>
+    <p class="closing-sign">它不会记得这些。日志会。</p>
+    <div class="closing-actions">
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-print>打印 / PDF</button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
+    <span>生成于 2026-10-30 17:18</span>
+  </footer>
+  <script type="application/json" id="rw-meta">{"lang":"zh","period":"2024 年 第 4 季度","human":25,"ai":25,"turns":25,"tokens":363719,"days":6,"badge":"工具大师 · 6 种工具","phrase":{"word":"试试","count":4},"closing":"这一段，你在这里写下 241字，它回了你 588字。说了 2 次谢谢。","labels":{"title":"对话回顾","footer":"DeepSeek Harness · dsh-plugin-wrapped","human":"你说了","ai":"AI 回了","rounds":"轮对话","tokens":"Token","days":"活跃天"},"ui":{"saved":"分享卡片已保存到下载目录","failed":"分享卡片生成失败","offline":"离线预览：切换周期请重新运行 CLI","navFailed":"切换周期失败"}}</script>
+</div></template>
+<template id="rw-body-2025-Q1" data-period-key="2025-Q1"><div class="wrap" data-rewind-root data-period-key="2025-Q1"><header class="bar">
+    <span class="kicker">DeepSeek Harness · 对话回顾</span>
+    <div class="tabs"><span class="tab">月度</span><span class="tab on">季度</span><span class="tab">年度</span></div>
+    <div class="actions">
+      <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
+    </div>
+  </header>
+  <nav class="nav">
+    <a class="btn nav-arrow" data-nav href="#2024-Q4">‹ 上一期</a>
+    <span class="period-pill"><span class="kind">季度</span><strong>2025 年 第 1 季度</strong></span>
+    <span class="btn nav-arrow" aria-disabled="false">下一期 ›</span>
+    <span class="btn ghost" aria-disabled="false">回到本期</span>
+    <span class="keys">← → 切换周期</span>
+  </nav>
+  <div class="scrub" data-scrub><span class="scrub-label">最近</span><a data-nav href="">Q4</a><a data-nav href="#2022-Q1">Q1</a><a data-nav href="#2022-Q4">Q4</a><a data-nav href="#2023-Q1">Q1</a><a data-nav href="#2023-Q4">Q4</a><a data-nav href="#2024-Q1">Q1</a><a data-nav href="#2024-Q4">Q4</a><a data-nav href="#2025-Q1" class="on" aria-current="page">Q1</a></div>
+  <section class="hero">
+    <div class="eyebrow">季度</div>
+    <h1>你和 AI 的 <em>2025 年 第 1 季度</em></h1>
+    <p>在 5 个活跃日、5 场会话里，你发了 18 条消息，AI 回了 18 条，一共 18 轮对话。</p>
+    <div class="split" data-split>
+      <span class="h" style="width:50.00%"></span>
+      <span class="a" style="width:50.00%"></span>
+    </div>
+    <div class="legend">
+      <span><span class="dot h"></span>你说<b><span class="num" data-count="18">18</span></b>条 · 50%</span>
+      <span><span class="dot a"></span>AI 说<b><span class="num" data-count="18">18</span></b>条 · 50%</span>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="card kpi" data-reveal style="--d:0ms">
+      <div class="label">消息总数</div>
+      <div class="value"><span class="num" data-count="36">36</span></div>
+      <div class="hint">人类 + AI 消息条数</div>
+    </div><div class="card kpi" data-reveal style="--d:45ms">
+      <div class="label">对话轮次</div>
+      <div class="value"><span class="num" data-count="18">18</span></div>
+      <div class="hint">由 AI 结束的一轮问答计一轮</div>
+    </div><div class="card kpi" data-reveal style="--d:90ms">
+      <div class="label">AI 步数</div>
+      <div class="value"><span class="num" data-count="18">18</span></div>
+      <div class="hint">含工具调用的模型步数</div>
+    </div><div class="card kpi" data-reveal style="--d:135ms">
+      <div class="label">会话数</div>
+      <div class="value"><span class="num" data-count="5">5</span></div>
+      <div class="hint">本期有对话的会话</div>
+    </div><div class="card kpi" data-reveal style="--d:180ms">
+      <div class="label">活跃天数</div>
+      <div class="value"><span class="num" data-count="5">5</span></div>
+      <div class="hint">有任意对话的日历日</div>
+    </div><div class="card kpi" data-reveal style="--d:225ms">
+      <div class="label">最长连击</div>
+      <div class="value"><span class="num" data-count="2">2</span><small>d</small></div>
+      <div class="hint">连续有对话的最长天数</div>
+    </div><div class="card kpi" data-reveal style="--d:270ms">
+      <div class="label">Token 用量</div>
+      <div class="value">25万</div>
+      <div class="hint">AI 侧真实上报的 Token</div>
+    </div>
+  </div>
+
+  <section data-reveal>
+    <h2>你说了多少，AI 回了多少</h2>
+    <div class="two">
+      <div class="card">
+        <div class="vol h"><span class="n"><span class="num" data-count="18">18</span></span><span class="u">你发出的消息</span></div>
+        <div class="sub"><b>170</b> 字 · 平均每条 <b>9</b></div>
+      </div>
+      <div class="card">
+        <div class="vol a"><span class="n"><span class="num" data-count="18">18</span></span><span class="u">AI 回复的消息</span></div>
+        <div class="sub"><b>504</b> 字 · 平均每条 <b>28</b></div>
+        <div class="sub">模型步数 <b>18</b> · 工具调用 <b>24</b> · AI 思考字数 <b>0</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>对话节奏</h2>
+    <div class="card chart"><svg viewBox="0 0 1000 230" width="100%" height="230" role="img" aria-label="对话节奏"><line x1="46" y1="156.5" x2="992" y2="156.5" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="160.5" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">4</text><line x1="46" y1="109.0" x2="992" y2="109.0" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="113.0" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">8</text><line x1="46" y1="61.5" x2="992" y2="61.5" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="65.5" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">12</text><line x1="46" y1="14.0" x2="992" y2="14.0" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="18.0" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">16</text><text x="82.4" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">01-01</text><rect class="bar" style="--i:1;fill:var(--human)" x="139.2" y="109.0" width="32.0" height="95.0" rx="3" opacity=".95" data-tip="2025-01-08 · 你 8 · AI 8"/><rect class="bar" style="--i:1;fill:var(--ai)" x="139.2" y="14.0" width="32.0" height="95.0" rx="3" opacity=".95" data-tip="2025-01-08 · 你 8 · AI 8"/><text x="155.2" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">01-08</text><text x="227.9" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">01-15</text><text x="300.7" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">01-22</text><text x="373.5" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">01-29</text><text x="446.2" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">02-05</text><text x="519.0" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">02-12</text><rect class="bar" style="--i:7;fill:var(--human)" x="575.8" y="132.8" width="32.0" height="71.3" rx="3" opacity=".95" data-tip="2025-02-19 · 你 6 · AI 6"/><rect class="bar" style="--i:7;fill:var(--ai)" x="575.8" y="61.5" width="32.0" height="71.3" rx="3" opacity=".95" data-tip="2025-02-19 · 你 6 · AI 6"/><text x="591.8" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">02-19</text><rect class="bar" style="--i:8;fill:var(--human)" x="648.5" y="192.1" width="32.0" height="11.9" rx="3" opacity=".95" data-tip="2025-02-26 · 你 1 · AI 1"/><rect class="bar" style="--i:8;fill:var(--ai)" x="648.5" y="180.3" width="32.0" height="11.9" rx="3" opacity=".95" data-tip="2025-02-26 · 你 1 · AI 1"/><text x="664.5" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">02-26</text><rect class="bar" style="--i:9;fill:var(--human)" x="721.3" y="168.4" width="32.0" height="35.6" rx="3" opacity=".95" data-tip="2025-03-05 · 你 3 · AI 3"/><rect class="bar" style="--i:9;fill:var(--ai)" x="721.3" y="132.8" width="32.0" height="35.6" rx="3" opacity=".95" data-tip="2025-03-05 · 你 3 · AI 3"/><text x="737.3" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">03-05</text><text x="810.1" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">03-12</text><text x="882.8" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">03-19</text><text x="955.6" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">03-26</text></svg></div>
+  </section>
+
+  <section data-reveal>
+    <h2>你最常在什么时候出现</h2>
+    <div class="grid2">
+      <div class="card chart hour">
+        <div class="note">你的高峰时段是 19:00 · 最忙的一天是 2025-01-14，共 12 条消息</div>
+        <svg viewBox="0 0 1000 156" width="100%" height="156" role="img" aria-label="你最常在什么时候出现"><rect class="bar" style="--i:0;fill:var(--accent)" x="13.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="00:00 · 0"/><text x="26.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">0</text><rect class="bar" style="--i:1;fill:var(--accent)" x="54.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="01:00 · 0"/><rect class="bar" style="--i:2;fill:var(--accent)" x="95.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="02:00 · 0"/><rect class="bar" style="--i:3;fill:var(--accent)" x="136.5" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="03:00 · 0"/><rect class="bar" style="--i:4;fill:var(--accent)" x="177.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="04:00 · 0"/><rect class="bar" style="--i:5;fill:var(--accent)" x="218.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="05:00 · 0"/><rect class="bar" style="--i:6;fill:var(--accent)" x="260.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="06:00 · 0"/><text x="273.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">6</text><rect class="bar" style="--i:7;fill:var(--accent)" x="301.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="07:00 · 0"/><rect class="bar" style="--i:8;fill:var(--accent)" x="342.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="08:00 · 0"/><rect class="bar" style="--i:9;fill:var(--accent)" x="383.5" y="93.3" width="27.2" height="40.7" rx="2" opacity="0.53" data-tip="09:00 · 4"/><rect class="bar" style="--i:10;fill:var(--accent)" x="424.7" y="52.7" width="27.2" height="81.3" rx="2" opacity="0.77" data-tip="10:00 · 8"/><rect class="bar" style="--i:11;fill:var(--accent)" x="465.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="11:00 · 0"/><rect class="bar" style="--i:12;fill:var(--accent)" x="507.0" y="113.7" width="27.2" height="20.3" rx="2" opacity="0.42" data-tip="12:00 · 2"/><text x="520.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">12</text><rect class="bar" style="--i:13;fill:var(--accent)" x="548.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="13:00 · 0"/><rect class="bar" style="--i:14;fill:var(--accent)" x="589.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="14:00 · 0"/><rect class="bar" style="--i:15;fill:var(--accent)" x="630.5" y="113.7" width="27.2" height="20.3" rx="2" opacity="0.42" data-tip="15:00 · 2"/><rect class="bar" style="--i:16;fill:var(--accent)" x="671.7" y="93.3" width="27.2" height="40.7" rx="2" opacity="0.53" data-tip="16:00 · 4"/><rect class="bar" style="--i:17;fill:var(--accent)" x="712.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="17:00 · 0"/><rect class="bar" style="--i:18;fill:var(--accent)" x="754.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="18:00 · 0"/><text x="767.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">18</text><rect class="bar" style="--i:19;fill:var(--accent)" x="795.2" y="12.0" width="27.2" height="122.0" rx="2" opacity="1.00" data-tip="19:00 · 12"/><rect class="bar" style="--i:20;fill:var(--accent)" x="836.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="20:00 · 0"/><rect class="bar" style="--i:21;fill:var(--accent)" x="877.5" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="21:00 · 0"/><rect class="bar" style="--i:22;fill:var(--accent)" x="918.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="22:00 · 0"/><rect class="bar" style="--i:23;fill:var(--accent)" x="959.8" y="93.3" width="27.2" height="40.7" rx="2" opacity="0.53" data-tip="23:00 · 4"/><text x="973.4" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">23</text></svg>
+      </div>
+      <div class="card chart">
+        <svg viewBox="0 0 1000 156" width="100%" height="156" role="img" aria-label="weekday"><rect class="bar" style="--i:0;fill:var(--ai)" x="43.6" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周日 · 0"/><text x="76.6" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周日</text><rect class="bar" style="--i:1;fill:var(--ai)" x="184.7" y="73.0" width="66.0" height="61.0" rx="4" opacity="0.9" data-tip="周一 · 6"/><text x="217.7" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周一</text><rect class="bar" style="--i:2;fill:var(--ai)" x="325.9" y="12.0" width="66.0" height="122.0" rx="4" opacity="0.9" data-tip="周二 · 12"/><text x="358.9" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周二</text><rect class="bar" style="--i:3;fill:var(--ai)" x="467.0" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周三 · 0"/><text x="500.0" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周三</text><rect class="bar" style="--i:4;fill:var(--ai)" x="608.1" y="73.0" width="66.0" height="61.0" rx="4" opacity="0.9" data-tip="周四 · 6"/><text x="641.1" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周四</text><rect class="bar" style="--i:5;fill:var(--ai)" x="749.3" y="12.0" width="66.0" height="122.0" rx="4" opacity="0.9" data-tip="周五 · 12"/><text x="782.3" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周五</text><rect class="bar" style="--i:6;fill:var(--ai)" x="890.4" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周六 · 0"/><text x="923.4" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周六</text></svg>
+        <div class="note">周二</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>你最常一起工作的是</h2>
+    <div class="two">
+      <div class="card">
+        <div class="sub" style="margin:0 0 10px"><b>模型</b></div>
+        <div class="rows"><div class="row"><span class="name" title="deepseek-reasoner">deepseek-reasoner</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">15<i> · 83%</i></span></div><div class="row"><span class="name" title="deepseek-chat">deepseek-chat</span><span class="track"><span class="fill" style="width:20%"></span></span><span class="n">3<i> · 17%</i></span></div></div>
+        <div class="sub" style="margin:16px 0 10px"><b>Provider</b></div>
+        <div class="rows"><div class="row"><span class="name" title="deepseek">deepseek</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">18<i> · 100%</i></span></div></div>
+      </div>
+      <div class="card">
+        <div class="sub" style="margin:0 0 10px"><b>工具</b></div>
+        <div class="rows"><div class="row"><span class="name" title="pwsh">pwsh</span><span class="track"><span class="fill warm" style="width:100%"></span></span><span class="n">5</span></div><div class="row"><span class="name" title="subagent">subagent</span><span class="track"><span class="fill warm" style="width:100%"></span></span><span class="n">5</span></div><div class="row"><span class="name" title="grep">grep</span><span class="track"><span class="fill warm" style="width:80%"></span></span><span class="n">4</span></div><div class="row"><span class="name" title="read">read</span><span class="track"><span class="fill warm" style="width:80%"></span></span><span class="n">4</span></div><div class="row"><span class="name" title="edit">edit</span><span class="track"><span class="fill warm" style="width:40%"></span></span><span class="n">2</span></div><div class="row"><span class="name" title="write">write</span><span class="track"><span class="fill warm" style="width:40%"></span></span><span class="n">2</span></div></div>
+        <div class="sub" style="margin:16px 0 10px"><b>工作区</b></div>
+        <div class="rows"><div class="row"><span class="name" title="/home/dev/code/tiny-db">/home/dev/code/tiny-db</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">16</span></div><div class="row"><span class="name" title="/home/dev/work/notes">/home/dev/work/notes</span><span class="track"><span class="fill" style="width:88%"></span></span><span class="n">14</span></div><div class="row"><span class="name" title="/home/dev/code/aurora-ui">/home/dev/code/aurora-ui</span><span class="track"><span class="fill" style="width:38%"></span></span><span class="n">6</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>本期高光对话</h2>
+    <div class="sessions"><article class="card session" data-reveal style="--d:0ms">
+        <div class="top"><span class="title">把报告页改成可分享的图片</span>
+        
+        <span class="id">demo-029</span></div>
+        <div class="meta">
+          <span>你说 6 · AI 说 6</span>
+          <span>9.4万 Token</span>
+          <span>持续 28m</span>
+          <span>2025-02-21 19:17</span>
+        </div>
+        等等，这个文件是谁改的,先别改，我确认一下需求,我这边看不到日志<div class="quote extra" hidden>先别改，我确认一下需求</div><div class="quote extra" hidden>我这边看不到日志</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:50ms">
+        <div class="top"><span class="title">重构表格排序逻辑</span>
+        
+        <span class="id">demo-027</span></div>
+        <div class="meta">
+          <span>你说 6 · AI 说 6</span>
+          <span>7.0万 Token</span>
+          <span>持续 22m</span>
+          <span>2025-01-14 09:55</span>
+        </div>
+        等等，这个文件是谁改的,算了，先回滚这一版,把这段抽成插件<div class="quote extra" hidden>算了，先回滚这一版</div><div class="quote extra" hidden>把这段抽成插件</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:100ms">
+        <div class="top"><span class="title">把日志里的时间戳统一成 UTC</span>
+        
+        <span class="id">demo-030</span></div>
+        <div class="meta">
+          <span>你说 3 · AI 说 3</span>
+          <span>3.6万 Token</span>
+          <span>持续 17m</span>
+          <span>2025-03-06 15:56</span>
+        </div>
+        为什么这里会慢,确认一下，这样可以吗,能不能拆成两个函数<div class="quote extra" hidden>确认一下，这样可以吗</div><div class="quote extra" hidden>能不能拆成两个函数</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:150ms">
+        <div class="top"><span class="title">补一组边界条件测试</span>
+        
+        <span class="id">demo-028</span></div>
+        <div class="meta">
+          <span>你说 2 · AI 说 2</span>
+          <span>4.1万 Token</span>
+          <span>持续 3m</span>
+          <span>2025-01-13 23:48</span>
+        </div>
+        帮我看看这个类型为什么不匹配,这里为什么会重复请求<div class="quote extra" hidden>这里为什么会重复请求</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:200ms">
+        <div class="top"><span class="title">把日志里的时间戳统一成 UTC</span>
+        
+        <span class="id">demo-031</span></div>
+        <div class="meta">
+          <span>你说 1 · AI 说 1</span>
+          <span>1.2万 Token</span>
+          <span>持续 1m</span>
+          <span>2025-03-03 12:55</span>
+        </div>
+        文档里这段是什么意思
+      </article></div>
+  </section>
+
+  <section data-reveal>
+    <h2>你留下的句子</h2>
+    <div class="moments-grid">
+      <div class="card tl-card">
+        <div class="label">每一段的第一句</div>
+        <div class="tl"><div class="tl-item" data-reveal style="--d:0ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">01-08</span>
+      <p class="tl-text">帮我看看这个类型为什么不匹配</p>
+    </div><div class="tl-item" data-reveal style="--d:40ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">02-19</span>
+      <p class="tl-text">等等，这个文件是谁改的</p>
+    </div><div class="tl-item" data-reveal style="--d:80ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">02-26</span>
+      <p class="tl-text">文档里这段是什么意思</p>
+    </div><div class="tl-item" data-reveal style="--d:120ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">03-05</span>
+      <p class="tl-text">为什么这里会慢</p>
+    </div></div>
+      </div>
+      <div class="stack">
+        <div class="card quiet">
+        <div class="label">最晚的一次</div>
+        <div class="clock">23:50</div>
+        <p class="said">「这里为什么会重复请求」</p>
+        <p class="whisper">（这一条，你自己大概也忘了）</p>
+      </div><div class="card quiet">
+        <div class="label">最长的一次</div>
+        <div class="clock small">29m</div>
+        <p class="said">「把报告页改成可分享的图片」</p>
+        <p class="whisper">连续聊了 29m</p>
+      </div><div class="card quiet">
+        <div class="label">你说得最多的</div>
+        <div class="phrase-row"><span class="phrase">「为什么」<i>×3</i></span><span class="phrase">「能不能」<i>×2</i></span><span class="phrase">「测试」<i>×2</i></span></div>
+      </div><div class="card quiet bookends">
+        <div class="bookend"><span class="label">第一次</span><span class="when">2025-01-13 23:48</span><p class="said">「帮我看看这个类型为什么不匹配」</p></div>
+        <div class="bookend"><span class="label">最近一次</span><span class="when">2025-03-06 16:11</span><p class="said">「能不能拆成两个函数」</p></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>本期称号</h2>
+    <div class="card"><div class="chips"><span class="chip" data-reveal style="--d:0ms"><span class="bullet"></span>工具大师 · 6 种工具</span></div></div>
+  </section>
+
+  <section data-reveal>
+    <h2>和上一期相比</h2>
+    <div class="card">
+      <div class="sub" style="margin:0 0 6px">上一期 · 2024-Q4</div>
+      <div class="note">消息：36（环比 -14.3%）<span style="color:var(--accent-2)"> ▼</span></div><div class="note">会话：5（环比 0%）<span></span></div><div class="note">Token：25万（环比 -14.1%）<span style="color:var(--accent-2)"> ▼</span></div>
+    </div>
+  </section>
+
+  
+
+  <section data-reveal class="closing">
+    <p class="closing-line">这一段，你在这里写下 170字，它回了你 504字。。</p>
+    <p class="closing-sign">它不会记得这些。日志会。</p>
+    <div class="closing-actions">
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-print>打印 / PDF</button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
+    <span>生成于 2026-10-30 17:18</span>
+  </footer>
+  <script type="application/json" id="rw-meta">{"lang":"zh","period":"2025 年 第 1 季度","human":18,"ai":18,"turns":18,"tokens":252556,"days":5,"badge":"工具大师 · 6 种工具","phrase":{"word":"为什么","count":3},"closing":"这一段，你在这里写下 170字，它回了你 504字。。","labels":{"title":"对话回顾","footer":"DeepSeek Harness · dsh-plugin-wrapped","human":"你说了","ai":"AI 回了","rounds":"轮对话","tokens":"Token","days":"活跃天"},"ui":{"saved":"分享卡片已保存到下载目录","failed":"分享卡片生成失败","offline":"离线预览：切换周期请重新运行 CLI","navFailed":"切换周期失败"}}</script>
+</div></template>
+<template id="rw-body-2025-Q4" data-period-key="2025-Q4"><div class="wrap" data-rewind-root data-period-key="2025-Q4"><header class="bar">
+    <span class="kicker">DeepSeek Harness · 对话回顾</span>
+    <div class="tabs"><span class="tab">月度</span><span class="tab on">季度</span><span class="tab">年度</span></div>
+    <div class="actions">
+      <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
+    </div>
+  </header>
+  <nav class="nav">
+    <span class="btn nav-arrow" aria-disabled="false">‹ 上一期</span>
+    <span class="period-pill"><span class="kind">季度</span><strong>2025 年 第 4 季度</strong></span>
+    <span class="btn nav-arrow" aria-disabled="false">下一期 ›</span>
+    <span class="btn ghost" aria-disabled="false">回到本期</span>
+    <span class="keys">← → 切换周期</span>
+  </nav>
+  <div class="scrub" data-scrub><span class="scrub-label">最近</span><a data-nav href="#2022-Q1">Q1</a><a data-nav href="#2022-Q4">Q4</a><a data-nav href="#2023-Q1">Q1</a><a data-nav href="#2023-Q4">Q4</a><a data-nav href="#2024-Q1">Q1</a><a data-nav href="#2024-Q4">Q4</a><a data-nav href="#2025-Q1">Q1</a><a data-nav href="#2025-Q4" class="on" aria-current="page">Q4</a></div>
+  <section class="hero">
+    <div class="eyebrow">季度</div>
+    <h1>你和 AI 的 <em>2025 年 第 4 季度</em></h1>
+    <p>在 7 个活跃日、7 场会话里，你发了 21 条消息，AI 回了 21 条，一共 21 轮对话。</p>
+    <div class="split" data-split>
+      <span class="h" style="width:50.00%"></span>
+      <span class="a" style="width:50.00%"></span>
+    </div>
+    <div class="legend">
+      <span><span class="dot h"></span>你说<b><span class="num" data-count="21">21</span></b>条 · 50%</span>
+      <span><span class="dot a"></span>AI 说<b><span class="num" data-count="21">21</span></b>条 · 50%</span>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="card kpi" data-reveal style="--d:0ms">
+      <div class="label">消息总数</div>
+      <div class="value"><span class="num" data-count="42">42</span></div>
+      <div class="hint">人类 + AI 消息条数</div>
+    </div><div class="card kpi" data-reveal style="--d:45ms">
+      <div class="label">对话轮次</div>
+      <div class="value"><span class="num" data-count="21">21</span></div>
+      <div class="hint">由 AI 结束的一轮问答计一轮</div>
+    </div><div class="card kpi" data-reveal style="--d:90ms">
+      <div class="label">AI 步数</div>
+      <div class="value"><span class="num" data-count="21">21</span></div>
+      <div class="hint">含工具调用的模型步数</div>
+    </div><div class="card kpi" data-reveal style="--d:135ms">
+      <div class="label">会话数</div>
+      <div class="value"><span class="num" data-count="7">7</span></div>
+      <div class="hint">本期有对话的会话</div>
+    </div><div class="card kpi" data-reveal style="--d:180ms">
+      <div class="label">活跃天数</div>
+      <div class="value"><span class="num" data-count="7">7</span></div>
+      <div class="hint">有任意对话的日历日</div>
+    </div><div class="card kpi" data-reveal style="--d:225ms">
+      <div class="label">最长连击</div>
+      <div class="value"><span class="num" data-count="2">2</span><small>d</small></div>
+      <div class="hint">连续有对话的最长天数</div>
+    </div><div class="card kpi" data-reveal style="--d:270ms">
+      <div class="label">Token 用量</div>
+      <div class="value">32万</div>
+      <div class="hint">AI 侧真实上报的 Token</div>
+    </div>
+  </div>
+
+  <section data-reveal>
+    <h2>你说了多少，AI 回了多少</h2>
+    <div class="two">
+      <div class="card">
+        <div class="vol h"><span class="n"><span class="num" data-count="21">21</span></span><span class="u">你发出的消息</span></div>
+        <div class="sub"><b>199</b> 字 · 平均每条 <b>9</b></div>
+      </div>
+      <div class="card">
+        <div class="vol a"><span class="n"><span class="num" data-count="21">21</span></span><span class="u">AI 回复的消息</span></div>
+        <div class="sub"><b>574</b> 字 · 平均每条 <b>27</b></div>
+        <div class="sub">模型步数 <b>21</b> · 工具调用 <b>31</b> · AI 思考字数 <b>0</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>对话节奏</h2>
+    <div class="card chart"><svg viewBox="0 0 1000 230" width="100%" height="230" role="img" aria-label="对话节奏"><line x1="46" y1="156.5" x2="992" y2="156.5" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="160.5" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">5</text><line x1="46" y1="109.0" x2="992" y2="109.0" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="113.0" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">9</text><line x1="46" y1="61.5" x2="992" y2="61.5" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="65.5" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">14</text><line x1="46" y1="14.0" x2="992" y2="14.0" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/><text x="38" y="18.0" text-anchor="end" font-size="10" fill="currentColor" fill-opacity=".45">18</text><text x="79.8" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">10-01</text><rect class="bar" style="--i:2;fill:var(--human)" x="198.9" y="161.8" width="32.0" height="42.2" rx="3" opacity=".95" data-tip="2025-10-15 · 你 4 · AI 4"/><rect class="bar" style="--i:2;fill:var(--ai)" x="198.9" y="119.6" width="32.0" height="42.2" rx="3" opacity=".95" data-tip="2025-10-15 · 你 4 · AI 4"/><text x="214.9" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">10-15</text><rect class="bar" style="--i:4;fill:var(--human)" x="334.1" y="109.0" width="32.0" height="95.0" rx="3" opacity=".95" data-tip="2025-10-29 · 你 9 · AI 9"/><rect class="bar" style="--i:4;fill:var(--ai)" x="334.1" y="14.0" width="32.0" height="95.0" rx="3" opacity=".95" data-tip="2025-10-29 · 你 9 · AI 9"/><text x="350.1" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">10-29</text><rect class="bar" style="--i:5;fill:var(--human)" x="401.6" y="193.4" width="32.0" height="10.6" rx="3" opacity=".95" data-tip="2025-11-05 · 你 1 · AI 1"/><rect class="bar" style="--i:5;fill:var(--ai)" x="401.6" y="182.9" width="32.0" height="10.6" rx="3" opacity=".95" data-tip="2025-11-05 · 你 1 · AI 1"/><text x="485.2" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">11-12</text><text x="620.4" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">11-26</text><rect class="bar" style="--i:9;fill:var(--human)" x="671.9" y="182.9" width="32.0" height="21.1" rx="3" opacity=".95" data-tip="2025-12-03 · 你 2 · AI 2"/><rect class="bar" style="--i:9;fill:var(--ai)" x="671.9" y="161.8" width="32.0" height="21.1" rx="3" opacity=".95" data-tip="2025-12-03 · 你 2 · AI 2"/><rect class="bar" style="--i:10;fill:var(--human)" x="739.5" y="182.9" width="32.0" height="21.1" rx="3" opacity=".95" data-tip="2025-12-10 · 你 2 · AI 2"/><rect class="bar" style="--i:10;fill:var(--ai)" x="739.5" y="161.8" width="32.0" height="21.1" rx="3" opacity=".95" data-tip="2025-12-10 · 你 2 · AI 2"/><text x="755.5" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">12-10</text><rect class="bar" style="--i:12;fill:var(--human)" x="874.6" y="172.3" width="32.0" height="31.7" rx="3" opacity=".95" data-tip="2025-12-24 · 你 3 · AI 3"/><rect class="bar" style="--i:12;fill:var(--ai)" x="874.6" y="140.7" width="32.0" height="31.7" rx="3" opacity=".95" data-tip="2025-12-24 · 你 3 · AI 3"/><text x="890.6" y="222" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">12-24</text></svg></div>
+  </section>
+
+  <section data-reveal>
+    <h2>你最常在什么时候出现</h2>
+    <div class="grid2">
+      <div class="card chart hour">
+        <div class="note">你的高峰时段是 11:00 · 最忙的一天是 2025-11-03，共 10 条消息</div>
+        <svg viewBox="0 0 1000 156" width="100%" height="156" role="img" aria-label="你最常在什么时候出现"><rect class="bar" style="--i:0;fill:var(--accent)" x="13.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="00:00 · 0"/><text x="26.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">0</text><rect class="bar" style="--i:1;fill:var(--accent)" x="54.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="01:00 · 0"/><rect class="bar" style="--i:2;fill:var(--accent)" x="95.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="02:00 · 0"/><rect class="bar" style="--i:3;fill:var(--accent)" x="136.5" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="03:00 · 0"/><rect class="bar" style="--i:4;fill:var(--accent)" x="177.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="04:00 · 0"/><rect class="bar" style="--i:5;fill:var(--accent)" x="218.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="05:00 · 0"/><rect class="bar" style="--i:6;fill:var(--accent)" x="260.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="06:00 · 0"/><text x="273.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">6</text><rect class="bar" style="--i:7;fill:var(--accent)" x="301.2" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="07:00 · 0"/><rect class="bar" style="--i:8;fill:var(--accent)" x="342.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="08:00 · 0"/><rect class="bar" style="--i:9;fill:var(--accent)" x="383.5" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="09:00 · 0"/><rect class="bar" style="--i:10;fill:var(--accent)" x="424.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="10:00 · 0"/><rect class="bar" style="--i:11;fill:var(--accent)" x="465.8" y="12.0" width="27.2" height="122.0" rx="2" opacity="1.00" data-tip="11:00 · 8"/><rect class="bar" style="--i:12;fill:var(--accent)" x="507.0" y="12.0" width="27.2" height="122.0" rx="2" opacity="1.00" data-tip="12:00 · 8"/><text x="520.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">12</text><rect class="bar" style="--i:13;fill:var(--accent)" x="548.2" y="88.3" width="27.2" height="45.8" rx="2" opacity="0.56" data-tip="13:00 · 3"/><rect class="bar" style="--i:14;fill:var(--accent)" x="589.3" y="27.3" width="27.2" height="106.8" rx="2" opacity="0.91" data-tip="14:00 · 7"/><rect class="bar" style="--i:15;fill:var(--accent)" x="630.5" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="15:00 · 0"/><rect class="bar" style="--i:16;fill:var(--accent)" x="671.7" y="42.5" width="27.2" height="91.5" rx="2" opacity="0.82" data-tip="16:00 · 6"/><rect class="bar" style="--i:17;fill:var(--accent)" x="712.8" y="103.5" width="27.2" height="30.5" rx="2" opacity="0.47" data-tip="17:00 · 2"/><rect class="bar" style="--i:18;fill:var(--accent)" x="754.0" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="18:00 · 0"/><text x="767.6" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">18</text><rect class="bar" style="--i:19;fill:var(--accent)" x="795.2" y="73.0" width="27.2" height="61.0" rx="2" opacity="0.65" data-tip="19:00 · 4"/><rect class="bar" style="--i:20;fill:var(--accent)" x="836.3" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="20:00 · 0"/><rect class="bar" style="--i:21;fill:var(--accent)" x="877.5" y="73.0" width="27.2" height="61.0" rx="2" opacity="0.65" data-tip="21:00 · 4"/><rect class="bar" style="--i:22;fill:var(--accent)" x="918.7" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="22:00 · 0"/><rect class="bar" style="--i:23;fill:var(--accent)" x="959.8" y="134.0" width="27.2" height="2.0" rx="2" opacity="0.12" data-tip="23:00 · 0"/><text x="973.4" y="150" text-anchor="middle" font-size="9.5" fill="currentColor" fill-opacity=".45">23</text></svg>
+      </div>
+      <div class="card chart">
+        <svg viewBox="0 0 1000 156" width="100%" height="156" role="img" aria-label="weekday"><rect class="bar" style="--i:0;fill:var(--ai)" x="43.6" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周日 · 0"/><text x="76.6" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周日</text><rect class="bar" style="--i:1;fill:var(--ai)" x="184.7" y="39.1" width="66.0" height="94.9" rx="4" opacity="0.9" data-tip="周一 · 14"/><text x="217.7" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周一</text><rect class="bar" style="--i:2;fill:var(--ai)" x="325.9" y="79.8" width="66.0" height="54.2" rx="4" opacity="0.9" data-tip="周二 · 8"/><text x="358.9" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周二</text><rect class="bar" style="--i:3;fill:var(--ai)" x="467.0" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周三 · 0"/><text x="500.0" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周三</text><rect class="bar" style="--i:4;fill:var(--ai)" x="608.1" y="12.0" width="66.0" height="122.0" rx="4" opacity="0.9" data-tip="周四 · 18"/><text x="641.1" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周四</text><rect class="bar" style="--i:5;fill:var(--ai)" x="749.3" y="120.4" width="66.0" height="13.6" rx="4" opacity="0.9" data-tip="周五 · 2"/><text x="782.3" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周五</text><rect class="bar" style="--i:6;fill:var(--ai)" x="890.4" y="134.0" width="66.0" height="2.0" rx="4" opacity="0.14" data-tip="周六 · 0"/><text x="923.4" y="150" text-anchor="middle" font-size="10" fill="currentColor" fill-opacity=".45">周六</text></svg>
+        <div class="note">周四</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>你最常一起工作的是</h2>
+    <div class="two">
+      <div class="card">
+        <div class="sub" style="margin:0 0 10px"><b>模型</b></div>
+        <div class="rows"><div class="row"><span class="name" title="deepseek-reasoner">deepseek-reasoner</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">15<i> · 71%</i></span></div><div class="row"><span class="name" title="code-fast">code-fast</span><span class="track"><span class="fill" style="width:20%"></span></span><span class="n">3<i> · 14%</i></span></div><div class="row"><span class="name" title="deepseek-chat">deepseek-chat</span><span class="track"><span class="fill" style="width:20%"></span></span><span class="n">3<i> · 14%</i></span></div></div>
+        <div class="sub" style="margin:16px 0 10px"><b>Provider</b></div>
+        <div class="rows"><div class="row"><span class="name" title="deepseek">deepseek</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">18<i> · 86%</i></span></div><div class="row"><span class="name" title="internal">internal</span><span class="track"><span class="fill" style="width:17%"></span></span><span class="n">3<i> · 14%</i></span></div></div>
+      </div>
+      <div class="card">
+        <div class="sub" style="margin:0 0 10px"><b>工具</b></div>
+        <div class="rows"><div class="row"><span class="name" title="read">read</span><span class="track"><span class="fill warm" style="width:100%"></span></span><span class="n">11</span></div><div class="row"><span class="name" title="glob">glob</span><span class="track"><span class="fill warm" style="width:55%"></span></span><span class="n">6</span></div><div class="row"><span class="name" title="write">write</span><span class="track"><span class="fill warm" style="width:36%"></span></span><span class="n">4</span></div><div class="row"><span class="name" title="edit">edit</span><span class="track"><span class="fill warm" style="width:27%"></span></span><span class="n">3</span></div><div class="row"><span class="name" title="grep">grep</span><span class="track"><span class="fill warm" style="width:18%"></span></span><span class="n">2</span></div><div class="row"><span class="name" title="pwsh">pwsh</span><span class="track"><span class="fill warm" style="width:18%"></span></span><span class="n">2</span></div></div>
+        <div class="sub" style="margin:16px 0 10px"><b>工作区</b></div>
+        <div class="rows"><div class="row"><span class="name" title="/home/dev/code/pipeline">/home/dev/code/pipeline</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">24</span></div><div class="row"><span class="name" title="/home/dev/code/tiny-db">/home/dev/code/tiny-db</span><span class="track"><span class="fill" style="width:42%"></span></span><span class="n">10</span></div><div class="row"><span class="name" title="/home/dev/code/aurora-ui">/home/dev/code/aurora-ui</span><span class="track"><span class="fill" style="width:33%"></span></span><span class="n">8</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>本期高光对话</h2>
+    <div class="sessions"><article class="card session" data-reveal style="--d:0ms">
+        <div class="top"><span class="title">把日志里的时间戳统一成 UTC</span>
+        
+        <span class="id">demo-045</span></div>
+        <div class="meta">
+          <span>你说 5 · AI 说 5</span>
+          <span>5.0万 Token</span>
+          <span>持续 26m</span>
+          <span>2025-11-03 13:53</span>
+        </div>
+        等等，这个文件是谁改的,为什么这里会慢,我这边看不到日志<div class="quote extra" hidden>为什么这里会慢</div><div class="quote extra" hidden>我这边看不到日志</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:50ms">
+        <div class="top"><span class="title">梳理一下这个模块的依赖</span>
+        
+        <span class="id">demo-044</span></div>
+        <div class="meta">
+          <span>你说 4 · AI 说 4</span>
+          <span>8.0万 Token</span>
+          <span>持续 19m</span>
+          <span>2025-10-16 12:05</span>
+        </div>
+        把这段抽成插件,再加个测试吧,这里为什么会重复请求<div class="quote extra" hidden>再加个测试吧</div><div class="quote extra" hidden>这里为什么会重复请求</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:100ms">
+        <div class="top"><span class="title">给搜索加上拼音匹配</span>
+        
+        <span class="id">demo-046</span></div>
+        <div class="meta">
+          <span>你说 4 · AI 说 4</span>
+          <span>7.4万 Token</span>
+          <span>持续 14m</span>
+          <span>2025-11-04 11:03</span>
+        </div>
+        文档里这段是什么意思,确认一下，这样可以吗,确认一下，这样可以吗<div class="quote extra" hidden>确认一下，这样可以吗</div><div class="quote extra" hidden>确认一下，这样可以吗</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:150ms">
+        <div class="top"><span class="title">给 CLI 加一个 --dry-run</span>
+        
+        <span class="id">demo-050</span></div>
+        <div class="meta">
+          <span>你说 3 · AI 说 3</span>
+          <span>6.6万 Token</span>
+          <span>持续 13m</span>
+          <span>2025-12-25 16:37</span>
+        </div>
+        这个接口的返回结构不太对,帮我看看这个类型为什么不匹配,能不能拆成两个函数<div class="quote extra" hidden>帮我看看这个类型为什么不匹配</div><div class="quote extra" hidden>能不能拆成两个函数</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:200ms">
+        <div class="top"><span class="title">优化首屏加载</span>
+        
+        <span class="id">demo-049</span></div>
+        <div class="meta">
+          <span>你说 2 · AI 说 2</span>
+          <span>2.1万 Token</span>
+          <span>持续 5m</span>
+          <span>2025-12-15 19:41</span>
+        </div>
+        谢谢，跑通了,我这边看不到日志<div class="quote extra" hidden>我这边看不到日志</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article><article class="card session" data-reveal style="--d:250ms">
+        <div class="top"><span class="title">给上传接口加并发限制</span>
+        
+        <span class="id">demo-048</span></div>
+        <div class="meta">
+          <span>你说 2 · AI 说 2</span>
+          <span>9,271 Token</span>
+          <span>持续 7m</span>
+          <span>2025-12-04 21:06</span>
+        </div>
+        再试一次，还是不行,线上现在能用吗<div class="quote extra" hidden>线上现在能用吗</div><button class="more" type="button" data-more data-open-label="展开更多原话" data-close-label="收起">展开更多原话</button>
+      </article></div>
+  </section>
+
+  <section data-reveal>
+    <h2>你留下的句子</h2>
+    <div class="moments-grid">
+      <div class="card tl-card">
+        <div class="label">每一段的第一句</div>
+        <div class="tl"><div class="tl-item" data-reveal style="--d:0ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">10-15</span>
+      <p class="tl-text">把这段抽成插件</p>
+    </div><div class="tl-item" data-reveal style="--d:40ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">10-29</span>
+      <p class="tl-text">等等，这个文件是谁改的</p>
+    </div><div class="tl-item" data-reveal style="--d:80ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">11-05</span>
+      <p class="tl-text">为什么这里会慢</p>
+    </div><div class="tl-item" data-reveal style="--d:120ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">12-03</span>
+      <p class="tl-text">再试一次，还是不行</p>
+    </div><div class="tl-item" data-reveal style="--d:160ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">12-10</span>
+      <p class="tl-text">谢谢，跑通了</p>
+    </div><div class="tl-item" data-reveal style="--d:200ms">
+      <span class="tl-dot"></span>
+      <span class="tl-when">12-24</span>
+      <p class="tl-text">这个接口的返回结构不太对</p>
+    </div></div>
+      </div>
+      <div class="stack">
+        <div class="card quiet">
+        <div class="label">最晚的一次</div>
+        <div class="clock">21:13</div>
+        <p class="said">「线上现在能用吗」</p>
+        <p class="whisper">（这一条，你自己大概也忘了）</p>
+      </div><div class="card quiet">
+        <div class="label">最长的一次</div>
+        <div class="clock small">26m</div>
+        <p class="said">「把日志里的时间戳统一成 UTC」</p>
+        <p class="whisper">连续聊了 26m</p>
+      </div><div class="card quiet">
+        <div class="label">你说得最多的</div>
+        <div class="phrase-row"><span class="phrase">「为什么」<i>×4</i></span><span class="phrase">「确认」<i>×4</i></span><span class="phrase">「能不能」<i>×2</i></span></div>
+      </div><div class="card quiet bookends">
+        <div class="bookend"><span class="label">第一次</span><span class="when">2025-10-16 12:05</span><p class="said">「把这段抽成插件」</p></div>
+        <div class="bookend"><span class="label">最近一次</span><span class="when">2025-12-25 16:49</span><p class="said">「能不能拆成两个函数」</p></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>本期称号</h2>
+    <div class="card"><div class="chips"><span class="chip" data-reveal style="--d:0ms"><span class="bullet"></span>工具大师 · 6 种工具</span><span class="chip" data-reveal style="--d:60ms"><span class="bullet"></span>模型杂食 · 3 个模型</span></div></div>
+  </section>
+
+  <section data-reveal>
+    <h2>和上一期相比</h2>
+    <div class="card">
+      <div class="sub" style="margin:0 0 6px">上一期 · 2025-Q3</div>
+      <div class="note">消息：42（环比 +5%）<span style="color:var(--ok)"> ▲</span></div><div class="note">会话：7（环比 +40%）<span style="color:var(--ok)"> ▲</span></div><div class="note">Token：32万（环比 +50%）<span style="color:var(--ok)"> ▲</span></div>
+    </div>
+  </section>
+
+  
+
+  <section data-reveal class="closing">
+    <p class="closing-line">这一段，你在这里写下 199字，它回了你 574字。说了 1 次谢谢。</p>
+    <p class="closing-sign">它不会记得这些。日志会。</p>
+    <div class="closing-actions">
+      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-print>打印 / PDF</button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
+    <span>生成于 2026-10-30 17:18</span>
+  </footer>
+  <script type="application/json" id="rw-meta">{"lang":"zh","period":"2025 年 第 4 季度","human":21,"ai":21,"turns":21,"tokens":315890,"days":7,"badge":"工具大师 · 6 种工具","phrase":{"word":"为什么","count":4},"closing":"这一段，你在这里写下 199字，它回了你 574字。说了 1 次谢谢。","labels":{"title":"对话回顾","footer":"DeepSeek Harness · dsh-plugin-wrapped","human":"你说了","ai":"AI 回了","rounds":"轮对话","tokens":"Token","days":"活跃天"},"ui":{"saved":"分享卡片已保存到下载目录","failed":"分享卡片生成失败","offline":"离线预览：切换周期请重新运行 CLI","navFailed":"切换周期失败"}}</script>
+</div></template>
+<script>(function(){
+  document.documentElement.classList.add('js');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var offline = location.protocol === 'file:';
+  var nf = new Intl.NumberFormat(document.documentElement.lang === 'en' ? 'en-US' : 'zh-CN');
+  var toastEl, tipEl, tipTimer;
+
+  function root(){ return document.querySelector('[data-rewind-root]'); }
+  function meta(){
+    var el = document.getElementById('rw-meta');
+    try { return el ? JSON.parse(el.textContent) : null; } catch (e) { return null; }
+  }
+  function ui(){
+    var m = meta();
+    return (m && m.ui) || { saved: 'saved', failed: 'failed', offline: 'offline', navFailed: 'failed' };
+  }
+  function toast(msg){
+    if (!toastEl) { toastEl = document.createElement('div'); toastEl.className = 'toast'; document.body.appendChild(toastEl); }
+    toastEl.textContent = msg; toastEl.classList.add('on');
+    clearTimeout(toastEl._t); toastEl._t = setTimeout(function(){ toastEl.classList.remove('on'); }, 2400);
+  }
+  function tipShow(text, x, y){
+    if (!tipEl) { tipEl = document.createElement('div'); tipEl.className = 'tip'; document.body.appendChild(tipEl); }
+    tipEl.textContent = text; tipEl.style.left = x + 'px'; tipEl.style.top = y + 'px';
+    tipEl.classList.add('on'); clearTimeout(tipTimer);
+  }
+  function tipHide(){ if (tipEl) tipEl.classList.remove('on'); }
+
+  function initNumbers(){
+    var nodes = document.querySelectorAll('[data-count]');
+    for (var i = 0; i < nodes.length; i++) {
+      (function(el){
+        var target = Number(el.getAttribute('data-count')) || 0;
+        if (reduce || target === 0) { el.textContent = nf.format(target); return; }
+        var start = 0;
+        function step(now){
+          if (!start) start = now;
+          var p = Math.min(1, (now - start) / 750);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = nf.format(Math.round(target * eased));
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      })(nodes[i]);
+    }
+  }
+
+  function initReveal(){
+    var nodes = document.querySelectorAll('[data-reveal], .chart');
+    if (!('IntersectionObserver' in window) || reduce) {
+      for (var i = 0; i < nodes.length; i++) nodes[i].classList.add('in');
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    for (var j = 0; j < nodes.length; j++) io.observe(nodes[j]);
+  }
+
+  function initTips(){
+    document.addEventListener('mouseover', function(event){
+      var target = event.target.closest ? event.target.closest('[data-tip]') : null;
+      if (!target) return;
+      var box = target.getBoundingClientRect();
+      tipShow(target.getAttribute('data-tip'), box.left + box.width / 2, box.top);
+    });
+    document.addEventListener('mouseout', function(event){
+      if (event.target.closest && event.target.closest('[data-tip]')) tipHide();
+    });
+    window.addEventListener('scroll', tipHide, { passive: true });
+  }
+
+  function bindOnce(){
+    document.addEventListener('click', function(event){
+      var more = event.target.closest ? event.target.closest('[data-more]') : null;
+      if (more) {
+        var card = more.closest('.session');
+        var open = card.getAttribute('data-open') === '1';
+        var extras = card.querySelectorAll('.quote.extra');
+        for (var i = 0; i < extras.length; i++) extras[i].hidden = open;
+        card.setAttribute('data-open', open ? '0' : '1');
+        more.textContent = open ? more.getAttribute('data-open-label') : more.getAttribute('data-close-label');
+        return;
+      }
+      var print = event.target.closest ? event.target.closest('[data-print]') : null;
+      if (print) { window.print(); return; }
+      var theme = event.target.closest ? event.target.closest('[data-theme-toggle]') : null;
+      if (theme) {
+        var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('rw-theme', next); } catch (e) {}
+        return;
+      }
+      var share = event.target.closest ? event.target.closest('[data-share]') : null;
+      if (share) { shareCard(); return; }
+      var link = event.target.closest ? event.target.closest('a[data-nav]') : null;
+      if (!link) return;
+      if (link.getAttribute('aria-disabled') === 'true') { event.preventDefault(); return; }
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+      event.preventDefault();
+      var url = link.getAttribute('href');
+      navigate(url);
+    });
+    document.addEventListener('keydown', function(event){
+      if (event.metaKey || event.ctrlKey || event.altKey || event.target.matches('input,textarea')) return;
+      var nav = root() && root().querySelectorAll('.nav-arrow');
+      if (!nav || !nav.length) return;
+      if (event.key === 'ArrowLeft' && nav[0] && nav[0].getAttribute('href')) { navigate(nav[0].getAttribute('href')); }
+      if (event.key === 'ArrowRight' && nav[1] && nav[1].getAttribute('href') && nav[1].getAttribute('aria-disabled') !== 'true') { navigate(nav[1].getAttribute('href')); }
+    });
+    window.addEventListener('popstate', function(){
+      var hash = location.hash && location.hash.length > 1 ? location.hash : null;
+      navigate(hash || location.pathname + location.search, { replace: true, force: true });
+    });
+    window.addEventListener('scroll', function(){
+      var bar = document.querySelector('.progress');
+      if (!bar) return;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? Math.min(100, (window.scrollY / h) * 100) : 0) + '%';
+    }, { passive: true });
+  }
+
+  function navigate(url, options){
+    options = options || {};
+    if (url.charAt(0) === '#') {
+      // Embedded bodies: the file carries its own recent periods, so switching
+      // works from disk with no server to fetch from.
+      var key = url.slice(1);
+      var template = document.getElementById('rw-body-' + key);
+      var host = root();
+      if (template && host) {
+        host.outerHTML = template.innerHTML;
+        if (!options.replace) {
+          try { history.pushState({ rewind: true }, '', '#' + key); } catch (e) { location.hash = key; }
+        }
+        init();
+        if (!options.replace) window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        return;
+      }
+      toast(ui().offline);
+      return;
+    }
+    if (offline) { toast(ui().offline); return; }
+    if (location.pathname + location.search === url && !options.force) return;
+    var body = root();
+    if (body) body.classList.add('is-loading');
+    var fetchUrl = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'partial=1';
+    fetch(fetchUrl, { headers: { 'x-wrapped-partial': '1' }, credentials: 'same-origin' })
+      .then(function(response){ if (!response.ok) throw new Error(response.status); return response.text(); })
+      .then(function(html){
+        var current = root();
+        if (!current) return;
+        current.outerHTML = html;
+        if (!options.replace) { try { history.pushState({ rewind: true }, '', url); } catch (e) {} }
+        init();
+        if (!options.replace) window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      })
+      .catch(function(err){
+        toast(ui().navFailed + ' · ' + err.message);
+        var current = root();
+        if (current) current.classList.remove('is-loading');
+      });
+  }
+
+  function shareCard(){
+    var data = meta();
+    if (!data) { toast(ui().failed); return; }
+    var canvas = document.createElement('canvas');
+    var w = 1080, h = 1350;
+    canvas.width = w; canvas.height = h;
+    var ctx = canvas.getContext('2d');
+    var g = ctx.createLinearGradient(0, 0, w, h);
+    g.addColorStop(0, '#0a0a12'); g.addColorStop(.55, '#0d0d18'); g.addColorStop(1, '#08080e');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+    var glow = ctx.createRadialGradient(w * .12, h * .06, 0, w * .12, h * .06, w * .9);
+    glow.addColorStop(0, 'rgba(255,45,85,.35)'); glow.addColorStop(1, 'rgba(255,45,85,0)');
+    ctx.fillStyle = glow; ctx.fillRect(0, 0, w, h);
+    var glow2 = ctx.createRadialGradient(w * .9, h * .12, 0, w * .9, h * .12, w * .8);
+    glow2.addColorStop(0, 'rgba(91,140,255,.3)'); glow2.addColorStop(1, 'rgba(91,140,255,0)');
+    ctx.fillStyle = glow2; ctx.fillRect(0, 0, w, h);
+    var font = '"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = 'rgba(246,246,248,.62)';
+    ctx.font = '600 30px ' + font;
+    ctx.fillText(data.labels.title, 90, 150);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '800 96px ' + font;
+    ctx.fillText(String(data.period), 90, 280);
+    ctx.fillStyle = 'rgba(246,246,248,.55)';
+    ctx.font = '500 34px ' + font;
+    var subtitle = data.badge || '';
+    if (data.phrase) subtitle += (subtitle ? '  ·  ' : '') + '「' + data.phrase.word + '」×' + data.phrase.count;
+    ctx.fillText(subtitle, 90, 345);
+
+    var stats = [
+      [nfText(data.human), data.labels.human],
+      [nfText(data.ai), data.labels.ai],
+      [nfText(data.turns), data.labels.rounds],
+      [nfText(data.days), data.labels.days]
+    ];
+    var top = 470;
+    for (var i = 0; i < stats.length; i++) {
+      var col = i % 2, row = Math.floor(i / 2);
+      var x = 90 + col * 470, y = top + row * 200;
+      ctx.fillStyle = i % 2 === 0 ? '#f6c88a' : '#5b8cff';
+      ctx.font = '800 88px ' + font;
+      ctx.fillText(stats[i][0], x, y);
+      ctx.fillStyle = 'rgba(246,246,248,.55)';
+      ctx.font = '500 30px ' + font;
+      ctx.fillText(stats[i][1], x, y + 52);
+    }
+
+    var barY = 1070, barW = 900, barH = 22;
+    ctx.fillStyle = 'rgba(255,255,255,.1)';
+    roundRect(ctx, 90, barY, barW, barH, 11); ctx.fill();
+    var total = Math.max(1, data.human + data.ai);
+    var hw = Math.max(6, (data.human / total) * barW);
+    ctx.fillStyle = '#f6c88a'; roundRect(ctx, 90, barY, hw, barH, 11); ctx.fill();
+    ctx.fillStyle = '#5b8cff'; roundRect(ctx, 90 + hw, barY, Math.max(6, barW - hw), barH, 11); ctx.fill();
+
+    ctx.fillStyle = 'rgba(246,246,248,.75)';
+    ctx.font = '600 30px ' + font;
+    ctx.fillText(nfText(data.tokens) + ' ' + data.labels.tokens, 90, 1180);
+    if (data.closing) {
+      ctx.fillStyle = 'rgba(246,246,248,.6)';
+      ctx.font = '500 26px ' + font;
+      wrapText(ctx, data.closing, 90, 1225, 900, 38, 2);
+    }
+    ctx.fillStyle = 'rgba(246,246,248,.35)';
+    ctx.font = '500 24px ' + font;
+    ctx.fillText(data.labels.footer, 90, 1300);
+
+    try {
+      canvas.toBlob(function(blob){
+        if (!blob) { toast(ui().failed); return; }
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'rewind-' + String(data.period).replace(/[^a-zA-Z0-9\u4e00-\u9fa5-]+/g, '_') + '.png';
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); }, 4000);
+        toast(ui().saved);
+      }, 'image/png');
+    } catch (e) { toast(ui().failed); }
+  }
+  function nfText(n){ return nf.format(Math.round(Number(n) || 0)); }
+  function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines){
+    var line = '';
+    var lines = 0;
+    for (var i = 0; i < text.length; i++) {
+      var test = line + text.charAt(i);
+      if (ctx.measureText(test).width > maxWidth && line) {
+        ctx.fillText(line, x, y);
+        y += lineHeight;
+        lines += 1;
+        line = text.charAt(i);
+        if (maxLines && lines >= maxLines) { ctx.fillText(line + '…', x, y); return; }
+      } else {
+        line = test;
+      }
+    }
+    if (line) ctx.fillText(line, x, y);
+  }
+  function roundRect(ctx, x, y, w, h, r){
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
+  }
+
+  function init(){ initNumbers(); initReveal(); initTips(); }
+  function openFromHash(){
+    var hash = location.hash;
+    if (!hash || hash.length < 2) return;
+    var key = hash.slice(1);
+    var host = root();
+    if (!host || host.getAttribute('data-period-key') === key) return;
+    var template = document.getElementById('rw-body-' + key);
+    if (!template) return;
+    host.outerHTML = template.innerHTML;
+    init();
+  }
+  try { var saved = localStorage.getItem('rw-theme'); if (saved) document.documentElement.setAttribute('data-theme', saved); } catch (e) {}
+  init(); openFromHash(); bindOnce();
+})();</script>
+</body></html>

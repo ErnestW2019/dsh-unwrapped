@@ -69,6 +69,12 @@ a{color:inherit;text-decoration:none}
 }
 .btn:hover{transform:translateY(-1px);border-color:var(--line-2)}
 .btn:active{transform:translateY(0)}
+.btn.primary{
+  border-color:transparent;color:#fff;
+  background:linear-gradient(100deg,var(--accent),var(--accent-2));
+  box-shadow:0 8px 24px -12px var(--accent);
+}
+.btn.primary:hover{box-shadow:0 12px 30px -12px var(--accent)}
 .btn.icon{padding:7px 10px}
 .btn[aria-disabled="true"]{opacity:.3;pointer-events:none}
 .nav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0 14px}
@@ -89,7 +95,18 @@ a{color:inherit;text-decoration:none}
 .scrub a.on{background:var(--panel);border-color:var(--line-2);color:var(--ink);font-weight:600}
 .scrub-label{flex:0 0 auto;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);align-self:center;margin-right:6px;font-weight:700}
 .hero{padding:46px 0 40px;position:relative}
-.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:16px}
+.ghost{
+  position:absolute;right:-8px;top:-38px;font-size:clamp(120px,22vw,260px);font-weight:900;letter-spacing:-.06em;
+  line-height:.8;color:var(--ink);opacity:.045;pointer-events:none;user-select:none;font-variant-numeric:tabular-nums;
+}
+.hero .punch{
+  margin:0 0 14px;font-size:clamp(19px,2.6vw,26px);line-height:1.5;font-weight:700;color:var(--ink);
+  letter-spacing:-.015em;max-width:none;
+}
+.hero .punch-pct{
+  display:inline-block;margin-left:12px;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:800;
+  color:var(--human);background:color-mix(in oklab,var(--human) 16%,transparent);vertical-align:3px;white-space:nowrap;
+}.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:16px}
 h1{
   font-size:clamp(34px,6vw,66px);line-height:1.03;margin:0 0 20px;letter-spacing:-.035em;font-weight:800;
   background:linear-gradient(120deg,var(--ink) 30%,var(--muted) 75%);
@@ -244,7 +261,7 @@ footer .grow{flex:1;min-width:260px}
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -257,8 +274,10 @@ footer .grow{flex:1;min-width:260px}
   </nav>
   <div class="scrub" data-scrub><span class="scrub-label">最近</span><a data-nav href="#2022">2022</a><a data-nav href="#2023">2023</a><a data-nav href="#2024">2024</a><a data-nav href="#2025">2025</a><a data-nav href="#2026" class="on" aria-current="page">2026</a></div>
   <section class="hero">
+    <div class="ghost" aria-hidden="true">2026</div>
     <div class="eyebrow">年度</div>
     <h1>你和 AI 的 <em>2026 年度</em></h1>
+    <p class="punch">你说 842 字，它说了 2,250 字<span class="punch-pct">你说 50%</span></p>
     <p>在 20 个活跃日、23 场会话里，你发了 85 条消息，AI 回了 85 条，一共 85 轮对话。</p>
     <div class="split" data-split>
       <span class="h" style="width:50.00%"></span>
@@ -493,23 +512,25 @@ footer .grow{flex:1;min-width:260px}
     <p class="closing-line">这一段，你在这里写下 842字，它回了你 2,250字。说了 3 次谢谢。</p>
     <p class="closing-sign">它不会记得这些。日志会。</p>
     <div class="closing-actions">
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn primary" type="button" data-share="main">分享卡片</button>
+      <button class="btn" type="button" data-share="contrast">反差卡</button>
+      <button class="btn" type="button" data-share="phrase">口头禅卡</button>
       <button class="btn" type="button" data-print>打印 / PDF</button>
     </div>
   </section>
 
   <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer>
-  <script type="application/json" id="rw-meta">{"lang":"zh","period":"2026 年度","human":85,"ai":85,"turns":85,"tokens":1240575,"days":20,"badge":"工具大师 · 6 种工具","phrase":{"word":"为什么","count":10},"closing":"这一段，你在这里写下 842字，它回了你 2,250字。说了 3 次谢谢。","labels":{"title":"对话回顾","footer":"DeepSeek Harness · dsh-plugin-wrapped","human":"你说了","ai":"AI 回了","rounds":"轮对话","tokens":"Token","days":"活跃天"},"ui":{"saved":"分享卡片已保存到下载目录","failed":"分享卡片生成失败","offline":"离线预览：切换周期请重新运行 CLI","navFailed":"切换周期失败"}}</script>
+  <script type="application/json" id="rw-meta">{"lang":"zh","period":"2026 年度","human":85,"ai":85,"turns":85,"tokens":1240575,"days":20,"badge":"工具大师 · 6 种工具","phrase":{"word":"为什么","count":10},"closing":"这一段，你在这里写下 842字，它回了你 2,250字。说了 3 次谢谢。","year":"2026","charHuman":"842","charAi":"2,250","humanPct":"50%","aiPct":"50%","night":{"time":"23:18","label":"最晚的一次","text":"能不能只改这一处，别动别的","when":"2026-03-13 23:18"},"labels":{"title":"对话回顾","footer":"DeepSeek Harness · dsh-plugin-wrapped","human":"你说了","ai":"AI 回了","rounds":"轮对话","tokens":"Token","days":"活跃天","chars":"字","shareLabel":"你的占比","watermark":"dsh-plugin-wrapped","install":"npx dsh-plugin-wrapped install","contrastLead":"你和 AI 的","phraseLead":"你说得最多的一个词","nightLead":"最晚的一次"},"ui":{"saved":"分享卡片已保存到下载目录","failed":"分享卡片生成失败","offline":"离线预览：切换周期请重新运行 CLI","navFailed":"切换周期失败"}}</script>
 </div>
 <template id="rw-body-2013" data-period-key="2013"><div class="wrap" data-rewind-root data-period-key="2013"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -524,14 +545,14 @@ footer .grow{flex:1;min-width:260px}
       <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
       <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer></div></template>
 <template id="rw-body-2014" data-period-key="2014"><div class="wrap" data-rewind-root data-period-key="2014"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -546,14 +567,14 @@ footer .grow{flex:1;min-width:260px}
       <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
       <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer></div></template>
 <template id="rw-body-2015" data-period-key="2015"><div class="wrap" data-rewind-root data-period-key="2015"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -568,14 +589,14 @@ footer .grow{flex:1;min-width:260px}
       <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
       <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer></div></template>
 <template id="rw-body-2016" data-period-key="2016"><div class="wrap" data-rewind-root data-period-key="2016"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -590,14 +611,14 @@ footer .grow{flex:1;min-width:260px}
       <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
       <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer></div></template>
 <template id="rw-body-2017" data-period-key="2017"><div class="wrap" data-rewind-root data-period-key="2017"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -612,14 +633,14 @@ footer .grow{flex:1;min-width:260px}
       <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
       <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer></div></template>
 <template id="rw-body-2018" data-period-key="2018"><div class="wrap" data-rewind-root data-period-key="2018"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -634,14 +655,14 @@ footer .grow{flex:1;min-width:260px}
       <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
       <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer></div></template>
 <template id="rw-body-2019" data-period-key="2019"><div class="wrap" data-rewind-root data-period-key="2019"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -656,14 +677,14 @@ footer .grow{flex:1;min-width:260px}
       <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
       <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer></div></template>
 <template id="rw-body-2020" data-period-key="2020"><div class="wrap" data-rewind-root data-period-key="2020"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -678,14 +699,14 @@ footer .grow{flex:1;min-width:260px}
       <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
       <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer></div></template>
 <template id="rw-body-2021" data-period-key="2021"><div class="wrap" data-rewind-root data-period-key="2021"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -700,14 +721,14 @@ footer .grow{flex:1;min-width:260px}
       <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
       <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer></div></template>
 <template id="rw-body-2022" data-period-key="2022"><div class="wrap" data-rewind-root data-period-key="2022"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -722,14 +743,14 @@ footer .grow{flex:1;min-width:260px}
       <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
       <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer></div></template>
 <template id="rw-body-2023" data-period-key="2023"><div class="wrap" data-rewind-root data-period-key="2023"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -744,14 +765,14 @@ footer .grow{flex:1;min-width:260px}
       <div class="empty card" data-reveal><h3>本期还没有数据</h3><p>换个周期看看，或者先去聊几轮。</p></div>
       <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer></div></template>
 <template id="rw-body-2024" data-period-key="2024"><div class="wrap" data-rewind-root data-period-key="2024"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -764,8 +785,10 @@ footer .grow{flex:1;min-width:260px}
   </nav>
   <div class="scrub" data-scrub><span class="scrub-label">最近</span><a data-nav href="#2020">2020</a><a data-nav href="#2021">2021</a><a data-nav href="#2022">2022</a><a data-nav href="#2023">2023</a><a data-nav href="#2024" class="on" aria-current="page">2024</a></div>
   <section class="hero">
+    <div class="ghost" aria-hidden="true">2024</div>
     <div class="eyebrow">年度</div>
     <h1>你和 AI 的 <em>2024 年度</em></h1>
+    <p class="punch">你说 963 字，它说了 2,694 字<span class="punch-pct">你说 50%</span></p>
     <p>在 27 个活跃日、27 场会话里，你发了 97 条消息，AI 回了 97 条，一共 97 轮对话。</p>
     <div class="split" data-split>
       <span class="h" style="width:50.00%"></span>
@@ -1004,23 +1027,25 @@ footer .grow{flex:1;min-width:260px}
     <p class="closing-line">这一段，你在这里写下 963字，它回了你 2,694字。说了 6 次谢谢。</p>
     <p class="closing-sign">它不会记得这些。日志会。</p>
     <div class="closing-actions">
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn primary" type="button" data-share="main">分享卡片</button>
+      <button class="btn" type="button" data-share="contrast">反差卡</button>
+      <button class="btn" type="button" data-share="phrase">口头禅卡</button>
       <button class="btn" type="button" data-print>打印 / PDF</button>
     </div>
   </section>
 
   <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer>
-  <script type="application/json" id="rw-meta">{"lang":"zh","period":"2024 年度","human":97,"ai":97,"turns":97,"tokens":1431412,"days":27,"badge":"工具大师 · 6 种工具","phrase":{"word":"确认","count":13},"closing":"这一段，你在这里写下 963字，它回了你 2,694字。说了 6 次谢谢。","labels":{"title":"对话回顾","footer":"DeepSeek Harness · dsh-plugin-wrapped","human":"你说了","ai":"AI 回了","rounds":"轮对话","tokens":"Token","days":"活跃天"},"ui":{"saved":"分享卡片已保存到下载目录","failed":"分享卡片生成失败","offline":"离线预览：切换周期请重新运行 CLI","navFailed":"切换周期失败"}}</script>
+  <script type="application/json" id="rw-meta">{"lang":"zh","period":"2024 年度","human":97,"ai":97,"turns":97,"tokens":1431412,"days":27,"badge":"工具大师 · 6 种工具","phrase":{"word":"确认","count":13},"closing":"这一段，你在这里写下 963字，它回了你 2,694字。说了 6 次谢谢。","year":"2024","charHuman":"963","charAi":"2,694","humanPct":"50%","aiPct":"50%","night":{"time":"23:31","label":"最晚的一次","text":"确认一下，这样可以吗","when":"2024-04-03 23:31"},"labels":{"title":"对话回顾","footer":"DeepSeek Harness · dsh-plugin-wrapped","human":"你说了","ai":"AI 回了","rounds":"轮对话","tokens":"Token","days":"活跃天","chars":"字","shareLabel":"你的占比","watermark":"dsh-plugin-wrapped","install":"npx dsh-plugin-wrapped install","contrastLead":"你和 AI 的","phraseLead":"你说得最多的一个词","nightLead":"最晚的一次"},"ui":{"saved":"分享卡片已保存到下载目录","failed":"分享卡片生成失败","offline":"离线预览：切换周期请重新运行 CLI","navFailed":"切换周期失败"}}</script>
 </div></template>
 <template id="rw-body-2025" data-period-key="2025"><div class="wrap" data-rewind-root data-period-key="2025"><header class="bar">
     <span class="kicker">DeepSeek Harness · 对话回顾</span>
     <div class="tabs"><span class="tab">月度</span><span class="tab">季度</span><span class="tab on">年度</span></div>
     <div class="actions">
       <button class="btn icon" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">◐</button>
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn" type="button" data-share="main">分享卡片</button>
       <button class="btn icon" type="button" data-print title="打印 / PDF" aria-label="打印 / PDF">⎙</button>
     </div>
   </header>
@@ -1033,8 +1058,10 @@ footer .grow{flex:1;min-width:260px}
   </nav>
   <div class="scrub" data-scrub><span class="scrub-label">最近</span><a data-nav href="#2021">2021</a><a data-nav href="#2022">2022</a><a data-nav href="#2023">2023</a><a data-nav href="#2024">2024</a><a data-nav href="#2025" class="on" aria-current="page">2025</a></div>
   <section class="hero">
+    <div class="ghost" aria-hidden="true">2025</div>
     <div class="eyebrow">年度</div>
     <h1>你和 AI 的 <em>2025 年度</em></h1>
+    <p class="punch">你说 817 字，它说了 2,516 字<span class="punch-pct">你说 50%</span></p>
     <p>在 23 个活跃日、24 场会话里，你发了 86 条消息，AI 回了 86 条，一共 86 轮对话。</p>
     <div class="split" data-split>
       <span class="h" style="width:50.00%"></span>
@@ -1273,16 +1300,18 @@ footer .grow{flex:1;min-width:260px}
     <p class="closing-line">这一段，你在这里写下 817字，它回了你 2,516字。说了 3 次谢谢。</p>
     <p class="closing-sign">它不会记得这些。日志会。</p>
     <div class="closing-actions">
-      <button class="btn" type="button" data-share>生成分享卡片</button>
+      <button class="btn primary" type="button" data-share="main">分享卡片</button>
+      <button class="btn" type="button" data-share="contrast">反差卡</button>
+      <button class="btn" type="button" data-share="phrase">口头禅卡</button>
       <button class="btn" type="button" data-print>打印 / PDF</button>
     </div>
   </section>
 
   <footer>
     <span class="grow">数据自动采集自本机 74 个会话日志（2024-01-13 — 2026-10-18），无需导入。</span>
-    <span>生成于 2026-10-30 17:18</span>
+    <span>生成于 2026-10-30 17:27</span>
   </footer>
-  <script type="application/json" id="rw-meta">{"lang":"zh","period":"2025 年度","human":86,"ai":86,"turns":86,"tokens":1178746,"days":23,"badge":"工具大师 · 6 种工具","phrase":{"word":"确认","count":12},"closing":"这一段，你在这里写下 817字，它回了你 2,516字。说了 3 次谢谢。","labels":{"title":"对话回顾","footer":"DeepSeek Harness · dsh-plugin-wrapped","human":"你说了","ai":"AI 回了","rounds":"轮对话","tokens":"Token","days":"活跃天"},"ui":{"saved":"分享卡片已保存到下载目录","failed":"分享卡片生成失败","offline":"离线预览：切换周期请重新运行 CLI","navFailed":"切换周期失败"}}</script>
+  <script type="application/json" id="rw-meta">{"lang":"zh","period":"2025 年度","human":86,"ai":86,"turns":86,"tokens":1178746,"days":23,"badge":"工具大师 · 6 种工具","phrase":{"word":"确认","count":12},"closing":"这一段，你在这里写下 817字，它回了你 2,516字。说了 3 次谢谢。","year":"2025","charHuman":"817","charAi":"2,516","humanPct":"50%","aiPct":"50%","night":{"time":"23:50","label":"最晚的一次","text":"这里为什么会重复请求","when":"2025-01-13 23:50"},"labels":{"title":"对话回顾","footer":"DeepSeek Harness · dsh-plugin-wrapped","human":"你说了","ai":"AI 回了","rounds":"轮对话","tokens":"Token","days":"活跃天","chars":"字","shareLabel":"你的占比","watermark":"dsh-plugin-wrapped","install":"npx dsh-plugin-wrapped install","contrastLead":"你和 AI 的","phraseLead":"你说得最多的一个词","nightLead":"最晚的一次"},"ui":{"saved":"分享卡片已保存到下载目录","failed":"分享卡片生成失败","offline":"离线预览：切换周期请重新运行 CLI","navFailed":"切换周期失败"}}</script>
 </div></template>
 <script>(function(){
   document.documentElement.classList.add('js');
@@ -1380,7 +1409,7 @@ footer .grow{flex:1;min-width:260px}
         return;
       }
       var share = event.target.closest ? event.target.closest('[data-share]') : null;
-      if (share) { shareCard(); return; }
+      if (share) { shareCard(share.getAttribute('data-share') || 'main'); return; }
       var link = event.target.closest ? event.target.closest('a[data-nav]') : null;
       if (!link) return;
       if (link.getAttribute('aria-disabled') === 'true') { event.preventDefault(); return; }
@@ -1450,9 +1479,10 @@ footer .grow{flex:1;min-width:260px}
       });
   }
 
-  function shareCard(){
+  function shareCard(kind){
     var data = meta();
     if (!data) { toast(ui().failed); return; }
+    kind = kind || 'main';
     var canvas = document.createElement('canvas');
     var w = 1080, h = 1350;
     canvas.width = w; canvas.height = h;
@@ -1467,63 +1497,130 @@ footer .grow{flex:1;min-width:260px}
     glow2.addColorStop(0, 'rgba(91,140,255,.3)'); glow2.addColorStop(1, 'rgba(91,140,255,0)');
     ctx.fillStyle = glow2; ctx.fillRect(0, 0, w, h);
     var font = '"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif';
+    // Big ghost year: the Wrapped-cover cue that survives being screenshotted.
+    ctx.fillStyle = 'rgba(255,255,255,.05)';
+    ctx.font = '900 470px ' + font;
+    ctx.textAlign = 'right';
+    ctx.fillText(String(data.year || ''), w - 40, 470);
     ctx.textAlign = 'left';
     ctx.fillStyle = 'rgba(246,246,248,.62)';
     ctx.font = '600 30px ' + font;
     ctx.fillText(data.labels.title, 90, 150);
     ctx.fillStyle = '#ffffff';
     ctx.font = '800 96px ' + font;
-    ctx.fillText(String(data.period), 90, 280);
-    ctx.fillStyle = 'rgba(246,246,248,.55)';
-    ctx.font = '500 34px ' + font;
-    var subtitle = data.badge || '';
-    if (data.phrase) subtitle += (subtitle ? '  ·  ' : '') + '「' + data.phrase.word + '」×' + data.phrase.count;
-    ctx.fillText(subtitle, 90, 345);
-
-    var stats = [
-      [nfText(data.human), data.labels.human],
-      [nfText(data.ai), data.labels.ai],
-      [nfText(data.turns), data.labels.rounds],
-      [nfText(data.days), data.labels.days]
-    ];
-    var top = 470;
-    for (var i = 0; i < stats.length; i++) {
-      var col = i % 2, row = Math.floor(i / 2);
-      var x = 90 + col * 470, y = top + row * 200;
-      ctx.fillStyle = i % 2 === 0 ? '#f6c88a' : '#5b8cff';
-      ctx.font = '800 88px ' + font;
-      ctx.fillText(stats[i][0], x, y);
-      ctx.fillStyle = 'rgba(246,246,248,.55)';
-      ctx.font = '500 30px ' + font;
-      ctx.fillText(stats[i][1], x, y + 52);
+    if (kind === 'contrast') {
+      ctx.font = '800 150px ' + font;
+      ctx.fillText(String(data.humanPct), 90, 330);
+      ctx.fillStyle = 'rgba(246,246,248,.7)';
+      ctx.font = '600 34px ' + font;
+      ctx.fillText(data.labels.shareLabel, 90, 380);
+    } else if (kind === 'phrase' && data.phrase) {
+      ctx.font = '800 120px ' + font;
+      ctx.fillText('「' + data.phrase.word + '」', 90, 320);
+    } else if (kind === 'night' && data.night) {
+      ctx.font = '800 190px ' + font;
+      ctx.fillText(String(data.night.time), 90, 330);
+    } else {
+      ctx.fillText(String(data.period), 90, 280);
     }
 
-    var barY = 1070, barW = 900, barH = 22;
-    ctx.fillStyle = 'rgba(255,255,255,.1)';
-    roundRect(ctx, 90, barY, barW, barH, 11); ctx.fill();
-    var total = Math.max(1, data.human + data.ai);
-    var hw = Math.max(6, (data.human / total) * barW);
-    ctx.fillStyle = '#f6c88a'; roundRect(ctx, 90, barY, hw, barH, 11); ctx.fill();
-    ctx.fillStyle = '#5b8cff'; roundRect(ctx, 90 + hw, barY, Math.max(6, barW - hw), barH, 11); ctx.fill();
+    if (kind === 'contrast') {
+      ctx.fillStyle = 'rgba(246,246,248,.6)';
+      ctx.font = '500 40px ' + font;
+      ctx.fillText(data.labels.contrastLead + ' ' + data.period, 90, 480);
+      ctx.fillStyle = '#f6c88a';
+      ctx.font = '800 78px ' + font;
+      ctx.fillText(data.charHuman, 90, 640);
+      ctx.fillStyle = 'rgba(246,246,248,.6)';
+      ctx.font = '500 32px ' + font;
+      ctx.fillText(data.labels.human + ' · ' + data.labels.chars, 90, 690);
+      ctx.fillStyle = '#5b8cff';
+      ctx.font = '800 78px ' + font;
+      ctx.fillText(data.charAi, 560, 640);
+      ctx.fillStyle = 'rgba(246,246,248,.6)';
+      ctx.font = '500 32px ' + font;
+      ctx.fillText(data.labels.ai + ' · ' + data.labels.chars, 560, 690);
+    } else if (kind === 'phrase' && data.phrase) {
+      ctx.fillStyle = 'rgba(246,246,248,.6)';
+      ctx.font = '500 40px ' + font;
+      ctx.fillText(data.labels.phraseLead, 90, 430);
+      ctx.fillStyle = '#f6c88a';
+      ctx.font = '800 64px ' + font;
+      ctx.fillText('×' + data.phrase.count, 90, 520);
+    } else if (kind === 'night' && data.night) {
+      ctx.fillStyle = 'rgba(246,246,248,.6)';
+      ctx.font = '500 36px ' + font;
+      ctx.fillText(data.night.label + ' · ' + data.night.when, 90, 430);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '500 44px ' + font;
+      wrapText(ctx, '「' + data.night.text + '」', 90, 520, 900, 62, 3);
+    } else {
+      ctx.fillStyle = 'rgba(246,246,248,.55)';
+      ctx.font = '500 34px ' + font;
+      var subtitle = data.badge || '';
+      if (data.phrase) subtitle += (subtitle ? '  ·  ' : '') + '「' + data.phrase.word + '」×' + data.phrase.count;
+      ctx.fillText(subtitle, 90, 345);
+
+      var stats = [
+        [nfText(data.human), data.labels.human],
+        [nfText(data.ai), data.labels.ai],
+        [nfText(data.turns), data.labels.rounds],
+        [nfText(data.days), data.labels.days]
+      ];
+      var top = 470;
+      for (var i = 0; i < stats.length; i++) {
+        var col = i % 2, row = Math.floor(i / 2);
+        var x = 90 + col * 470, y = top + row * 200;
+        ctx.fillStyle = i % 2 === 0 ? '#f6c88a' : '#5b8cff';
+        ctx.font = '800 88px ' + font;
+        ctx.fillText(stats[i][0], x, y);
+        ctx.fillStyle = 'rgba(246,246,248,.55)';
+        ctx.font = '500 30px ' + font;
+        ctx.fillText(stats[i][1], x, y + 52);
+      }
+
+      var barY = 1070, barW = 900, barH = 22;
+      ctx.fillStyle = 'rgba(255,255,255,.1)';
+      roundRect(ctx, 90, barY, barW, barH, 11); ctx.fill();
+      var total = Math.max(1, data.human + data.ai);
+      var hw = Math.max(6, (data.human / total) * barW);
+      ctx.fillStyle = '#f6c88a'; roundRect(ctx, 90, barY, hw, barH, 11); ctx.fill();
+      ctx.fillStyle = '#5b8cff'; roundRect(ctx, 90 + hw, barY, Math.max(6, barW - hw), barH, 11); ctx.fill();
+    }
 
     ctx.fillStyle = 'rgba(246,246,248,.75)';
     ctx.font = '600 30px ' + font;
-    ctx.fillText(nfText(data.tokens) + ' ' + data.labels.tokens, 90, 1180);
-    if (data.closing) {
+    var footY = kind === 'main' ? 1180 : 900;
+    ctx.fillText(nfText(data.tokens) + ' ' + data.labels.tokens, 90, footY);
+    if (kind === 'contrast' && data.closing) {
       ctx.fillStyle = 'rgba(246,246,248,.6)';
-      ctx.font = '500 26px ' + font;
-      wrapText(ctx, data.closing, 90, 1225, 900, 38, 2);
+      ctx.font = '500 30px ' + font;
+      wrapText(ctx, data.closing, 90, 980, 900, 44, 3);
     }
+    if (kind !== 'main' && data.closing && kind !== 'contrast') {
+      ctx.fillStyle = 'rgba(246,246,248,.6)';
+      ctx.font = '500 32px ' + font;
+      wrapText(ctx, data.closing, 90, 1000, 900, 46, 3);
+    }
+    // Every exported card is an ad slot: brand + the one command that installs it.
+    ctx.textAlign = 'right';
+    ctx.fillStyle = 'rgba(255,255,255,.34)';
+    ctx.font = '600 26px ' + font;
+    ctx.fillText(data.labels.watermark, w - 90, h - 108);
+    ctx.fillStyle = 'rgba(255,255,255,.22)';
+    ctx.font = '500 24px ' + font;
+    ctx.fillText(data.labels.install, w - 90, h - 72);
+    ctx.textAlign = 'left';
     ctx.fillStyle = 'rgba(246,246,248,.35)';
     ctx.font = '500 24px ' + font;
-    ctx.fillText(data.labels.footer, 90, 1300);
+    ctx.fillText(data.labels.footer, 90, h - 72);
 
     try {
       canvas.toBlob(function(blob){
         if (!blob) { toast(ui().failed); return; }
         var a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = 'rewind-' + String(data.period).replace(/[^a-zA-Z0-9\u4e00-\u9fa5-]+/g, '_') + '.png';
+        a.download = 'wrapped-' + kind + '-' + String(data.period).replace(/[^a-zA-Z0-9\u4e00-\u9fa5-]+/g, '_') + '.png';
         document.body.appendChild(a); a.click(); a.remove();
         setTimeout(function(){ URL.revokeObjectURL(a.href); }, 4000);
         toast(ui().saved);

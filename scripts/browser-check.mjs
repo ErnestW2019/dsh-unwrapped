@@ -198,13 +198,20 @@ try {
   const tooltips = await page.evaluate("document.querySelectorAll('[data-tip]').length");
   check('chart tooltips wired', tooltips > 0, `${tooltips} hotspots`);
 
-  const share = await page.evaluate(`(function(){
-    document.querySelector('[data-share]').click();
-    return 'clicked';
-  })()`);
-  await sleep(700);
-  const shareToast = await page.evaluate("(document.querySelector('.toast') || {}).textContent || ''");
-  check('share card runs end to end', share === 'clicked' && shareToast.length > 0, shareToast);
+  // Every share template has its own canvas layout, so click all of them: a
+  // broken branch (missing phrase, missing night hour) only shows up here.
+  const shareKinds = await page.evaluate("Array.from(document.querySelectorAll('[data-share]')).map(function(el){return el.getAttribute('data-share')})");
+  for (const kind of shareKinds) {
+    const clicked = await page.evaluate(`(function(){
+      var el = document.querySelector('[data-share="${kind}"]');
+      if (!el) return 'missing';
+      el.click();
+      return 'clicked';
+    })()`);
+    await sleep(600);
+    const toast = await page.evaluate("(document.querySelector('.toast') || {}).textContent || ''");
+    check(`share card "${kind}" runs end to end`, clicked === 'clicked' && toast.length > 0, toast);
+  }
 
   const expandable = await page.evaluate("document.querySelectorAll('[data-more]').length");
   if (expandable > 0) {

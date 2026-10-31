@@ -11,8 +11,7 @@ human-vs-AI dialogue: how much each side said, when you showed up, which session
 and the sentences you actually typed.
 
 ```bash
-git clone https://github.com/ErnestW2019/dsh-unwrapped.git
-cd dsh-unwrapped && node bin/plugin.js install
+npx dsh-unwrapped install
 ```
 
 Restart `dsh web`, then open `http://127.0.0.1:8080/unwrapped`.
@@ -65,9 +64,7 @@ Requires Node ≥ 22.15 (uses `zlib.zstdDecompressSync`) and a harness profile t
 started at least once.
 
 ```bash
-git clone https://github.com/ErnestW2019/dsh-unwrapped.git
-cd dsh-unwrapped
-node bin/plugin.js install                # into $DSH_HOME/profiles/web
+npx dsh-unwrapped install                 # into $DSH_HOME/profiles/web
 ```
 
 Then **restart** `dsh web` and open `http://127.0.0.1:8080/unwrapped`.
@@ -75,11 +72,11 @@ Then **restart** `dsh web` and open `http://127.0.0.1:8080/unwrapped`.
 Other flags:
 
 ```bash
-node bin/plugin.js install --profile tui  # another profile
-node bin/plugin.js install --language en --label "Wrapped"
-node bin/plugin.js install --dry-run      # print what would change, write nothing
-node bin/plugin.js status                 # is it installed? is the patch line there?
-node bin/plugin.js uninstall              # remove the patch line + the plugin dir
+npx dsh-unwrapped install --profile tui   # another profile
+npx dsh-unwrapped install --language en --label "Wrapped"
+npx dsh-unwrapped install --dry-run       # print what would change, write nothing
+npx dsh-unwrapped status                  # is it installed? is the patch line there?
+npx dsh-unwrapped uninstall               # remove the patch line + the plugin dir
 ```
 
 The installer does two things: copies the plugin into
@@ -94,9 +91,14 @@ lines.
 > plugin code needs a restart of `dsh web`** — Node caches ES modules by URL, so re-applying
 > the patch only remounts config, it does not re-read files.
 
-> **`npx dsh-unwrapped install` only works once the package is on npm**; right now it 404s.
-> See [`docs/PUBLISH.md`](https://github.com/ErnestW2019/dsh-unwrapped/blob/main/docs/PUBLISH.md).
-> For the harness-free CLI, see "Offline CLI" below.
+Prefer not to use `npx`? Clone the repo instead:
+
+```bash
+git clone https://github.com/ErnestW2019/dsh-unwrapped.git
+cd dsh-unwrapped && node bin/plugin.js install
+```
+
+For the harness-free CLI, see "Offline CLI" below.
 
 ## Privacy
 

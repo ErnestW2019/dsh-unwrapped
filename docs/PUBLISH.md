@@ -2,14 +2,15 @@
 
 维护者文档，不进 npm 包。
 
-## 0. 现状（2026-10-30 实测）
+## 0. 现状（2026-10-31 实测）
 
 | 项 | 状态 |
 | --- | --- |
-| 外网 | 通（`registry.npmjs.org` 可达） |
-| npm 登录 | **没有**（`npm whoami` → `ENEEDAUTH`）→ 所以 agent 没能发布 |
-| 包名 | 已定为 `dsh-unwrapped`（可用，见下） |
-| 产物 | `npm pack` → 21 文件 / 1.5 MB；装进临时 prefix、用自带命令往干净 `$DSH_HOME` 安装、真实启动 harness，`/unwrapped` → 200 且是交互版 |
+| 外网 | 通（`registry.npmjs.org` 可达；`www.npmjs.com` 在本机 403） |
+| npm 登录 | ✅ `ernestw2019`，用 Granular Access Token |
+| 已发布 | ✅ `dsh-unwrapped@0.2.0`（`latest`），21 文件 / 1.5 MB |
+| 包名 | `dsh-unwrapped`（可用，见下） |
+| 产物 | `npm pack` → 21 文件 / 1.5 MB；`npx dsh-unwrapped --help` 已验证可跑 |
 
 改名过程（2026-10-30 实测 npm registry + GitHub）：
 
@@ -37,19 +38,30 @@ node scripts/market-check.mjs --name dsh-unwrapped --name foo
 
 ```bash
 npm login                                  # 浏览器或 OTP
-npm view dsh-unwrapped version        # 应返回 404（= 名字仍是你的）
+npm view dsh-unwrapped version             # 已有版本号 = 名字是你的
 npm pack --dry-run                         # 看清单：21 个文件，约 1.5 MB
 npm test                                   # 105 个用例（prepublishOnly 也会跑）
 ```
 
-> **WSL 里 `npm login` 会崩**：`npm error code ERR_INVALID_ARG_TYPE` /
-> `The "file" argument must be of type string`。原因是没有 `xdg-open`，npm 拿 `undefined`
-> 去 spawn 浏览器，与账号无关。绕法（任选其一）：
+> **认证用 Granular Access Token 最省事**（`www.npmjs.com` 打不开时尤其如此）。token 必须
+> 勾选 **Bypass 2FA**，否则 `npm publish` 会 403：
+>
+> ```
+> 403 Two-factor authentication or granular access token with bypass 2fa enabled is required
+> ```
+>
+> 校验当前 token：`npm whoami`；查 token 自身的权限：`GET /-/npm/v1/tokens`。
+>
+> **WSL 里 `npm login` 也会崩**：`ERR_INVALID_ARG_TYPE` / `The "file" argument must be of type
+> string`。原因是没有 `xdg-open`，npm 拿 `undefined` 去 spawn 浏览器。绕法（任选其一）：
 >
 > ```bash
-> npm login --browser=false     # 只打印 URL，自己在 Windows 浏览器里粘贴打开
-> npm login --browser=explorer.exe   # 或让 WSL 调 Windows 的 explorer.exe
+> npm login --browser=false                    # 只打印 URL，自己在别处打开
+> npm login --browser=explorer.exe             # 或让 WSL 调 Windows 的 explorer.exe
 > ```
+>
+> 但 `--auth-type=legacy` 这条路走不通：npm 已关闭 legacy **注册**，只会返回
+> `{"ok":false,"error":"username or password was invalid"}`。用 token。
 >
 > **Node 版本**：WSL 里常是 Node 20，而 `--test-isolation=none` 是 Node 24 才有的拼写
 > （22 只认 `--experimental-test-isolation`，20 两个都不认）。所以 `npm test` 不带路径、
@@ -69,6 +81,14 @@ npm view dsh-unwrapped version dist.tarball
 
 升级：`npm version patch|minor|major` 会改版本号并打 git tag，然后 `npm publish`。
 
+> **staged publish 的坑**：如果 token 的 bypass 2FA 被回收，`npm publish` 不会报错，而是把
+> 包**暂存**起来，并先上线一个 `0.0.0-stage` 占位版（描述是 "Temporary package placeholder
+> for staged publishing"）。此时 `npm view dsh-unwrapped version` 会返回 `0.0.0-stage`，
+> 而真实版本已存在于 `versions` 里但不在 `dist-tags` 中。
+> 用 `npm stage list` / `npm stage approve <stage-id>` 处理（需要 npm CLI ≥ 11.15 且有 2FA）；
+> 或者换一个勾了 Bypass 2FA 的 token 重新 `npm publish`。
+> 2026-10-31 这次首发就撞上了：发生一次后 `latest` 已回到 `0.2.0`，占位版留下但不影响安装。
+
 ## 4. 发布后自检
 
 ```bash
@@ -78,7 +98,13 @@ npx dsh-unwrapped status
 
 ## 5. 用户怎么用
 
-发布前，别人只能用仓库直装（这条现在就有效）：
+已发布，最快的装机方式是一行：
+
+```bash
+npx dsh-unwrapped install
+```
+
+也可以克隆仓库自己跑（离线环境和审计场景）：
 
 ```bash
 git clone https://github.com/ErnestW2019/dsh-unwrapped.git
@@ -86,19 +112,16 @@ cd dsh-unwrapped
 node bin/plugin.js install
 ```
 
-发布后，多一种更轻的方式：
+其他形态：
 
 ```bash
-# A. 一行装进当前 profile
-npx dsh-unwrapped install
-
-# B. 指定 profile / 换语言 / 换按钮文案
+# 指定 profile / 换语言 / 换按钮文案
 npx dsh-unwrapped install --profile tui --language en --label "Wrapped"
 
-# C. 全局安装
+# 全局安装
 npm i -g dsh-unwrapped && dsh-unwrapped install
 
-# D. 只要文件，不要 harness
+# 只要文件，不要 harness
 npx dsh-unwrapped install --dry-run            # 只打印会做什么
 npx dsh-unwrapped-report --period year --embed 13 --out unwrapped.html
 ```

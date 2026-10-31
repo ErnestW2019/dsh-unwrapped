@@ -10,8 +10,7 @@
 什么时候说的、哪几场最高光，以及你当时到底说了什么。
 
 ```bash
-git clone https://github.com/ErnestW2019/dsh-unwrapped.git
-cd dsh-unwrapped && node bin/plugin.js install
+npx dsh-unwrapped install
 ```
 
 重启 `dsh web`，打开 `http://127.0.0.1:8080/unwrapped`，你的这一年就在那儿了。
@@ -56,9 +55,7 @@ cd dsh-unwrapped && node bin/plugin.js install
 需要 Node ≥ 22.15（用到 `zlib.zstdDecompressSync`），以及一个已经跑过一次的 harness profile。
 
 ```bash
-git clone https://github.com/ErnestW2019/dsh-unwrapped.git
-cd dsh-unwrapped
-node bin/plugin.js install                # 装进 $DSH_HOME/profiles/web
+npx dsh-unwrapped install                 # 装进 $DSH_HOME/profiles/web
 ```
 
 装完**重启一次** `dsh web`，打开 `http://127.0.0.1:8080/unwrapped`。
@@ -66,11 +63,11 @@ node bin/plugin.js install                # 装进 $DSH_HOME/profiles/web
 其他用法：
 
 ```bash
-node bin/plugin.js install --profile tui  # 换 profile
-node bin/plugin.js install --language en --label "Wrapped"
-node bin/plugin.js install --dry-run      # 只打印会改什么，不落盘
-node bin/plugin.js status                 # 装没装、patch 行在不在
-node bin/plugin.js uninstall              # 摘掉 patch 行 + 删掉插件目录
+npx dsh-unwrapped install --profile tui   # 换 profile
+npx dsh-unwrapped install --language en --label "Wrapped"
+npx dsh-unwrapped install --dry-run       # 只打印会改什么，不落盘
+npx dsh-unwrapped status                  # 装没装、patch 行在不在
+npx dsh-unwrapped uninstall               # 摘掉 patch 行 + 删掉插件目录
 ```
 
 安装器只做两件事：把插件文件复制进 `$DSH_HOME/profiles/<profile>/plugins/dsh-unwrapped`，
@@ -83,9 +80,14 @@ node bin/plugin.js uninstall              # 摘掉 patch 行 + 删掉插件目�
 > 必须重启一次 `dsh web`** —— Node 的 ESM 模块缓存按 URL 命中，patch 重新应用只是重新挂载配置，
 > 不会重新读取文件。
 
-> **`npx dsh-unwrapped install` 要等 npm 发布后才可用**，现在会 404。发布流程见
-> [`docs/PUBLISH.md`](https://github.com/ErnestW2019/dsh-unwrapped/blob/main/docs/PUBLISH.md)。
-> 不需要 harness 的离线 CLI 见下面的「离线 CLI」。
+不想用 `npx` 也可以直接克隆仓库：
+
+```bash
+git clone https://github.com/ErnestW2019/dsh-unwrapped.git
+cd dsh-unwrapped && node bin/plugin.js install
+```
+
+不需要 harness 的离线 CLI 见下面的「离线 CLI」。
 
 ## 隐私
 

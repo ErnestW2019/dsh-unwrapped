@@ -19,7 +19,7 @@
 - 离线 CLI：`node bin/unwrapped.js`，不需要 harness，支持 `--embed <n>` 把最近 N 期烘进同一个文件。
 - HTTP API：`GET /unwrapped`、`GET /api/unwrapped`，支持 `?partial=1` 片段返回。
 - 跨平台安装器 `node bin/plugin.js install|uninstall|status|patch`（`--profile` / `--dry-run`）。
-  包发布到 npm 后同样的命令可通过 `npx dsh-unwrapped` 调用。
+  已发布到 npm，同样可用 `npx dsh-unwrapped install` 调用。
 - 多帧 zstd 读取：按 RFC 8878 逐帧解码 `session.vN.jsonl.zstd`，尾部残帧自动丢弃。
 - 中文 / 英文文案包（`language: zh | en`）。
 

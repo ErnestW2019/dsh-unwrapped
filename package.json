@@ -39,6 +39,7 @@
     "lib",
     "bin",
     "README.md",
+    "README.en.md",
     "docs/preview-year.png"
   ],
   "engines": {

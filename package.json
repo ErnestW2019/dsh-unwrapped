@@ -1,6 +1,6 @@
 {
   "name": "dsh-unwrapped",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "description": "Unwrapped for DeepSeek Harness: an interactive monthly / quarterly / yearly report of human-vs-AI conversations — auto-collected from every local session log, with the sentences you actually said. · 给你和 AI 的对话一份网易云年度报告。",
   "keywords": [

@@ -8,7 +8,7 @@
 | --- | --- |
 | 外网 | 通（`registry.npmjs.org` 可达；`www.npmjs.com` 在本机 403） |
 | npm 登录 | ✅ `ernestw2019`，用 Granular Access Token |
-| 已发布 | ✅ `dsh-unwrapped@0.2.0`（`latest`），21 文件 / 1.5 MB |
+| 已发布 | ✅ `dsh-unwrapped@0.2.1`（`latest`），21 文件 / 1.5 MB |
 | 包名 | `dsh-unwrapped`（可用，见下） |
 | 产物 | `npm pack` → 21 文件 / 1.5 MB；`npx dsh-unwrapped --help` 已验证可跑 |
 

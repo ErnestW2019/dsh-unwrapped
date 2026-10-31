@@ -5,6 +5,18 @@
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-10-31
+
+只改文档，代码零变化。0.2.0 发布时 npm 快照下来的 README 里还写着
+「`npx dsh-unwrapped install` 要等发布后才可用，现在会 404」，与事实矛盾；
+npm 只在发版时刷新 README，所以补一个补丁版本。
+
+### 文档
+
+- README 中英双版：首屏命令改回 `npx dsh-unwrapped install`，克隆路径降为备选。
+- `docs/PUBLISH.md`：记录 2FA bypass token 的要求、staged publish 会留下
+  `0.0.0-stage` 占位版、以及 legacy auth 注册已关闭。
+
 ## [0.2.0] - 2026-10-31
 
 首个公开版本。此前仓库名为 `dsh-plugin-wrapped`（从未发布到 npm）。
@@ -30,5 +42,6 @@
 - `docs/` 下全部预览由确定性的合成数据生成，可用 `scripts/make-demo.mjs` 复现。
 - GitHub Actions：Linux + Windows × Node 22 / 24 测试矩阵，外加演示管线冒烟检查。
 
-[Unreleased]: https://github.com/ErnestW2019/dsh-unwrapped/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/ErnestW2019/dsh-unwrapped/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/ErnestW2019/dsh-unwrapped/releases/tag/v0.2.1
 [0.2.0]: https://github.com/ErnestW2019/dsh-unwrapped/releases/tag/v0.2.0

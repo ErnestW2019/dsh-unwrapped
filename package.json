@@ -40,7 +40,8 @@
     "bin",
     "README.md",
     "README.en.md",
-    "docs/preview-year.png"
+    "docs/preview-year.png",
+    "docs/preview-year.gif"
   ],
   "engines": {
     "node": ">=22.15.0"

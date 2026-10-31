@@ -18,7 +18,7 @@
 所以素材的优先级是：
 1. **分享卡片**（1080×1350，已内置三种模板）—— 最轻的传播单位；
 2. **首屏截图**（`docs/preview-year.png`）—— 决定"要不要点 star"；
-3. **15 秒 GIF** —— 决定"要不要装"。
+3. **首屏 GIF**（`docs/preview-year.gif`，5 秒循环，约 1 MB）—— 决定"要不要装"。
 
 功能列表排在最后。没有人因为"支持季度聚合"而转发。
 
@@ -29,7 +29,7 @@
 | 场景 | 文案 |
 | --- | --- |
 | 技术人 | **给你的 AI 对话做一份网易云年度报告。** 自动读本地会话日志，零上传、零 token。 |
-| 情绪人 | **你说 4,731 字，它回了 3.3 万字。** 消息里你只占 22%，但每句话都是你先开的口。 |
+| 情绪人 | **你说 4,765 字，它回了 3.4 万字。** 消息里你只占 22%，但每句话都是你先开的口。 |
 | 反差钩 | **我和 AI 聊了一年，近八成的消息都是它在说。** |
 
 英文版（X / HN）：
@@ -83,8 +83,8 @@ install: npx dsh-unwrapped install
 > 用了一年 AI 写代码，好奇到底谁在说话，就做了个插件把本地日志变成网易云那种年度报告。
 >
 > 结果有点扎心：
-> · 我写了 {{4,731}} 字，它回了 {{3.3万}} 字 —— 消息里我只占 **{{22%}}**
-> · 最晚一次是 {{01:15}}，最后一句是「文档里这段是什么意思，我没看懂 migration 那行」
+> · 我写了 {{4,765}} 字，它回了 {{3.4万}} 字 —— 消息里我只占 **{{22%}}**
+> · 最晚一次是 {{00:53}}，最后一句是「好，那把这个坑写进值班文档」
 > · 我说得最多的词是「{{能不能}}」，{{26}} 次
 > · 一年里我问了 {{5}} 个问题，说了 {{16}} 次谢谢（AI 不在乎，但我有点）
 >
@@ -98,11 +98,11 @@ install: npx dsh-unwrapped install
 > Not screenshots. Not a SaaS. It reads your local session logs and renders
 > a shareable report — monthly, quarterly, yearly.
 >
-> 2/ The number that got me: I wrote {{4,731}} characters this year. The model
-> wrote {{33,000}}. I'm {{22%}} of my own conversations.
+> 2/ The number that got me: I wrote {{4,765}} characters this year. The model
+> wrote {{34,000}}. I'm {{22%}} of my own conversations.
 >
 > 3/ But 100% of the openings were mine. The report has a "things you said"
-> section — first line, latest line, the {{01:15}} you were still debugging,
+> section — first line, latest line, the {{00:53}} you were still debugging,
 > the phrase you kept repeating.
 >
 > 4/ No upload, no database, no model calls. It's a host plugin on the
@@ -146,21 +146,29 @@ install: npx dsh-unwrapped install
 | 分享卡 · 反差卡 | 1080×1350 | 点「反差卡」：大号 `你只占了 X%` |
 | 分享卡 · 口头禅卡 | 1080×1350 | 点「口头禅卡」 |
 | 九宫格 | 1080×1080 ×9 | 卡片 + 页面切片 + 一句文案 |
-| 15 秒 GIF | 1200×800 | 见下面的录制脚本 |
+| 首屏 GIF | 880×600 · 5s | `node scripts/make-gif.mjs`（见下） |
 
-**15 秒 GIF 脚本**（一镜到底，别剪辑炫技）：
+**首屏 GIF**（已随仓库提供 `docs/preview-year.gif`）：
+
+```bash
+node scripts/make-gif.mjs                                   # 默认 880×600 / 8fps / 5s / 1 MB
+node scripts/make-gif.mjs --width 1080 --height 720 --fps 10 --seconds 8
+```
+
+脚本用 headless Edge 滚动截图（`Page.captureScreenshot`），再用 ffmpeg 两遍
+`palettegen` + `paletteuse` 合成；不装 ffmpeg 会直接退出并提示 `FFMPEG=`。
+体积别超过 3 MB（X 和微信才直传），压不住就降 `--colors` / `--fps`。
+
+**如果要一条 15 秒带终端的片子**（发布日再录，别用它当 README 首图）：
 
 ```
 0-2s   终端：npx dsh-unwrapped install && 看到 "patch -> ... (live)"
 2-5s   浏览器刷新，右下角出现悬浮按钮，点进去
-5-8s   首屏：巨大的 2026 + "你说 4,731 字，它说了 3.3 万字" + 占比条生长
-8-11s  滚动：图表长出来 → 「最晚的一次 01:15」→ 引号里的原话
+5-8s   首屏：巨大的 2026 + "你说 4,765 字，它说了 3.4 万字" + 占比条生长
+8-11s  滚动：图表长出来 → 「最晚的一次 00:53」→ 引号里的原话
 11-13s 滚到底：「它不会记得这些。日志会。」
 13-15s 点「分享卡片」，卡片落进下载目录（画面停在卡片上）
 ```
-
-录屏用 `scripts/shot.mjs` 的同款 headless 方案（`Page.startScreencast`）或直接
-OBS；GIF 控制在 3 MB 内（X 和微信都能直传）。
 
 ---
 

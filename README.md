@@ -15,7 +15,7 @@ npx dsh-unwrapped install
 
 装完打开 `http://127.0.0.1:8080/unwrapped`，你的这一年就在那儿了。
 
-![年度回顾](docs/preview-year.png)
+![年度回顾](docs/preview-year.gif)
 
 零上传 · 零存储 · 零 token · 零构建。数据源就是 harness 已经在写的会话日志，
 不调模型、不进上下文、不产生任何推理开销。
@@ -163,6 +163,7 @@ node scripts/browser-check.mjs --file docs/preview-year.html    # 真浏览器�
 node scripts/make-demo.mjs                                      # 重建 docs/ 下的演示数据与预览
 node scripts/shot.mjs --file docs/preview-year.html --out docs/preview-year.png
 node scripts/shot-cards.mjs                                     # 重截三张分享卡
+node scripts/make-gif.mjs                                       # 重录首图 GIF（需要 ffmpeg）
 ```
 
 预览全部由**合成数据**生成（3 年 / 260 多场虚构会话），真实日志里的任何一句话都不会进仓库。

@@ -14,40 +14,40 @@
   },
   "hasData": true,
   "totals": {
-    "messages": 1148,
-    "humanMessages": 256,
-    "aiMessages": 892,
-    "aiSteps": 892,
-    "humanChars": 4731,
-    "aiChars": 33093,
-    "reasoningChars": 1275,
-    "turns": 256,
-    "steps": 256,
-    "toolCalls": 769,
-    "sessionsTouched": 92,
-    "sessionsCreated": 92,
-    "messagesPerSession": 12.5,
-    "avgMessagesPerSession": 12.5,
-    "activeDays": 68,
+    "messages": 1187,
+    "humanMessages": 262,
+    "aiMessages": 925,
+    "aiSteps": 925,
+    "humanChars": 4765,
+    "aiChars": 34027,
+    "reasoningChars": 1319,
+    "turns": 262,
+    "steps": 262,
+    "toolCalls": 797,
+    "sessionsTouched": 91,
+    "sessionsCreated": 91,
+    "messagesPerSession": 13,
+    "avgMessagesPerSession": 13,
+    "activeDays": 70,
     "maxStreak": 12,
     "humanAvgChars": 18,
     "aiAvgChars": 37,
-    "longestSpanMs": 13642000,
-    "longestRunMs": 13644000,
-    "interrupted": 19,
-    "failures": 19,
+    "longestSpanMs": 13752000,
+    "longestRunMs": 13754000,
+    "interrupted": 21,
+    "failures": 17,
     "injectedMessages": 14,
-    "delegatedSessions": 7,
+    "delegatedSessions": 3,
     "busiestDay": {
       "day": "2026-07-16",
-      "messages": 36
+      "messages": 39
     },
     "peakHour": 12
   },
   "ratio": {
-    "humanShare": 0.223,
-    "aiShare": 0.777,
-    "humanToAi": 0.29
+    "humanShare": 0.2207,
+    "aiShare": 0.7793,
+    "humanToAi": 0.28
   },
   "series": [
     {
@@ -88,27 +88,27 @@
     },
     {
       "key": "2026-07",
-      "human": 28,
-      "ai": 87,
-      "total": 115
+      "human": 34,
+      "ai": 121,
+      "total": 155
     },
     {
       "key": "2026-08",
-      "human": 20,
-      "ai": 76,
-      "total": 96
+      "human": 32,
+      "ai": 109,
+      "total": 141
     },
     {
       "key": "2026-09",
-      "human": 35,
-      "ai": 117,
-      "total": 152
+      "human": 28,
+      "ai": 100,
+      "total": 128
     },
     {
       "key": "2026-10",
-      "human": 20,
-      "ai": 66,
-      "total": 86
+      "human": 15,
+      "ai": 49,
+      "total": 64
     },
     {
       "key": "2026-11",
@@ -124,8 +124,7 @@
     }
   ],
   "hours": [
-    19,
-    17,
+    32,
     0,
     0,
     0,
@@ -133,61 +132,62 @@
     0,
     0,
     0,
-    38,
-    106,
+    0,
+    30,
+    114,
+    50,
+    160,
+    94,
+    149,
+    55,
+    77,
+    56,
+    70,
     91,
-    158,
-    111,
-    101,
-    40,
-    107,
-    84,
-    47,
-    68,
-    53,
-    40,
+    65,
+    54,
     52,
-    16
+    38
   ],
   "weekday": [
-    44,
-    248,
-    253,
-    218,
-    187,
-    121,
-    77
+    48,
+    309,
+    200,
+    157,
+    236,
+    176,
+    61
   ],
   "tokens": {
-    "input": 36073012,
-    "output": 67426,
-    "total": 36140438,
-    "cacheRead": 16989299,
+    "input": 37366756,
+    "output": 69316,
+    "total": 37436072,
+    "cacheRead": 17734673,
     "cacheWrite": 0,
-    "requests": 892
+    "requests": 925
   },
   "topModels": [
     {
       "model": "code-fast",
-      "count": 473
+      "count": 480
     },
     {
       "model": "deepseek-chat",
-      "count": 225
+      "count": 237
     },
     {
       "model": "deepseek-reasoner",
-      "count": 194
+      "count": 208
     }
   ],
   "topProviders": [
     {
       "provider": "internal",
-      "count": 473
+      "count": 480
     },
     {
       "provider": "deepseek",
-      "count": 419
+      "count": 445
     }
   ],
   "topWorkspaces": [
@@ -197,78 +197,78 @@
     },
     {
       "workspace": "/home/dev/code/ledger-core",
-      "count": 262
-    },
-    {
-      "workspace": "/home/dev/code/signal-hub",
-      "count": 223
+      "count": 266
     },
     {
       "workspace": "/home/dev/code/tiny-db",
-      "count": 206
+      "count": 218
+    },
+    {
+      "workspace": "/home/dev/code/signal-hub",
+      "count": 213
     },
     {
       "workspace": "/home/dev/code/aurora-ui",
-      "count": 166
+      "count": 199
     }
   ],
   "topPresets": [
     {
       "preset": "standard",
-      "count": 63
+      "count": 64
     },
     {
       "preset": "reviewer",
-      "count": 29
+      "count": 27
     }
   ],
   "tools": [
     {
       "name": "edit",
-      "count": 235
+      "count": 239
     },
     {
       "name": "read",
-      "count": 232
+      "count": 236
     },
     {
       "name": "pwsh",
-      "count": 155
+      "count": 160
     },
     {
       "name": "write",
-      "count": 84
+      "count": 96
     },
     {
       "name": "grep",
-      "count": 58
+      "count": 55
     },
     {
       "name": "web_search",
-      "count": 5
+      "count": 11
     }
   ],
   "topSessions": [
     {
       "id": "demo-232",
-      "title": "从零做一个插件，最后发布出去",
+      "title": "把跑了两年的定时任务改成可重入",
       "cwd": "/home/dev/code/ledger-core",
       "agentPreset": "standard",
       "delegated": false,
       "human": 11,
-      "ai": 32,
-      "steps": 32,
-      "messages": 43,
-      "chars": 1253,
-      "tokens": 1308243,
-      "tools": 21,
-      "spanMs": 13642000,
+      "ai": 36,
+      "steps": 36,
+      "messages": 47,
+      "chars": 1252,
+      "tokens": 1415282,
+      "tools": 28,
+      "spanMs": 13752000,
       "startTs": 1784120755000,
-      "endTs": 1784134397000,
+      "endTs": 1784134507000,
       "previews": [
-        "我想开发一个插件，把本地的对话日志变成一份能分享的年度报告",
-        "为什么不能直接把整个日志丢给模型让它总结",
-        "报告里最打动人的地方应该是什么"
+        "这个定时任务偶尔会跑两份，日志里同一分钟有两条开始记录",
+        "为什么要用过期时间，不用行锁",
+        "多跑一次也不行，这个任务会重复写账单"
       ]
     },
     {
@@ -316,28 +316,6 @@
       ]
     },
     {
-      "id": "demo-248",
-      "title": "梳理这个模块的依赖方向",
-      "cwd": "/home/dev/code/tiny-db",
-      "agentPreset": "standard",
-      "delegated": false,
-      "human": 3,
-      "ai": 14,
-      "steps": 14,
-      "messages": 17,
-      "chars": 500,
-      "tokens": 524965,
-      "tools": 11,
-      "spanMs": 1087000,
-      "startTs": 1788368427000,
-      "endTs": 1788369514000,
-      "previews": [
-        "梳理一下这个模块的依赖，我怀疑有循环",
-        "换个思路试试，能不能不改结构只加约束",
-        "算了，先回滚这一版，明天再说"
-      ]
-    },
-    {
       "id": "demo-192",
       "title": "一个只在长会话里出现的内存泄漏",
       "cwd": "/home/dev/code/ledger-core",
@@ -360,41 +338,63 @@
       ]
     },
     {
-      "id": "demo-256",
-      "title": "SSR 首屏 hydration 不一致",
-      "cwd": "/home/dev/work/notes",
+      "id": "demo-186",
+      "title": "梳理这个模块的依赖方向",
+      "cwd": "/home/dev/code/signal-hub",
       "agentPreset": "standard",
       "delegated": false,
       "human": 3,
       "ai": 13,
       "steps": 13,
       "messages": 16,
-      "chars": 487,
-      "tokens": 581549,
+      "chars": 489,
+      "tokens": 567314,
       "tools": 12,
-      "spanMs": 1004000,
-      "startTs": 1790755378000,
-      "endTs": 1790756382000,
+      "spanMs": 898000,
+      "startTs": 1771209482000,
+      "endTs": 1771210380000,
       "previews": [
-        "首屏一直闪一下，控制台说 hydration mismatch，帮我看看",
-        "优化首屏加载，现在白屏大概 1.4 秒",
-        "有没有更简单的写法"
+        "梳理一下这个模块的依赖，我怀疑有循环",
+        "换个思路试试，能不能不改结构只加约束",
+        "算了，先回滚这一版，明天再说"
+      ]
+    },
+    {
+      "id": "demo-238",
+      "title": "给 CLI 加一个 --dry-run",
+      "cwd": "/home/dev/work/notes",
+      "agentPreset": "reviewer",
+      "delegated": false,
+      "human": 3,
+      "ai": 13,
+      "steps": 13,
+      "messages": 16,
+      "chars": 502,
+      "tokens": 552060,
+      "tools": 17,
+      "spanMs": 748000,
+      "startTs": 1785647294000,
+      "endTs": 1785648042000,
+      "previews": [
+        "给 CLI 加一个 --dry-run，只打印不落盘",
+        "我刚才那个改动是不是把缓存弄坏了",
+        "等等，这个文件是谁改的，我没动过 utils"
       ]
     }
   ],
   "failures": {
-    "count": 19,
+    "count": 17,
     "samples": [
       {
         "t": 1773809102000,
         "message": "context window exceeded (131072 tokens)"
       },
       {
-        "t": 1790174409000,
-        "message": "context window exceeded (131072 tokens)"
+        "t": 1788688970000,
+        "message": "edit conflict: file changed on disk since read"
       },
       {
-        "t": 1788916770000,
+        "t": 1784188959000,
         "message": "tool timeout: pwsh exited 124 after 120s"
       },
       {
@@ -411,31 +411,31 @@
       "id": "demo-174"
     },
     "last": {
-      "t": 1793270842000,
-      "text": "文档里这段是什么意思，我没看懂 migration 那行",
-      "title": "发布前检查清单",
-      "id": "demo-265"
+      "t": 1793276081000,
+      "text": "先写测试再改，别动现有索引",
+      "title": "调研向量检索方案",
+      "id": "demo-264"
     },
     "latestNight": {
-      "t": 1788369342000,
-      "text": "算了，先回滚这一版，明天再说",
-      "title": "梳理这个模块的依赖方向",
-      "id": "demo-248",
-      "hour": 1,
-      "minute": 15
+      "t": 1784134414000,
+      "text": "好，那把这个坑写进值班文档",
+      "title": "把跑了两年的定时任务改成可重入",
+      "id": "demo-232",
+      "hour": 0,
+      "minute": 53
     },
     "latestClock": {
-      "t": 1784130276000,
-      "text": "再试一次，还是不行，离线切周期没反应",
-      "title": "从零做一个插件，最后发布出去",
+      "t": 1784130264000,
+      "text": "确认了，可以改，注意别动账期计算",
+      "title": "把跑了两年的定时任务改成可重入",
       "id": "demo-232",
       "hour": 23,
       "minute": 44
     },
     "longest": {
       "id": "demo-232",
-      "title": "从零做一个插件，最后发布出去",
-      "runMs": 13644000,
+      "title": "把跑了两年的定时任务改成可重入",
+      "runMs": 13754000,
       "startTs": 1784120755000
     },
     "timeline": [
@@ -461,26 +461,26 @@
       },
       {
         "key": "2026-09",
-        "t": 1788245522000,
-        "text": "这个接口的返回结构不太对，有的地方是 code 有的是 error_code"
+        "t": 1788535041000,
+        "text": "给搜索加上拼音匹配，中文和首字母都要能搜到"
       }
     ],
-    "questions": 5,
+    "questions": 6,
     "thanks": 16,
-    "samples": 256
+    "samples": 262
   },
   "phrases": [
     {
       "word": "能不能",
-      "count": 26
+      "count": 24
     },
     {
       "word": "确认",
-      "count": 23
+      "count": 24
     },
     {
       "word": "为什么",
-      "count": 22
+      "count": 21
     }
   ],
   "comparison": {
@@ -490,9 +490,9 @@
     "sessions": 94,
     "tokens": 36718730,
     "deltas": {
-      "messagesPct": -0.4,
-      "sessionsPct": -2.1,
-      "tokensPct": -1.6
+      "messagesPct": 2.9,
+      "sessionsPct": -3.2,
+      "tokensPct": 2
     }
   },
   "badges": [
@@ -502,11 +502,11 @@
     },
     {
       "key": "marathon",
-      "metric": 227
+      "metric": 229
     },
     {
       "key": "delegation_chief",
-      "metric": 7
+      "metric": 3
     },
     {
       "key": "tool_master",
@@ -517,10 +517,10 @@
     "key": "streak_keeper",
     "metric": 12
   },
-  "generatedAt": 1793355001160,
+  "generatedAt": 1793412817417,
   "corpus": {
-    "sessions": 266,
+    "sessions": 265,
     "firstAt": 1704970260000,
-    "lastAt": 1793270880000
+    "lastAt": 1793276211000
   }
 }

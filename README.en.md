@@ -16,7 +16,7 @@ npx dsh-unwrapped install
 
 Then open `http://127.0.0.1:8080/unwrapped`.
 
-![Yearly report](docs/preview-year.png)
+![Yearly report](docs/preview-year.gif)
 
 No upload · no database · no model calls · no build step. The data source is the session log
 the harness already writes; nothing enters the model context and nothing costs tokens.
@@ -178,6 +178,7 @@ node scripts/browser-check.mjs --file docs/preview-year.html    # 17 real-browse
 node scripts/make-demo.mjs                                      # rebuild demo data + previews
 node scripts/shot.mjs --file docs/preview-year.html --out docs/preview-year.png
 node scripts/shot-cards.mjs                                     # re-capture the three share cards
+node scripts/make-gif.mjs                                       # re-record the README gif (needs ffmpeg)
 ```
 
 Every preview is rendered from **synthetic data** (3 years, 260+ fictional sessions). No line

@@ -9,7 +9,7 @@
 | 外网 | 通（`registry.npmjs.org` 可达） |
 | npm 登录 | **没有**（`npm whoami` → `ENEEDAUTH`）→ 所以 agent 没能发布 |
 | 包名 | 已定为 `dsh-unwrapped`（可用，见下） |
-| 产物 | `npm pack` → 15 文件 / 57 KB；装进临时 prefix、用自带命令往干净 `$DSH_HOME` 安装、真实启动 harness，`/unwrapped` → 200 且是交互版 |
+| 产物 | `npm pack` → 21 文件 / 1.5 MB；装进临时 prefix、用自带命令往干净 `$DSH_HOME` 安装、真实启动 harness，`/unwrapped` → 200 且是交互版 |
 
 改名过程（2026-10-30 实测 npm registry + GitHub）：
 
@@ -78,8 +78,18 @@ npx dsh-unwrapped status
 
 ## 5. 用户怎么用
 
+发布前，别人只能用仓库直装（这条现在就有效）：
+
 ```bash
-# A. 一行装进当前 profile（推荐）
+git clone https://github.com/ErnestW2019/dsh-unwrapped.git
+cd dsh-unwrapped
+node bin/plugin.js install
+```
+
+发布后，多一种更轻的方式：
+
+```bash
+# A. 一行装进当前 profile
 npx dsh-unwrapped install
 
 # B. 指定 profile / 换语言 / 换按钮文案
@@ -94,9 +104,13 @@ npx dsh-unwrapped-report --period year --embed 13 --out unwrapped.html
 ```
 
 装完重启一次 `dsh web`（改代码必须重启，改 config 才热加载），刷新 GUI 点右下角悬浮按钮，
-或直接开 `http://127.0.0.1:8080/rewind`。
+或直接开 `http://127.0.0.1:8080/unwrapped`。
 
 卸载：`npx dsh-unwrapped uninstall`（`--keep-files` 只摘 patch 行，保留插件目录）。
+
+> **注意**：`dsh plugin add` 这条路走不通——它内部调 pnpm，没装 pnpm 的机器会直接失败
+> （`dsh: pnpm failed in profile directory ...`）。本插件不需要 pnpm，安装器只做文件拷贝
+> 和 patch 行维护。
 
 ## 6. 发布后值得跟进的动作
 

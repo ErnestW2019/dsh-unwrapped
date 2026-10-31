@@ -11,10 +11,11 @@ human-vs-AI dialogue: how much each side said, when you showed up, which session
 and the sentences you actually typed.
 
 ```bash
-npx dsh-unwrapped install
+git clone https://github.com/ErnestW2019/dsh-unwrapped.git
+cd dsh-unwrapped && node bin/plugin.js install
 ```
 
-Then open `http://127.0.0.1:8080/unwrapped`.
+Restart `dsh web`, then open `http://127.0.0.1:8080/unwrapped`.
 
 ![Yearly report](docs/preview-year.gif)
 
@@ -60,29 +61,42 @@ always produces the same report.
 
 ## Install
 
-Requires Node ≥ 22.15 (uses `zlib.zstdDecompressSync`).
+Requires Node ≥ 22.15 (uses `zlib.zstdDecompressSync`) and a harness profile that has been
+started at least once.
 
 ```bash
-npx dsh-unwrapped install                 # into $DSH_HOME/profiles/web
-npx dsh-unwrapped install --profile tui   # another profile
-npx dsh-unwrapped install --language en --label "Wrapped"
-npx dsh-unwrapped status                  # is it installed? is the patch line there?
-npx dsh-unwrapped uninstall               # remove the patch line + the plugin dir
+git clone https://github.com/ErnestW2019/dsh-unwrapped.git
+cd dsh-unwrapped
+node bin/plugin.js install                # into $DSH_HOME/profiles/web
 ```
 
-Or globally: `npm i -g dsh-unwrapped && dsh-unwrapped install`.
+Then **restart** `dsh web` and open `http://127.0.0.1:8080/unwrapped`.
+
+Other flags:
+
+```bash
+node bin/plugin.js install --profile tui  # another profile
+node bin/plugin.js install --language en --label "Wrapped"
+node bin/plugin.js install --dry-run      # print what would change, write nothing
+node bin/plugin.js status                 # is it installed? is the patch line there?
+node bin/plugin.js uninstall              # remove the patch line + the plugin dir
+```
 
 The installer does two things: copies the plugin into
 `$DSH_HOME/profiles/<profile>/plugins/dsh-unwrapped`, and maintains exactly **one** `insert`
 line in `cordis.patch.yml`. Re-running is idempotent and never touches anyone else's patch
-lines. `--dry-run` prints without writing.
+lines.
 
-> **Installed but can't see the new UI?** `config` changes (language, launcher label, routes)
-> hot-reload, but **plugin code changes need a `dsh web` restart** — Node's ESM module cache is
-> keyed by URL, so re-applying the patch only remounts config, it doesn't re-read files.
+> **Two things that trip people up.**
+> `~/.dsh/profiles/<profile>` must already exist — run `dsh --profile web` once, or the
+> installer stops with `profile not found`.
+> And if the UI does not change: `config` (language, label, route) hot-reloads, but **edited
+> plugin code needs a restart of `dsh web`** — Node caches ES modules by URL, so re-applying
+> the patch only remounts config, it does not re-read files.
 
-See [`docs/PUBLISH.md`](docs/PUBLISH.md) for install paths without `npx`, and the offline CLI
-below.
+> **`npx dsh-unwrapped install` only works once the package is on npm**; right now it 404s.
+> See [`docs/PUBLISH.md`](https://github.com/ErnestW2019/dsh-unwrapped/blob/main/docs/PUBLISH.md).
+> For the harness-free CLI, see "Offline CLI" below.
 
 ## Privacy
 

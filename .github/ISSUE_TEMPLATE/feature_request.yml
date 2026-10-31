@@ -1,0 +1,52 @@
+name: Feature request
+description: 提一个功能或口径上的建议
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        这个插件的硬约束是：**零运行时依赖、零上传、只读**。
+        需要引入数据库、联网或模型调用的方案，基本不会被接受——先说清为什么绕不开。
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 你想解决什么问题
+      description: 描述场景，不要直接描述实现。
+      placeholder: 我想知道周末和工作日的对话强度差多少，但现在只能看到整体的星期分布。
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 你设想的做法
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: 属于哪一块
+      options:
+        - 指标 / 口径
+        - 报告页展示
+        - 分享卡
+        - 离线 CLI
+        - 配置项
+        - 安装器
+        - 其它
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: 约束确认
+      options:
+        - label: 方案不需要新增运行时依赖
+          required: true
+        - label: 方案不需要联网或调用模型
+          required: true
+        - label: 方案仍然只读，不修改会话或工作区文件
+          required: true

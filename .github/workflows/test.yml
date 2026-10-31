@@ -1,0 +1,46 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: ['22.x', '24.x']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Unit tests
+        run: node --test --test-isolation=none "test/*.test.js"
+      - name: Package contents
+        run: npm pack --dry-run
+
+  preview:
+    # Smoke-test the demo pipeline: the committed previews are rendered from it,
+    # so a break here means the docs can no longer be reproduced. Output is not
+    # diffed against git — every render stamps the current time.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+      - run: node scripts/make-demo.mjs
+      - name: Previews were rendered
+        run: |
+          for f in docs/preview-year.html docs/preview-quarter.html docs/preview-empty.html docs/preview-year.json; do
+            test -s "$f" || { echo "missing $f"; exit 1; }
+          done

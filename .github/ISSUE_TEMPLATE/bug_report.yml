@@ -1,0 +1,88 @@
+name: Bug report
+description: 报告一个可复现的问题
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        安全漏洞请不要走这里，见 [SECURITY.md](https://github.com/ErnestW2019/dsh-unwrapped/blob/main/SECURITY.md)。
+        日志里可能有你的真实对话，贴之前请先删掉句子，只留结构和数字。
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 发生了什么
+      description: 实际看到的结果，以及你期望的结果。
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. npx dsh-unwrapped install --profile web
+        2. 打开 http://127.0.0.1:8080/unwrapped
+        3. 切到季度，看到 ...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: 插件版本
+      description: package.json 里的 version，或 `npm ls dsh-unwrapped`
+      placeholder: 0.2.0
+    validations:
+      required: true
+
+  - type: input
+    id: harness
+    attributes:
+      label: Harness 版本与 profile
+      placeholder: dsh 1.x · profile=web
+    validations:
+      required: true
+
+  - type: input
+    id: node-os
+    attributes:
+      label: Node 与操作系统
+      placeholder: Node 24.21.0 · Windows 11 / macOS 15 / Ubuntu 24.04
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: 影响范围
+      options:
+        - 报告页（浏览器里）
+        - 分享卡（下载的 PNG）
+        - 离线 CLI（bin/unwrapped.js）
+        - 安装器（install / uninstall / status）
+        - JSON API（/api/unwrapped）
+        - 其它
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 错误输出
+      description: 贴之前请删掉会话内容，只保留报错本身。
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我搜过已有 issue，没有重复
+          required: true
+        - label: 这是插件本身的问题，不是 harness 上游的问题
+          required: true
+        - label: 贴出的日志已经去掉真实对话内容
+          required: true

@@ -2,7 +2,7 @@
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
 [![node](https://img.shields.io/badge/node-%3E%3D22.15-339933.svg)](package.json)
-[![tests](https://img.shields.io/badge/tests-105%20passing-3fb950.svg)](https://github.com/ErnestW2019/dsh-unwrapped/tree/main/test)
+[![test](https://github.com/ErnestW2019/dsh-unwrapped/actions/workflows/test.yml/badge.svg)](https://github.com/ErnestW2019/dsh-unwrapped/actions/workflows/test.yml)
 [![deps](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](package.json)
 [![plugin](https://img.shields.io/badge/DeepSeek%20Harness-plugin-5b8cff.svg)](https://github.com/ErnestW2019/dsh-unwrapped)
 
@@ -235,6 +235,13 @@ node scripts/make-gif.mjs                                       # 重录首图 G
 - 不做推送式刷新：开着页面时的新对话要等下一次切换或刷新才出现。
 - 分享卡在浏览器里现画，字体用系统字体；无 canvas / 无下载权限时退化成 toast 提示。
 - `file://` 打开的离线 HTML 切周期只覆盖烘焙进去的那几期，超出会提示用 CLI 重跑。
+
+## 参与
+
+- 改动之前先看 [CONTRIBUTING.md](https://github.com/ErnestW2019/dsh-unwrapped/blob/main/CONTRIBUTING.md)：
+  这个项目的硬约束是零运行时依赖、只读、预览必须由合成数据生成。
+- 版本变化见 [CHANGELOG.md](https://github.com/ErnestW2019/dsh-unwrapped/blob/main/CHANGELOG.md)。
+- 安全问题和隐私边界见 [SECURITY.md](https://github.com/ErnestW2019/dsh-unwrapped/blob/main/SECURITY.md)。
 
 ## License
 

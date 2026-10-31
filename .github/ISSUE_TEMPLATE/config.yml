@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 安全漏洞
+    url: https://github.com/ErnestW2019/dsh-unwrapped/security/advisories/new
+    about: 请走私密报告，不要开公开 issue。
+  - name: 使用说明
+    url: https://github.com/ErnestW2019/dsh-unwrapped#readme
+    about: 装不上、看不到界面、想换周期，先看 README 的「安装」和「已知限制」。

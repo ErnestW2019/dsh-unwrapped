@@ -2,7 +2,7 @@
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
 [![node](https://img.shields.io/badge/node-%3E%3D22.15-339933.svg)](package.json)
-[![tests](https://img.shields.io/badge/tests-105%20passing-3fb950.svg)](https://github.com/ErnestW2019/dsh-unwrapped/tree/main/test)
+[![test](https://github.com/ErnestW2019/dsh-unwrapped/actions/workflows/test.yml/badge.svg)](https://github.com/ErnestW2019/dsh-unwrapped/actions/workflows/test.yml)
 [![deps](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](package.json)
 [![plugin](https://img.shields.io/badge/DeepSeek%20Harness-plugin-5b8cff.svg)](https://github.com/ErnestW2019/dsh-unwrapped)
 
@@ -254,6 +254,14 @@ before it still reads.
 - Share cards are drawn in the browser with system fonts; without canvas or download permission
   they degrade to a toast.
 - An offline HTML opened over `file://` can only switch between the baked-in periods.
+
+## Contributing
+
+- Read [CONTRIBUTING.md](https://github.com/ErnestW2019/dsh-unwrapped/blob/main/CONTRIBUTING.md) first:
+  the hard constraints are zero runtime dependencies, read-only access, and previews that must be
+  generated from synthetic data.
+- Version history lives in [CHANGELOG.md](https://github.com/ErnestW2019/dsh-unwrapped/blob/main/CHANGELOG.md).
+- Security and the privacy boundary are documented in [SECURITY.md](https://github.com/ErnestW2019/dsh-unwrapped/blob/main/SECURITY.md).
 
 ## License
 

@@ -40,6 +40,8 @@
     "bin",
     "README.md",
     "README.en.md",
+    "CHANGELOG.md",
+    "SECURITY.md",
     "docs/preview-year.png",
     "docs/preview-year.gif"
   ],

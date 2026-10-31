@@ -49,12 +49,12 @@
     "node": ">=22.15.0"
   },
   "scripts": {
-    "test": "node --test --test-isolation=none \"test/*.test.js\"",
+    "test": "node --test",
     "preview": "node bin/unwrapped.js",
     "report": "node bin/unwrapped.js --period year --out report.html --json report.json",
     "install:profile": "node bin/plugin.js install",
     "uninstall:profile": "node bin/plugin.js uninstall",
-    "prepublishOnly": "node --test --test-isolation=none \"test/*.test.js\""
+    "prepublishOnly": "node --test"
   },
   "publishConfig": {
     "access": "public"

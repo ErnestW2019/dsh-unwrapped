@@ -38,9 +38,24 @@ node scripts/market-check.mjs --name dsh-unwrapped --name foo
 ```bash
 npm login                                  # 浏览器或 OTP
 npm view dsh-unwrapped version        # 应返回 404（= 名字仍是你的）
-npm pack --dry-run                         # 看清单：15 个文件，约 57 KB
-node --test --test-isolation=none "test/*.test.js"   # 105 个用例（prepublishOnly 也会跑）
+npm pack --dry-run                         # 看清单：21 个文件，约 1.5 MB
+npm test                                   # 105 个用例（prepublishOnly 也会跑）
 ```
+
+> **WSL 里 `npm login` 会崩**：`npm error code ERR_INVALID_ARG_TYPE` /
+> `The "file" argument must be of type string`。原因是没有 `xdg-open`，npm 拿 `undefined`
+> 去 spawn 浏览器，与账号无关。绕法（任选其一）：
+>
+> ```bash
+> npm login --browser=false     # 只打印 URL，自己在 Windows 浏览器里粘贴打开
+> npm login --browser=explorer.exe   # 或让 WSL 调 Windows 的 explorer.exe
+> ```
+>
+> **Node 版本**：WSL 里常是 Node 20，而 `--test-isolation=none` 是 Node 24 才有的拼写
+> （22 只认 `--experimental-test-isolation`，20 两个都不认）。所以 `npm test` 不带路径、
+> 也不带 isolation flag，由 runner 自己发现用例。Node 20 缺 zstd，相关用例会自动跳过
+> （96 项而不是 105 项）——这不影响 `npm publish`，但**发布前建议在 Node ≥ 22.15 上再跑一次**
+> 以覆盖 zstd 路径。
 
 元数据已填好（`repository` / `homepage` / `bugs` / `author` 指向
 `github.com/ErnestW2019/dsh-unwrapped`）。如果仓库放到别处，记得同步改 `package.json`。

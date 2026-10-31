@@ -9,11 +9,12 @@
 - 零运行时依赖，不需要 `npm install` 就能跑测试
 
 ```bash
-node --test --test-isolation=none "test/*.test.js"   # 105 个用例
+npm test                                              # 105 个用例
 node scripts/browser-check.mjs --file docs/preview-year.html   # 真浏览器交互 17 项
 ```
 
-`node --test test/` 在受限沙箱里会因管道被拦截而 `EPERM`，所以命令里带 `--test-isolation=none`。
+`node --test test/` 在受限沙箱里会因管道被拦截而 `EPERM`，所以交给 `npm test`——它不带路径，
+由 runner 自己发现 `test/*.test.js`，Node 20 / 22 / 24 都认。
 
 ## 改动的形状
 

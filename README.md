@@ -158,7 +158,7 @@ node bin/unwrapped.js --period year --embed 13 --out unwrapped.html
 ## 开发与测试
 
 ```bash
-node --test --test-isolation=none "test/*.test.js"              # 105 个用例，零依赖
+npm test                                                        # 105 个用例，零依赖
 node scripts/browser-check.mjs --file docs/preview-year.html    # 真浏览器交互 17 项
 node scripts/make-demo.mjs                                      # 重建 docs/ 下的演示数据与预览
 node scripts/shot.mjs --file docs/preview-year.html --out docs/preview-year.png
@@ -169,8 +169,8 @@ node scripts/make-gif.mjs                                       # 重录首图 G
 预览全部由**合成数据**生成（3 年 / 260 多场虚构会话），真实日志里的任何一句话都不会进仓库。
 `make-demo.mjs` 用固定种子的 PRNG，重跑得到逐字节相同的输入。
 
-> 受限沙箱里 `node --test test/` 会因管道被拦截而 `EPERM`；
-> `--test-isolation=none` 让所有用例在同一个进程内执行。
+> 受限沙箱里 `node --test test/` 会因管道被拦截而 `EPERM`，用 `npm test`（不带参数，由
+> runner 自己发现 `test/*.test.js`）。Node 20 没有 zstd，相关用例会自动跳过，所以 WSL 里是 96 项。
 
 <details>
 <summary>设计取舍（点开）</summary>

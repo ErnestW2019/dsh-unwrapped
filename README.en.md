@@ -173,7 +173,7 @@ tagged on their highlight card.
 ## Development
 
 ```bash
-node --test --test-isolation=none "test/*.test.js"              # 105 tests, zero deps
+npm test                                                        # 105 tests, zero deps
 node scripts/browser-check.mjs --file docs/preview-year.html    # 17 real-browser checks
 node scripts/make-demo.mjs                                      # rebuild demo data + previews
 node scripts/shot.mjs --file docs/preview-year.html --out docs/preview-year.png
@@ -186,7 +186,8 @@ from a real log ships in this repo. `make-demo.mjs` uses a seeded PRNG, so re-ru
 byte-identical input.
 
 > `node --test test/` hits `EPERM` in restricted sandboxes because subprocess pipes are blocked;
-> `--test-isolation=none` runs every test in one process.
+> `npm test` passes no paths and lets the runner discover `test/*.test.js`. Node 20 has no zstd,
+> so those cases skip themselves — that is why WSL reports 96 instead of 105.
 
 <details>
 <summary>Design notes</summary>

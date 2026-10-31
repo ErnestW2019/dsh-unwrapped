@@ -212,8 +212,13 @@ describe('aggregate: moments (the emotional layer)', () => {
       ai(JUNE + 20, 'ok'),
     ])];
     const report = buildReport(facts, { period: 'month', key: '2026-06', offsetMinutes: 0, nowMs: JUNE });
-    assert.equal(report.phrases[0].word, '插件');
+    // All three are said twice, so their order carries no meaning — what
+    // matters is that it is the same on every host. Collation must not leak in
+    // here: the same corpus once ranked differently under a C locale.
+    assert.deepEqual(report.phrases.map((entry) => entry.word), ['再试', '插件', '试试']);
     assert.equal(report.phrases[0].count, 2);
+    const again = buildReport(facts, { period: 'month', key: '2026-06', offsetMinutes: 0, nowMs: JUNE });
+    assert.deepEqual(again.phrases, report.phrases);
   });
 
   it('has empty moments for a period with no data', () => {

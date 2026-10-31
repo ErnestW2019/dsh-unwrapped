@@ -24,7 +24,13 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Unit tests
-        run: node --test --test-isolation=none "test/*.test.js"
+        # Node 22 only knows the experimental spelling of `--test-isolation`;
+        # Node 24 renamed it. Pass whichever this matrix entry understands.
+        shell: bash
+        run: |
+          flag=--test-isolation=none
+          node --test "$flag" "test/*.test.js" >/dev/null 2>&1 || flag=--experimental-test-isolation=none
+          node --test "$flag" "test/*.test.js"
       - name: Package contents
         run: npm pack --dry-run
 
